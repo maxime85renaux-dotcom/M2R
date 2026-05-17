@@ -1,0 +1,115 @@
+/* ══════════════════════════════════════════════
+   M2Return WIKI FR — animations.css
+   Keyframes · Hero effects · Transitions
+   ══════════════════════════════════════════════ */
+
+/* ── KEYFRAMES ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(15px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%       { transform: translateX(-50%) translateY(7px); }
+}
+
+@keyframes panelIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fogDrift {
+  from { transform: translateX(-3%); }
+  to   { transform: translateX(3%); }
+}
+
+@keyframes rayPulse {
+  from { opacity: .5; }
+  to   { opacity: .06; }
+}
+
+/* ── HERO ANIMATIONS ── */
+.hero-logo {
+  opacity: 0;
+  animation: fadeUp .9s .1s forwards;
+}
+.h-eyebrow {
+  opacity: 0;
+  animation: fadeUp .9s .3s forwards;
+}
+.h-title {
+  opacity: 0;
+  animation: fadeUp .9s .5s forwards;
+}
+.h-divider {
+  opacity: 0;
+  animation: fadeUp .9s .8s forwards;
+}
+.h-sub {
+  opacity: 0;
+  animation: fadeUp .9s 1s forwards;
+}
+.blocks {
+  opacity: 0;
+  animation: fadeUp .9s 1.2s forwards;
+}
+
+.h-arrow {
+  animation: bounce 2s infinite;
+}
+
+/* ── FOG & RAYONS ── */
+.fog {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  overflow: hidden;
+}
+.fog span {
+  position: absolute;
+  bottom: 0;
+  width: 120%; height: 30%;
+  left: -10%;
+  background: radial-gradient(ellipse at 50% 100%, rgba(18,5,0,.46) 0%, transparent 70%);
+  animation: fogDrift 18s ease-in-out infinite alternate;
+}
+.fog span:nth-child(2) {
+  animation-duration: 24s;
+  animation-delay: -8s;
+  opacity: .52;
+  width: 130%;
+  left: -15%;
+}
+
+.rays {
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  width: 700px; height: 52%;
+  pointer-events: none;
+  overflow: hidden;
+}
+.rays::before, .rays::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(210,155,35,.09), transparent);
+  transform-origin: top center;
+  animation: rayPulse 6s ease-in-out infinite alternate;
+}
+.rays::before { width: 200px; left: 28%; transform: rotate(-15deg); }
+.rays::after  { width: 200px; left: 18%; animation-delay: -3s; transform: rotate(15deg); }
+
+/* ── REDUCED MOTION ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  html { scroll-behavior: auto !important; }
+  #bgvid { display: none; }
+}

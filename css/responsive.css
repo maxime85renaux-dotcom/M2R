@@ -1,0 +1,86 @@
+/* ══════════════════════════════════════════════
+   METIN2 WIKI FR — responsive.css
+   Breakpoints mobile/tablette
+   ══════════════════════════════════════════════ */
+
+@media (max-width: 860px) {
+  .cgrid    { grid-template-columns: repeat(2, 1fr); }
+  .cp-body  { grid-template-columns: 1fr; }
+  .qgrid    { grid-template-columns: repeat(3, 1fr); }
+  .eg       { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 700px) {
+  .h-title        { font-size: 2.5rem; }
+  .h-sub-word     { font-size: .9rem; letter-spacing: 5px; }
+  .hero-logo      { height: 62px; }
+  .hero-char      { height: 52%; opacity: .48; }
+
+  .nav-links a span { display: none; }
+  #nav           { padding: 0 .9rem; }
+
+  .blocks        { gap: 9px; }
+  .block         { min-width: 112px; padding: 1.1rem .65rem; }
+
+  .panel         { padding: 3rem .9rem; }
+  .mmo-bd        { padding: 1.2rem .9rem; }
+  .mmo-hs        { display: none; }
+
+  .boss-grid     { grid-template-columns: repeat(2, 1fr); }
+
+  .horse-track   { flex-direction: column; }
+  .horse-step:not(:last-child)::after {
+    content: '↓';
+    right: auto; left: 50%; top: auto; bottom: -12px;
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 480px) {
+  .cgrid { grid-template-columns: repeat(2, 1fr); }
+  .cc-img { height: 120px; }
+  .qgrid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Dépliant quêtes — 1 colonne sur mobile */
+@media (max-width: 600px) {
+  .q-detail-inner {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── BOUTON PLAY VIDÉO MOBILE ── */
+.video-play-btn {
+  display: none;
+}
+@media (max-width: 860px) {
+  .video-play-btn {
+    display: flex;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+    background: rgba(0,0,0,.55);
+    border: 2px solid rgba(200,150,30,.6);
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background .2s, border-color .2s;
+  }
+  .video-play-btn:hover,
+  .video-play-btn:focus {
+    background: rgba(0,0,0,.75);
+    border-color: var(--gold);
+  }
+  .video-play-btn svg {
+    fill: var(--gold);
+    margin-left: 3px;
+  }
+  .video-play-btn.hidden {
+    display: none;
+  }
+}

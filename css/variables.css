@@ -1,0 +1,47 @@
+/* ══════════════════════════════════════════════
+   METIN2 WIKI FR — variables.css
+   Toutes les custom properties CSS centralisées
+   ══════════════════════════════════════════════ */
+
+:root {
+  /* Palette couleurs */
+  --gold:       #dea028;
+  --gold-l:     #f8e090;
+  --gold-b:     #fff0a8;
+  --gold-d:     #8a6010;
+  --copper:     #b87830;
+  --copper-l:   #d4a050;
+  --red:        #a01828;
+  --red-b:      #c02038;
+
+  /* Fond & brun */
+  --br:   #1a0800;
+  --brm:  #2e1005;
+  --brl:  #4a1e08;
+  --panel: rgba(38, 16, 4, .97);
+
+  /* Texte */
+  --parch:   #dcc070;
+  --parch-l: #eedea0;
+  --tx:      #ecd8a8;
+  --mut:     #9a7838;
+  --dim:     #5a3a10;
+
+  /* Bordures & ombres */
+  --border:   rgba(160, 110, 35, .45);
+  --border-h: rgba(220, 170, 55, .85);
+  --ins-t:    rgba(240, 190, 60, .07);
+  --ins-b:    rgba(0, 0, 0, .88);
+
+  /* Layout */
+  --nav-h: 56px;
+  
+
+  /* Texture noise (SVG inline encodé) */
+  --noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+
+  /* Typographies (chargées depuis Google Fonts) */
+  --font-title:  'Cinzel', serif;
+  --font-label:  'Alegreya SC', serif;
+  --font-body:   'Crimson Pro', Georgia, serif;
+}

@@ -1,0 +1,83 @@
+/* ══════════════════════════════════════════════
+   M2Return WIKI FR — reset.css
+   Reset minimal + base body
+   ══════════════════════════════════════════════ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Empêche le fond blanc en overscroll */
+  background: #060200;
+  overscroll-behavior: none;
+}
+
+body {
+  font-family: var(--font-body);
+  background: #060200 url('../assets/Fond2015.jpg') center / cover fixed;
+  color: var(--tx);
+  min-height: 100vh;
+  overflow-x: hidden;
+  /* Bloque le rebond/overscroll sur tous les navigateurs */
+  overscroll-behavior: none;
+}
+
+@media (max-width: 700px) {
+  body { background-attachment: scroll; }
+}
+
+/* Overlay sombre global */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,.54), rgba(0,0,0,.8));
+  pointer-events: none;
+}
+
+/* Overlay texture noise */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: var(--noise);
+  opacity: .028;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+body > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Focus visible accessible */
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* Scrollbar custom */
+::-webkit-scrollbar       { width: 6px; }
+::-webkit-scrollbar-track { background: #060200; }
+::-webkit-scrollbar-thumb { background: var(--brl); border-radius: 2px; }
+
+/* Canvas particules — doit être fixed pour ne pas perturber le flow */
+canvas#ptc {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Tous les enfants directs du body au-dessus du canvas */
+body > * {
+  position: relative;
+  z-index: 1;
+}

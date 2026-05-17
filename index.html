@@ -1,0 +1,1383 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>M2Return — Guide Metin2 FR</title>
+  <meta name="description" content="Guide complet Metin2 FR : classes, quêtes niv.1-84, biologiste, missions de chasse, équitation, livres de quêtes, cartes et empires.">
+
+  <!-- Google Fonts -->
+  <!-- Polices locales (hors ligne) — lancer assets/fonts/TELECHARGER_POLICES.ps1 une fois -->
+  <link rel="stylesheet" href="assets/fonts/fonts-local.css" id="local-fonts"
+        onerror="this.remove(); var gf=document.createElement('link'); gf.rel='stylesheet'; gf.href='https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Alegreya+SC:wght@400;500;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,400&display=swap'; document.head.appendChild(gf);">
+  <!-- Fallback Google Fonts si polices locales absentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- CSS modulaire -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+<canvas id="ptc"></canvas>
+
+<!-- NAVBAR -->
+<nav id="nav">
+  <a href="#hero" class="nav-logo">
+    <img src="assets/metin2return_pas_coller_png_.webp"
+     alt="Metin2"
+     style="height:140px; width:auto;"
+     onerror="this.style.display='none'">
+    </a>
+  <nav class="nav-links" aria-label="Navigation">
+    <a href="#classes"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.25C17.25 22.15 21 17.25 21 12V7L12 2z"/></svg><span>Classes</span></a>
+    <a href="#quetes"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg><span>Quêtes</span></a>
+    <a href="#cartes"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg><span>Cartes</span></a>
+    <a href="#saviez-vous"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01"/></svg><span>Saviez-vous</span></a>
+  </nav>
+</nav>
+
+<!-- HERO -->
+<section id="hero" aria-label="Accueil">
+  <button class="video-play-btn" id="video-play-btn" aria-label="Lancer la vidéo" onclick="var v=document.getElementById('bgvid');v.play();this.classList.add('hidden')">
+    <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+  </button>
+  <div class="h-ov" aria-hidden="true"></div>
+  <img class="hero-char left" src="assets/warrior-render.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+  <img class="hero-char right" src="assets/sura-render.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+  <img class="hero-metin" src="assets/metin-stone.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
+  <div class="fog" aria-hidden="true"><span></span><span></span></div>
+  <div class="rays" aria-hidden="true"></div>
+  <div class="h-content">
+    <div class="h-eyebrow">Le retour au source</div>
+    <img class="hero-logo"
+     src="assets/metin2return_pas_coller_png_.webp"
+     style="width:300px; height:300px;">
+    <h1 class="h-title"><span class="h-sub-word">WIKI</span></h1>
+    <div class="h-divider" aria-hidden="true">
+      <span></span><em><svg width="12" height="12" viewBox="0 0 24 24" fill="var(--gold)"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg></em><span></span>
+    </div>
+    <div class="blocks">
+      <a href="#classes" class="block"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.25C17.25 22.15 21 17.25 21 12V7L12 2z"/></svg><span class="btitle">Classes</span></a>
+      <a href="#quetes" class="block"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg><span class="btitle">Quêtes</span></a>
+      <a href="#cartes" class="block"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg><span class="btitle">Cartes</span></a>
+      <a href="#saviez-vous" class="block"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01"/></svg><span class="btitle">Saviez-vous</span></a>
+    </div>
+  </div>
+  <a href="#classes" class="h-arrow" aria-label="Défiler">&#8595;</a>
+</section>
+
+<!-- ══ CLASSES ══ -->
+<div class="sep" aria-hidden="true"><span class="sep-l"></span><span class="sep-r"><svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.25C17.25 22.15 21 17.25 21 12V7L12 2z"/></svg>Classes</span><span class="sep-l"></span></div>
+<section class="panel" id="classes">
+  <div class="mmo">
+    <div class="mmo-hd">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.25C17.25 22.15 21 17.25 21 12V7L12 2z"/></svg>
+      <span class="mmo-ht">Les Classes</span>
+      <span class="mmo-hs">Cliquez pour découvrir</span>
+    </div>
+    <div class="mmo-bd">
+
+      <div class="cgrid" id="class-grid">
+
+        <!-- GUERRIER -->
+        <div class="cc guerrier" role="button" tabindex="0" data-class="guerrier" aria-expanded="false">
+          <div class="cc-img">
+            <img src="assets/Bandeaurougehomme.png" alt="Guerrier H" loading="lazy" onerror="this.style.display='none'">
+            <img src="assets/Coupealamoderougefemme.png" alt="Guerrier F" loading="lazy" onerror="this.style.display='none'" style="position:absolute;right:0;bottom:0;width:50%;height:100%;object-fit:cover;object-position:top">
+            <div class="cc-label">
+              <div class="ccn">Guerrier</div>
+              <div class="cc-roles"><span class="role tank">Tank</span><span class="role dps">DPS</span><span class="role farm">Farm</span></div>
+            </div>
+          </div>
+          <div class="cc-foot">EN SAVOIR PLUS ›</div>
+        </div>
+
+        <!-- SURA -->
+        <div class="cc sura" role="button" tabindex="0" data-class="sura" aria-expanded="false">
+          <div class="cc-img">
+            <img src="assets/Couperespectableblanchomme.png" alt="Sura H" loading="lazy" onerror="this.style.display='none'">
+            <img src="assets/Longuetresseblanchefemme.png" alt="Sura F" loading="lazy" onerror="this.style.display='none'" style="position:absolute;right:0;bottom:0;width:50%;height:100%;object-fit:cover;object-position:top">
+            <div class="cc-label">
+              <div class="ccn">Sura</div>
+              <div class="cc-roles"><span class="role dps">DPS</span><span class="role farm">Farm</span></div>
+            </div>
+          </div>
+          <div class="cc-foot">EN SAVOIR PLUS ›</div>
+        </div>
+
+        <!-- NINJA -->
+        <div class="cc ninja" role="button" tabindex="0" data-class="ninja" aria-expanded="false">
+          <div class="cc-img">
+            <img src="assets/Coupecourterougehomme.png" alt="Ninja H" loading="lazy" onerror="this.style.display='none'">
+            <img src="assets/Coupecourterougefemme.png" alt="Ninja F" loading="lazy" onerror="this.style.display='none'" style="position:absolute;right:0;bottom:0;width:50%;height:100%;object-fit:cover;object-position:top">
+            <div class="cc-label">
+              <div class="ccn">Ninja</div>
+              <div class="cc-roles"><span class="role dps">DPS</span></div>
+            </div>
+          </div>
+          <div class="cc-foot">EN SAVOIR PLUS ›</div>
+        </div>
+
+        <!-- CHAMANE -->
+        <div class="cc chamane" role="button" tabindex="0" data-class="chamane" aria-expanded="false">
+          <div class="cc-img">
+            <img src="assets/Coiffuretraditionnellerougehomme.png" alt="Chamane H" loading="lazy" onerror="this.style.display='none'">
+            <img src="assets/Coupeeleganteclairfemme.png" alt="Chamane F" loading="lazy" onerror="this.style.display='none'" style="position:absolute;right:0;bottom:0;width:50%;height:100%;object-fit:cover;object-position:top">
+            <div class="cc-label">
+              <div class="ccn">Chamane</div>
+              <div class="cc-roles"><span class="role support">Support</span><span class="role dps">DPS</span></div>
+            </div>
+          </div>
+          <div class="cc-foot">EN SAVOIR PLUS ›</div>
+        </div>
+
+        <!-- PANELS DÉPLIANTS (grid-column:1/-1) -->
+        <div class="cc-panel" id="panel-guerrier">
+          <button class="cp-close" data-close-class="guerrier">Fermer ✕</button>
+          <div class="cp-head">
+            <span class="cp-name">Guerrier</span>
+            <div class="cp-specs"><span class="cp-spec">Corps-à-corps</span><span class="cp-spec">Mental</span></div>
+          </div>
+
+          <!-- GÉNÉRALITÉS -->
+          <p class="cp-desc" style="margin-bottom:1.4rem">Grâce à leur habileté ainsi qu'à leur lourde armure, les Guerriers jouent un rôle important dans les combats au corps-à-corps. Ils aspirent à toujours plus de force physique et de sérénité. Selon leur spécialité, ils peuvent semer la terreur grâce à leurs armes à deux mains ou repousser toutes les attaques en utilisant habilement épée et bouclier.</p>
+
+          <!-- STATS -->
+          <div class="ptitle" style="margin-top:0"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Statistiques</div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.6rem;margin-bottom:1.6rem">
+            <div style="background:rgba(30,11,2,.75);border:1px solid rgba(140,85,16,.35);border-radius:3px;padding:.6rem .9rem">
+              <div style="font-family:'Alegreya SC',serif;font-size:.58rem;letter-spacing:2px;color:var(--copper-l);text-transform:uppercase;margin-bottom:.5rem">Statistiques de départ</div>
+              <div class="cp-stat">Force (STR) <strong>6</strong></div>
+              <div class="cp-stat">Vitalité (VIT) <strong>4</strong></div>
+              <div class="cp-stat">Intelligence (INT) <strong>3</strong></div>
+              <div class="cp-stat">Dextérité (DEX) <strong>3</strong></div>
+            </div>
+            <div style="background:rgba(30,11,2,.75);border:1px solid rgba(140,85,16,.35);border-radius:3px;padding:.6rem .9rem">
+              <div style="font-family:'Alegreya SC',serif;font-size:.58rem;letter-spacing:2px;color:var(--copper-l);text-transform:uppercase;margin-bottom:.5rem">Statistiques à haut niveau</div>
+              <div class="cp-stat">Force (STR) <strong>90</strong></div>
+              <div class="cp-stat">Vitalité (VIT) <strong>90</strong></div>
+              <div class="cp-stat">Intelligence (INT) <strong>16</strong></div>
+              <div class="cp-stat">Dextérité (DEX) <strong>90</strong></div>
+            </div>
+          </div>
+
+          <!-- GUERRIER CAC -->
+          <div class="ptitle" style="margin-top:0"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/><path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>Guerrier Corps à Corps</div>
+          <p class="cp-desc" style="margin-bottom:1.1rem">Particulièrement prisé en PvE surtout en bas level, mais peut être également redoutable en PvP.</p>
+          <div class="cp-body" style="margin-bottom:1.5rem">
+            <div class="cp-col">
+              <h4>PvE — Ordre recommandé</h4>
+              <div class="cp-skills">
+                <div class="cp-skill"><img src="assets/Auradelepee.jpg" alt="">Aura de l'épée <span>STR</span></div>
+                <div class="cp-skill"><img src="assets/Moulinet.jpg" alt="">Moulinet à l'épée <span>STR · DEX · VIT</span></div>
+                <div class="cp-skill"><img src="assets/Berserk.jpg" alt="">Berserk <span>Aucun bonus</span></div>
+                <div class="cp-skill"><img src="assets/Acceleration.jpg" alt="">Accélération <span>STR · DEX · VIT</span></div>
+                <div class="cp-skill"><img src="assets/Triplelaceration.jpg" alt="">Triple lacération <span>STR</span></div>
+              </div>
+            </div>
+            <div class="cp-col">
+              <h4>PvP — Ordre recommandé</h4>
+              <div class="cp-skills">
+                <div class="cp-skill"><img src="assets/Auradelepee.jpg" alt="">Aura de l'épée <span>STR</span></div>
+                <div class="cp-skill"><img src="assets/Acceleration.jpg" alt="">Accélération <span>STR · DEX · VIT</span></div>
+                <div class="cp-skill"><img src="assets/Berserk.jpg" alt="">Berserk <span>Aucun bonus</span></div>
+                <div class="cp-skill"><img src="assets/Moulinet.jpg" alt="">Moulinet à l'épée <span>STR · DEX · VIT</span></div>
+                <div class="cp-skill"><img src="assets/Triplelaceration.jpg" alt="">Triple lacération <span>STR</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- GUERRIER MENTAL -->
+          <div class="ptitle" style="margin-top:0"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.25C17.25 22.15 21 17.25 21 12V7L12 2z"/></svg>Guerrier Mental</div>
+          <p class="cp-desc" style="margin-bottom:1.1rem">Principalement utilisé en PvP, mais peut être également utile en PvE. Corps puissant niveau G1 empêche de "tomber" en combat.</p>
+          <div class="cp-body">
+            <div class="cp-col">
+              <h4>PvE — Ordre recommandé</h4>
+              <div class="cp-skills">
+                <div class="cp-skill"><img src="assets/Attaquedelapaume.jpg" alt="">Corps puissant <span>VIT · STR — Déf. ↑</span></div>
+                <div class="cp-skill"><img src="assets/Charge.jpg" alt="" onerror="this.style.display='none'">Charge <span>STR · DEX · VIT — Zone + assomme</span></div>
+                <div class="cp-skill"><img src="assets/Attaquedelapaume.jpg" alt="">Attaque de la paume <span>STR · VIT</span></div>
+                <div class="cp-skill"><img src="assets/Frappedelesprit.jpg" alt="">Attaque de l'esprit <span>STR · VIT — éjecte</span></div>
+                <div class="cp-skill"><img src="assets/Coupdeepee.jpg" alt="" onerror="this.style.display='none'">Coup d'épée <span>STR · DEX · VIT — assomme</span></div>
+              </div>
+            </div>
+            <div class="cp-col">
+              <h4>PvP — Ordre recommandé</h4>
+              <div class="cp-skills">
+                <div class="cp-skill"><img src="assets/Attaquedelapaume.jpg" alt="">Corps puissant <span>VIT · STR — Déf. ↑</span></div>
+                <div class="cp-skill"><img src="assets/Frappedelesprit.jpg" alt="">Attaque de l'esprit <span>STR · VIT — éjecte</span></div>
+                <div class="cp-skill"><img src="assets/Attaquedelapaume.jpg" alt="">Attaque de la paume <span>STR · VIT</span></div>
+                <div class="cp-skill"><img src="assets/Charge.jpg" alt="" onerror="this.style.display='none'">Charge <span>STR · DEX · VIT — Zone + assomme</span></div>
+                <div class="cp-skill"><img src="assets/Coupdeepee.jpg" alt="" onerror="this.style.display='none'">Coup d'épée <span>STR · DEX · VIT — assomme</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="ibox" style="margin-top:1.2rem"><strong>Note :</strong> Ces ordres sont indicatifs — de nombreux choix s'offrent à vous selon la spécificité souhaitée pour votre personnage.</div>
+        </div>
+
+        <div class="cc-panel" id="panel-sura">
+          <button class="cp-close" data-close-class="sura">Fermer ✕</button>
+          <div class="cp-head">
+            <span class="cp-name">Sura</span>
+            <div class="cp-specs"><span class="cp-spec">Armes Magiques</span><span class="cp-spec">Magie Noire</span></div>
+          </div>
+
+          <!-- GÉNÉRALITÉS -->
+          <p class="cp-desc" style="margin-bottom:1.4rem">Les Suras sont des combattants ayant reçu des pouvoirs magiques lorsqu'ils acceptèrent de laisser la graine du Mal pousser dans leur bras. Capables de manier leur épée au combat rapproché ou de provoquer des dommages à distance grâce à la magie. En se spécialisant, ils peuvent améliorer leurs sorts offensifs ou recevoir des sorts d'amélioration. Chaque spécialisation excelle dans sa spécialité PvP ou PvE.</p>
+
+          <!-- STATS -->
+          <div class="ptitle" style="margin-top:0"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Statistiques</div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.6rem;margin-bottom:1.6rem">
+            <div style="background:rgba(30,11,2,.75);border:1px solid rgba(140,85,16,.35);border-radius:3px;padding:.6rem .9rem">
+              <div style="font-family:'Alegreya SC',serif;font-size:.58rem;letter-spacing:2px;color:var(--copper-l);text-transform:uppercase;margin-bottom:.5rem">Statistiques de départ</div>
+              <div class="cp-stat">Force (STR) <strong>5</strong></div>
+              <div class="cp-stat">Vitalité (VIT) <strong>3</strong></div>
+              <div class="cp-stat">Intelligence (INT) <strong>5</strong></div>
+              <div class="cp-stat">Dextérité (DEX) <strong>3</strong></div>
+            </div>
+            <div style="background:rgba(30,11,2,.75);border:1px solid rgba(140,85,16,.35);border-radius:3px;padding:.6rem .9rem">
+              <div style="font-family:'Alegreya SC',serif;font-size:.58rem;letter-spacing:2px;color:var(--copper-l);text-transform:uppercase;margin-bottom:.5rem">Statistiques à haut niveau</div>
+              <div class="cp-stat">Force (STR) <strong>16</strong></div>
+              <div class="cp-stat">Vitalité (VIT) <strong>90</strong></div>
+              <div class="cp-stat">Intelligence (INT) <strong>90</strong></div>
+              <div class="cp-stat">Dextérité (DEX) <strong>90</strong></div>
+            </div>
+          </div>
+
+          <!-- SURA ARME MAGIQUE -->
+          <div class="ptitle" style="margin-top:0"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/><path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>Sura Arme Magique (AM)</div>
+          <p class="cp-desc" style="margin-bottom:1.1rem">Principalement PvE, mais redoutable en PvP à haut niveau. La Lame Enchantée augmente l'attaque et vole de la vie. Le Tourbillon du Dragon ignore la défense.</p>
+          <div class="cp-body" style="margin-bottom:1.5rem">
+            <div class="cp-col">
+              <h4>PvE — Ordre recommandé</h4>
+              <div class="cp-skills">
+                <div class="cp-skill"><img src="assets/Lameenchantee.jpg" alt="" onerror="this.style.display='none'">Lame Enchantée <span>INT — Att. ↑ + vol de vie</span></div>
+                <div class="cp-skill"><img src="assets/Armureenchantee.jpg" alt="" onerror="this.style.display='none'">Armure Enchantée <span>INT — Déf. ↑ + renvoi dégâts</span></div>
+                <div class="cp-skill"><img src="assets/Peur.jpg" alt="" onerror="this.style.display='none'">Peur <span>Aucun — Réduit dégâts physiques</span></div>
+                <div class="cp-skill"><img src="assets/Tourbillondudragon.jpg" alt="" onerror="this.style.display='none'">Tourbillon du Dragon <span>INT · DEX · STR — Zone + ignore déf.</span></div>
+                <div class="cp-skill"><img src="assets/Toucherbrulant.jpg" alt="" onerror="this.style.display='none'">Toucher brûlant <span>INT · DEX · STR — Frontal + ignore déf.</span></div>
+                <div class="cp-skill"><img src="assets/Contresort.jpg" alt="" onerror="this.style.display='none'">Contre-sort <span>INT · DEX — Distance + supprime buffs</span></div>
+              </div>
+            </div>
+            <div class="cp-col">
+              <h4>PvP — Ordre recommandé</h4>
+              <div class="cp-skills">
+                <div class="cp-skill"><img src="assets/Lameenchantee.jpg" alt="" onerror="this.style.display='none'">Lame Enchantée <span>INT — Att. ↑ + vol de vie</span></div>
+                <div class="cp-skill"><img src="assets/Peur.jpg" alt="" onerror="this.style.display='none'">Peur <span>Aucun — Réduit dégâts + annule aggro</span></div>
+                <div class="cp-skill"><img src="assets/Contresort.jpg" alt="" onerror="this.style.display='none'">Contre-sort <span>INT · DEX — Supprime buffs ennemis</span></div>
+                <div class="cp-skill"><img src="assets/Tourbillondudragon.jpg" alt="" onerror="this.style.display='none'">Tourbillon du Dragon <span>INT · DEX · STR — Zone + éjecte</span></div>
+                <div class="cp-skill"><img src="assets/Toucherbrulant.jpg" alt="" onerror="this.style.display='none'">Toucher brûlant <span>INT · DEX · STR — Ignore déf.</span></div>
+                <div class="cp-skill"><img src="assets/Armureenchantee.jpg" alt="" onerror="this.style.display='none'">Armure Enchantée <span>INT — Renvoie dégâts physiques</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SURA MAGIE NOIRE -->
+          <div class="ptitle" style="margin-top:0"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01"/></svg>Sura Magie Noire (MN)</div>
+          <p class="cp-desc" style="margin-bottom:1.1rem">Principalement PvP, mais utile en PvE. Attaques magiques à distance en rafale. Protection des Ténèbres réduit les dégâts magiques et physiques.</p>
+          <div class="cp-body">
+            <div class="cp-col">
+              <h4>PvE — Ordre recommandé</h4>
+              <div class="cp-skills">
+                <div class="cp-skill"><img src="assets/Frappedelesprit.jpg" alt="">Attaque de flammes <span>INT · STR · VIT — Zone + met à terre</span></div>
+                <div class="cp-skill"><img src="assets/Protectiondestenebres.jpg" alt="" onerror="this.style.display='none'">Protection des Ténèbres <span>INT — Déf. ↑ + réduit dégâts mag.</span></div>
+                <div class="cp-skill"><img src="assets/Attaquedestenebres.jpg" alt="" onerror="this.style.display='none'">Attaque des Ténèbres <span>INT · DEX — Distance multi-cibles</span></div>
+                <div class="cp-skill"><img src="assets/Orbedestenebres.jpg" alt="" onerror="this.style.display='none'">Orbe des Ténèbres <span>INT · DEX · VIT — Distance multi-cibles</span></div>
+                <div class="cp-skill"><img src="assets/Frappedelesprit.jpg" alt="">Frappe de l'Esprit <span>INT · DEX · VIT — Ralentit les cibles</span></div>
+                <div class="cp-skill">Esprit de flammes <span>INT · VIT · STR — Attaque répétée</span></div>
+              </div>
+            </div>
+            <div class="cp-col">
+              <h4>PvP — Ordre recommandé</h4>
+              <div class="cp-skills">
+                <div class="cp-skill">Esprit de flammes <span>INT · VIT · STR — Attaque répétée</span></div>
+                <div class="cp-skill"><img src="assets/Protectiondestenebres.jpg" alt="" onerror="this.style.display='none'">Protection des Ténèbres <span>INT — Déf. ↑ + réduit dégâts</span></div>
+                <div class="cp-skill"><img src="assets/Orbedestenebres.jpg" alt="" onerror="this.style.display='none'">Orbe des Ténèbres <span>INT · DEX · VIT — Distance multi-cibles</span></div>
+                <div class="cp-skill"><img src="assets/Attaquedestenebres.jpg" alt="" onerror="this.style.display='none'">Attaque des Ténèbres <span>INT · DEX — Distance multi-cibles</span></div>
+                <div class="cp-skill"><img src="assets/Frappedelesprit.jpg" alt="">Frappe de l'Esprit <span>INT · DEX · VIT — Ralentit les cibles</span></div>
+                <div class="cp-skill">Attaque de flammes <span>INT · STR · VIT — Zone + met à terre</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="ibox" style="margin-top:1.2rem"><strong>Note :</strong> Ces ordres sont indicatifs — de nombreux choix s'offrent à vous selon la spécificité souhaitée pour votre personnage.</div>
+        </div>
+
+        <div class="cc-panel" id="panel-ninja">
+          <button class="cp-close" data-close-class="ninja">Fermer ✕</button>
+          <div class="cp-head">
+            <span class="cp-name">Ninja</span>
+            <div class="cp-specs"><span class="cp-spec">Assassin</span><span class="cp-spec">Archer</span></div>
+          </div>
+
+          <p class="cp-desc" style="margin-bottom:1.4rem">Les Ninjas sont de puissants assassins professionnels qui excellent dans les embuscades. Ils portent une armure légère pour privilégier la mobilité et la rapidité. Maîtres du combat à la dague et à l'arc selon leur spécialisation.</p>
+
+          <div class="ptitle" style="margin-top:0"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Statistiques</div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.6rem;margin-bottom:1.6rem">
+            <div style="background:rgba(30,11,2,.75);border:1px solid rgba(140,85,16,.35);border-radius:3px;padding:.6rem .9rem">
+              <div style="font-family:'Alegreya SC',serif;font-size:.58rem;letter-spacing:2px;color:var(--copper-l);text-transform:uppercase;margin-bottom:.5rem">Statistiques de départ</div>
+              <div class="cp-stat">Force (STR) <strong>4</strong></div>
+              <div class="cp-stat">Vitalité (VIT) <strong>3</strong></div>
+              <div class="cp-stat">Intelligence (INT) <strong>3</strong></div>
+              <div class="cp-stat">Dextérité (DEX) <strong>6</strong></div>
+            </div>
+            <div style="background:rgba(30,11,2,.75);border:1px solid rgba(140,85,16,.35);border-radius:3px;padding:.6rem .9rem">
+              <div style="font-family:'Alegreya SC',serif;font-size:.58rem;letter-spacing:2px;color:var(--copper-l);text-transform:uppercase;margin-bottom:.5rem">Statistiques à haut niveau</div>
+              <div class="cp-stat">Force (STR) <strong>90</strong></div>
+              <div class="cp-stat">Vitalité (VIT) <strong>90</strong></div>
+              <div class="cp-stat">Intelligence (INT) <strong>16</strong></div>
+              <div class="cp-stat">Dextérité (DEX) <strong>90</strong></div>
+            </div>
+          </div>
+
+          <!-- ASSASSIN -->
+          <div class="ptitle" style="margin-top:0"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/><path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>Ninja Assassin</div>
+          <p class="cp-desc" style="margin-bottom:1.1rem">Très polyvalent — excellent en PvE et redoutable en PvP. L'Embuscade inflige des dégâts massifs dans le dos depuis l'état furtif.</p>
+          <div class="cp-body" style="margin-bottom:1.5rem">
+            <div class="cp-col">
+              <h4>PvE — Ordre recommandé</h4>
+              <div class="cp-skills">
+                <div class="cp-skill"><img src="assets/Embuscade.jpg" alt="" onerror="this.style.display='none'">Embuscade <span>DEX · STR — Dégâts ↑ de dos en furtif</span></div>
+                <div class="cp-skill"><img src="assets/Daguefilante.jpg" alt="" onerror="this.style.display='none'">Dague filante <span>DEX · STR — Tourbillon + empoisonne</span></div>
+                <div class="cp-skill"><img src="assets/Attaquerapide.jpg" alt="" onerror="this.style.display='none'">Attaque rapide <span>DEX · STR — Téléportée + furtif ↑</span></div>
+                <div class="cp-skill"><img src="assets/Brumeempoisonnee.jpg" alt="" onerror="this.style.display='none'">Brume empoisonnée <span>DEX · STR — Distance + empoisonne</span></div>
+                <div class="cp-skill"><img src="assets/Furtif.jpg" alt="" onerror="this.style.display='none'">Furtif <span>Aucun — Invisibilité + dégâts ↑</span></div>
+              </div>
+            </div>
+            <div class="cp-col">
+              <h4>PvP — Ordre recommandé</h4>
+              <div class="cp-skills">
+                <div class="cp-skill"><img src="assets/Embuscade.jpg" alt="" onerror="this.style.display='none'">Embuscade <span>DEX · STR — Dégâts ↑ de dos en furtif</span></div>
+                <div class="cp-skill"><img src="assets/Furtif.jpg" alt="" onerror="this.style.display='none'">Furtif <span>Aucun — Invisibilité + dégâts ↑</span></div>
+                <div class="cp-skill"><img src="assets/Daguefilante.jpg" alt="" onerror="this.style.display='none'">Dague filante <span>DEX · STR — Tourbillon + empoisonne</span></div>
+                <div class="cp-skill"><img src="assets/Brumeempoisonnee.jpg" alt="" onerror="this.style.display='none'">Brume empoisonnée <span>DEX · STR — Distance + empoisonne</span></div>
+                <div class="cp-skill"><img src="assets/Attaquerapide.jpg" alt="" onerror="this.style.display='none'">Attaque rapide <span>DEX · STR — Téléportée + furtif ↑</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ARCHER -->
+          <div class="ptitle" style="margin-top:0"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01"/></svg>Ninja Archer</div>
+          <p class="cp-desc" style="margin-bottom:1.1rem">Redoutable en PvP, peut rencontrer quelques difficultés en PvE. Attaques à distance sur plusieurs cibles. Foulée de plume augmente la mobilité.</p>
+          <div class="cp-body">
+            <div class="cp-col">
+              <h4>PvE — Ordre recommandé</h4>
+              <div class="cp-skills">
+                <div class="cp-skill"><img src="assets/Fouleedeplume.jpg" alt="" onerror="this.style.display='none'">Foulée de plume <span>Aucun — Vitesse déplacement ↑</span></div>
+                <div class="cp-skill"><img src="assets/Flecheempoisonnee.jpg" alt="" onerror="this.style.display='none'">Flèche empoisonnée <span>DEX · STR — Distance + empoisonne</span></div>
+                <div class="cp-skill"><img src="assets/Flechedefeu.jpg" alt="" onerror="this.style.display='none'">Flèche de feu <span>DEX · STR — Distance multi-cibles</span></div>
+                <div class="cp-skill"><img src="assets/Tirararepetition.jpg" alt="" onerror="this.style.display='none'">Tir à répétition <span>DEX · STR — Distance rafale</span></div>
+                <div class="cp-skill"><img src="assets/Pluiedefleches.jpg" alt="" onerror="this.style.display='none'">Pluie de flèches <span>DEX · STR — Zone à distance</span></div>
+              </div>
+            </div>
+            <div class="cp-col">
+              <h4>PvP — Ordre recommandé</h4>
+              <div class="cp-skills">
+                <div class="cp-skill"><img src="assets/Flechedefeu.jpg" alt="" onerror="this.style.display='none'">Flèche de feu <span>DEX · STR — Distance multi-cibles</span></div>
+                <div class="cp-skill"><img src="assets/Flecheempoisonnee.jpg" alt="" onerror="this.style.display='none'">Flèche empoisonnée <span>DEX · STR — Distance + empoisonne</span></div>
+                <div class="cp-skill"><img src="assets/Tirararepetition.jpg" alt="" onerror="this.style.display='none'">Tir à répétition <span>DEX · STR — Distance rafale</span></div>
+                <div class="cp-skill"><img src="assets/Pluiedefleches.jpg" alt="" onerror="this.style.display='none'">Pluie de flèches <span>DEX · STR — Zone à distance</span></div>
+                <div class="cp-skill"><img src="assets/Fouleedeplume.jpg" alt="" onerror="this.style.display='none'">Foulée de plume <span>Aucun — Vitesse déplacement ↑</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="ibox" style="margin-top:1.2rem"><strong>Note :</strong> Ces ordres sont indicatifs — de nombreux choix s'offrent à vous selon la spécificité souhaitée pour votre personnage.</div>
+        </div>
+
+        <div class="cc-panel" id="panel-chamane">
+          <button class="cp-close" data-close-class="chamane">Fermer ✕</button>
+          <div class="cp-head">
+            <span class="cp-name">Chamane</span>
+            <div class="cp-specs"><span class="cp-spec">Dragon</span><span class="cp-spec">Soin</span></div>
+          </div>
+
+          <p class="cp-desc" style="margin-bottom:1.4rem">Les Chamanes sont des sages qui utilisent la magie et les sorts. Leurs pouvoirs mystiques sont d'une efficacité redoutable tant au combat que dans le soutien. En fonction de leur spécialisation, elles peuvent augmenter leurs attaques ou se consacrer aux sorts de soins.</p>
+
+          <div class="ptitle" style="margin-top:0"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Statistiques</div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.6rem;margin-bottom:.6rem">
+            <div style="background:rgba(30,11,2,.75);border:1px solid rgba(140,85,16,.35);border-radius:3px;padding:.6rem .9rem">
+              <div style="font-family:'Alegreya SC',serif;font-size:.58rem;letter-spacing:2px;color:var(--copper-l);text-transform:uppercase;margin-bottom:.5rem">Statistiques de départ</div>
+              <div class="cp-stat">Force (STR) <strong>3</strong></div>
+              <div class="cp-stat">Vitalité (VIT) <strong>4</strong></div>
+              <div class="cp-stat">Intelligence (INT) <strong>6</strong></div>
+              <div class="cp-stat">Dextérité (DEX) <strong>3</strong></div>
+            </div>
+            <div style="background:rgba(30,11,2,.75);border:1px solid rgba(140,85,16,.35);border-radius:3px;padding:.6rem .9rem">
+              <div style="font-family:'Alegreya SC',serif;font-size:.58rem;letter-spacing:2px;color:var(--copper-l);text-transform:uppercase;margin-bottom:.5rem">Statistiques à haut niveau</div>
+              <div class="cp-stat">Force (STR) <strong>16</strong></div>
+              <div class="cp-stat">Vitalité (VIT) <strong>90</strong></div>
+              <div class="cp-stat">Intelligence (INT) <strong>90</strong></div>
+              <div class="cp-stat">Dextérité (DEX) <strong>90</strong></div>
+            </div>
+          </div>
+          <div class="ibox" style="margin-bottom:1.4rem"><strong>Conseil :</strong> Montez les statistiques par niveau ainsi : <strong>2 INT + 1 VIT</strong> — à titre indicatif selon votre spécificité.</div>
+
+          <!-- CHAMANE DRAGON -->
+          <div class="ptitle" style="margin-top:0"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/><path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>Chamane Dragon</div>
+          <p class="cp-desc" style="margin-bottom:1.1rem">Très polyvalent — excellent en PvE et redoutable en PvP. Dégâts offensifs augmentés si le personnage porte un <strong>gong</strong>. Possède aussi une spécialisation <strong>Buff</strong> orientée soutien d'équipe.</p>
+          <div class="cp-body" style="margin-bottom:1.5rem">
+            <div class="cp-col">
+              <h4>PvE — Ordre recommandé</h4>
+              <div class="cp-skills">
+                <div class="cp-skill"><img src="assets/Rugissementdudragon.jpg" alt="" onerror="this.style.display='none'">Rugissement du Dragon <span>INT · STR — Zone + feu + met à terre</span></div>
+                <div class="cp-skill"><img src="assets/Aidedudragon.jpg" alt="" onerror="this.style.display='none'">Aide du Dragon <span>INT — Attaque critique ↑</span></div>
+                <div class="cp-skill"><img src="assets/Dragonchassant.jpg" alt="" onerror="this.style.display='none'">Dragon chassant <span>INT · DEX — Frontal + feu durable</span></div>
+                <div class="cp-skill"><img src="assets/Benediction.jpg" alt="" onerror="this.style.display='none'">Bénédiction <span>INT · DEX — Réduit dégâts physiques reçus</span></div>
+                <div class="cp-skill"><img src="assets/Talismanvolant.jpg" alt="" onerror="this.style.display='none'">Talisman volant <span>INT · STR — Distance multi-cibles</span></div>
+                <div class="cp-skill"><img src="assets/Reflet.jpg" alt="" onerror="this.style.display='none'">Reflet <span>INT · STR — Renvoie dégâts physiques</span></div>
+              </div>
+            </div>
+            <div class="cp-col">
+              <h4>PvP — Ordre recommandé</h4>
+              <div class="cp-skills">
+                <div class="cp-skill"><img src="assets/Rugissementdudragon.jpg" alt="" onerror="this.style.display='none'">Rugissement du Dragon <span>INT · STR — Zone + feu + met à terre</span></div>
+                <div class="cp-skill"><img src="assets/Dragonchassant.jpg" alt="" onerror="this.style.display='none'">Dragon chassant <span>INT · DEX — Frontal + feu durable</span></div>
+                <div class="cp-skill"><img src="assets/Aidedudragon.jpg" alt="" onerror="this.style.display='none'">Aide du Dragon <span>INT — Attaque critique ↑</span></div>
+                <div class="cp-skill"><img src="assets/Talismanvolant.jpg" alt="" onerror="this.style.display='none'">Talisman volant <span>INT · STR — Distance multi-cibles</span></div>
+                <div class="cp-skill"><img src="assets/Benediction.jpg" alt="" onerror="this.style.display='none'">Bénédiction <span>INT · DEX — Réduit dégâts physiques reçus</span></div>
+                <div class="cp-skill"><img src="assets/Reflet.jpg" alt="" onerror="this.style.display='none'">Reflet <span>INT · STR — Renvoie dégâts physiques</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div style="background:rgba(30,11,2,.75);border:1px solid rgba(140,85,16,.35);border-radius:3px;padding:.75rem 1rem;margin-bottom:1.5rem">
+            <div style="font-family:'Alegreya SC',serif;font-size:.62rem;font-weight:700;letter-spacing:1.5px;color:var(--copper-l);text-transform:uppercase;margin-bottom:.6rem">Dragon Buff — Ordre recommandé</div>
+            <div class="cp-skills">
+              <div class="cp-skill"><img src="assets/Aidedudragon.jpg" alt="" onerror="this.style.display='none'">Aide du Dragon <span>INT — Critique ↑</span></div>
+              <div class="cp-skill"><img src="assets/Benediction.jpg" alt="" onerror="this.style.display='none'">Bénédiction <span>INT · DEX — Réduit dégâts physiques</span></div>
+              <div class="cp-skill"><img src="assets/Reflet.jpg" alt="" onerror="this.style.display='none'">Reflet <span>INT · STR — Renvoie dégâts</span></div>
+              <div class="cp-skill"><img src="assets/Rugissementdudragon.jpg" alt="" onerror="this.style.display='none'">Rugissement du Dragon <span>INT · STR — Zone + feu</span></div>
+              <div class="cp-skill"><img src="assets/Dragonchassant.jpg" alt="" onerror="this.style.display='none'">Dragon chassant <span>INT · DEX — Frontal + feu</span></div>
+              <div class="cp-skill"><img src="assets/Talismanvolant.jpg" alt="" onerror="this.style.display='none'">Talisman volant <span>INT · STR — Distance multi-cibles</span></div>
+            </div>
+          </div>
+
+          <!-- CHAMANE SOIN -->
+          <div class="ptitle" style="margin-top:0"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01"/></svg>Chamane Soin</div>
+          <p class="cp-desc" style="margin-bottom:1.1rem">Redoutable en PvP, peut rencontrer des difficultés en PvE. Dégâts offensifs augmentés si le personnage porte un <strong>éventail</strong>. Le Soin restaure les PV et soigne les effets négatifs.</p>
+          <div class="cp-body">
+            <div class="cp-col">
+              <h4>PvE — Ordre recommandé</h4>
+              <div class="cp-skills">
+                <div class="cp-skill"><img src="assets/Invocationdefoudre.jpg" alt="" onerror="this.style.display='none'">Invocation de Foudre <span>INT · STR — Distance + assomme</span></div>
+                <div class="cp-skill"><img src="assets/Soin.jpg" alt="" onerror="this.style.display='none'">Soin <span>INT — Restaure PV + soigne effets négatifs</span></div>
+                <div class="cp-skill"><img src="assets/Promptitude.jpg" alt="" onerror="this.style.display='none'">Promptitude <span>DEX — Vitesse déplacement + sort ↑</span></div>
+                <div class="cp-skill"><img src="assets/Jetdefoudre.jpg" alt="" onerror="this.style.display='none'">Jet de Foudre <span>INT · DEX — Distance multi-cibles</span></div>
+                <div class="cp-skill"><img src="assets/Attaquerenforcee.jpg" alt="" onerror="this.style.display='none'">Attaque renforcée <span>INT · STR — Puissance d'attaque ↑</span></div>
+                <div class="cp-skill"><img src="assets/Griffedefoudre.jpg" alt="" onerror="this.style.display='none'">Griffe de Foudre <span>INT · STR — Réaction en chaîne</span></div>
+              </div>
+            </div>
+            <div class="cp-col">
+              <h4>PvP — Ordre recommandé</h4>
+              <div class="cp-skills">
+                <div class="cp-skill"><img src="assets/Soin.jpg" alt="" onerror="this.style.display='none'">Soin <span>INT — Restaure PV + soigne effets négatifs</span></div>
+                <div class="cp-skill"><img src="assets/Promptitude.jpg" alt="" onerror="this.style.display='none'">Promptitude <span>DEX — Vitesse déplacement + sort ↑</span></div>
+                <div class="cp-skill"><img src="assets/Invocationdefoudre.jpg" alt="" onerror="this.style.display='none'">Invocation de Foudre <span>INT · STR — Distance + assomme</span></div>
+                <div class="cp-skill"><img src="assets/Jetdefoudre.jpg" alt="" onerror="this.style.display='none'">Jet de Foudre <span>INT · DEX — Distance multi-cibles</span></div>
+                <div class="cp-skill"><img src="assets/Griffedefoudre.jpg" alt="" onerror="this.style.display='none'">Griffe de Foudre <span>INT · STR — Réaction en chaîne</span></div>
+                <div class="cp-skill"><img src="assets/Attaquerenforcee.jpg" alt="" onerror="this.style.display='none'">Attaque renforcée <span>INT · STR — Puissance d'attaque ↑</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="ibox" style="margin-top:1.2rem"><strong>Note :</strong> Ces ordres sont indicatifs — de nombreux choix s'offrent à vous selon la spécificité souhaitée pour votre personnage.</div>
+        </div>
+
+      </div><!-- /cgrid -->
+
+      <div class="ibox" style="margin-top:1.5rem"><strong>Progression :</strong> Niveaux 1–20 → Maître M1–M10 → Grand Maître G1–G10 → <strong>Parfait P</strong>. Montez au niveau 17 pour maximiser les chances de passage en M1.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ QUÊTES ══ -->
+<div class="sep" aria-hidden="true"><span class="sep-l"></span><span class="sep-r"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Quêtes</span><span class="sep-l"></span></div>
+<section class="panel" id="quetes">
+  <div class="mmo">
+    <div class="mmo-hd">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      <span class="mmo-ht">Les Quêtes</span>
+      <span class="mmo-hs">Cliquez pour explorer</span>
+    </div>
+    <div class="mmo-bd">
+
+      <div class="qgrid" id="quest-grid">
+
+        <!-- VIGNETTE 1 : QUÊTE PRINCIPALE -->
+        <div class="qc qliste" role="button" tabindex="0" data-quest="liste" aria-expanded="false">
+          <div class="qc-img-wrap">
+            <img src="assets/Quetes.png" alt="" loading="lazy" decoding="async" onerror="this.src='assets/Livredecompetence.png'">
+          </div>
+          <div class="qc-label">
+            <div class="qcn">Quête principale</div>
+            <div class="qcd">Niv. 1–84 · Processus complet</div>
+          </div>
+          <div class="qc-foot">VOIR ›</div>
+        </div>
+
+        <!-- VIGNETTE 2 : MISSIONS DE CHASSE -->
+        <div class="qc qchasse" role="button" tabindex="0" data-quest="chasse" aria-expanded="false">
+          <div class="qc-img-wrap">
+            <img src="assets/Chienerrant.png" alt="" loading="lazy" decoding="async" onerror="this.src='assets/Ogreguerrier.png'">
+          </div>
+          <div class="qc-label">
+            <div class="qcn">Missions de chasse</div>
+            <div class="qcd">Niv. 2–90 · Une par niveau</div>
+          </div>
+          <div class="qc-foot">VOIR ›</div>
+        </div>
+
+        <!-- VIGNETTE 3 : MISSIONS BIOLOGIQUES -->
+        <div class="qc qbio" role="button" tabindex="0" data-quest="bio" aria-expanded="false">
+          <div class="qc-img-wrap">
+            <img src="assets/chaegirab.png" alt="" loading="lazy" decoding="async">
+          </div>
+          <div class="qc-label">
+            <div class="qcn">Biologiste</div>
+            <div class="qcd">Bonus permanents</div>
+          </div>
+          <div class="qc-foot">VOIR ›</div>
+        </div>
+        <!-- VIGNETTE 4 : MISSIONS D'ÉQUITATION -->
+        <div class="qc qequit" role="button" tabindex="0" data-quest="equit" aria-expanded="false">
+          <div class="qc-img-wrap">
+            <img src="assets/Chevalguilde.jpg" alt="" loading="lazy" decoding="async" onerror="this.src='assets/Chefguerriercitadellefoudre.png'">
+          </div>
+          <div class="qc-label">
+            <div class="qcn">Équitation</div>
+            <div class="qcd">Poney → Militaire</div>
+          </div>
+          <div class="qc-foot">VOIR ›</div>
+        </div>
+
+        <!-- VIGNETTE 5 : LIVRES DE QUÊTES -->
+        <div class="qc qlivres" role="button" tabindex="0" data-quest="livres" aria-expanded="false">
+          <div class="qc-img-wrap">
+            <img src="assets/Livredecompetence.png" alt="" loading="lazy" decoding="async" onerror="this.src='assets/livre-maudit.png'">
+          </div>
+          <div class="qc-label">
+            <div class="qcn">Livres de quêtes</div>
+            <div class="qcd">Facile → Expert</div>
+          </div>
+          <div class="qc-foot">VOIR ›</div>
+        </div>
+
+        <!-- ═══ PANNEAU MISSIONS DE CHASSE ═══ -->
+        <div class="qc-panel" id="panel-chasse">
+          <button class="qcp-close" data-close-quest="chasse">Fermer ✕</button>
+          <div class="qcp-head">
+            <div class="qcp-title">Missions de chasse</div>
+            <div class="qcp-sub">Une mission par niveau · 15% EXP garanti · Disponible uniquement si la mission précédente est terminée</div>
+          </div>
+          <div class="tbox"><strong>Règle :</strong> Une mission par niveau — disponible uniquement si la précédente est terminée. Récompense fixe : <strong>15% EXP</strong> du niveau de la quête + récompense indiquée.</div>
+      <div class="qtabs">
+        <button class="qtab active" data-panel="h2">2–10</button>
+        <button class="qtab" data-panel="h11">11–20</button>
+        <button class="qtab" data-panel="h21">21–30</button>
+        <button class="qtab" data-panel="h31">31–40</button>
+        <button class="qtab" data-panel="h41">41–50</button>
+        <button class="qtab" data-panel="h51">51–60</button>
+        <button class="qtab" data-panel="h61">61–70</button>
+        <button class="qtab" data-panel="h71">71–80</button>
+        <button class="qtab" data-panel="h81">81–90</button>
+      </div>
+
+      <!-- 2-10 -->
+      <div class="qpanel active" id="h2">
+        <table class="qt">
+          <thead><tr><th scope="col">Niv.</th><th scope="col">Mission</th><th scope="col">Récompenses spéciales</th></tr></thead>
+          <tbody>
+            <tr><td>2</td><td>10 Chiens errants affamés <em>ou</em> 5 Loups affamés</td><td>Armure selon classe +0</td></tr>
+            <tr><td>3</td><td>20 Chiens errants affamés <em>ou</em> 10 Loups affamés</td><td>Casque selon classe +0</td></tr>
+            <tr><td>4</td><td>15 Loups affamés <em>ou</em> 5 Loups alphas affamés</td><td>Bouclier de bataille +0</td></tr>
+            <tr><td>5</td><td>10 Loups alphas affamés <em>ou</em> 10 Loups bleus affamés</td><td>Objet aléatoire</td></tr>
+            <tr><td>6</td><td>20 Loups bleus affamés <em>ou</em> 10 Sangliers sauvages affamés</td><td>Objet aléatoire</td></tr>
+            <tr><td>7</td><td>10 Sangliers sauvages affamés <em>ou</em> 5 Loups alphas bleus affamés</td><td>Objet aléatoire</td></tr>
+            <tr><td>8</td><td>20 Sangliers sauvages affamés <em>ou</em> 10 Loups alphas bleus affamés</td><td>Objet aléatoire</td></tr>
+            <tr><td>9</td><td>15 Loups alphas bleus affamés <em>ou</em> 5 Sangliers rouges affamés</td><td>Objet aléatoire</td></tr>
+            <tr><td>10</td><td>20 Loups alphas bleus affamés <em>ou</em> 10 Sangliers rouges affamés</td><td>Objet aléatoire</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 11-20 -->
+      <div class="qpanel" id="h11">
+        <table class="qt">
+          <thead><tr><th scope="col">Niv.</th><th scope="col">Mission</th><th scope="col">Récompenses spéciales</th></tr></thead>
+          <tbody>
+            <tr><td>11</td><td>10 Sangliers rouges affamés <em>ou</em> 5 Ours affamés</td><td><strong>30% EXP</strong> · Objet aléatoire</td></tr>
+            <tr><td>12</td><td>15 Ours affamés <em>ou</em> 10 Loups gris affamés</td><td>Objet aléatoire</td></tr>
+            <tr><td>13</td><td>20 Loups gris affamés <em>ou</em> 5 Grizzly affamés</td><td>Objet aléatoire</td></tr>
+            <tr><td>14</td><td>15 Grizzly affamés <em>ou</em> 5 Loups alphas gris affamés</td><td>Objet aléatoire</td></tr>
+            <tr><td>15</td><td>20 Grizzly affamés <em>ou</em> 10 Loups alphas gris affamés</td><td>Objet aléatoire</td></tr>
+            <tr><td>16</td><td>15 Loups alphas gris affamés <em>ou</em> 5 Tigres affamés</td><td>Objet aléatoire</td></tr>
+            <tr><td>17</td><td>20 Loups alphas gris affamés <em>ou</em> 10 Tigres affamés</td><td>Objet aléatoire</td></tr>
+            <tr><td>18</td><td>10 Tigres affamés <em>ou</em> 10 Ours noirs affamés</td><td>Objet aléatoire</td></tr>
+            <tr><td>19</td><td>20 Ours noirs affamés <em>ou</em> 10 Ours bruns affamés</td><td>Objet aléatoire</td></tr>
+            <tr><td>20</td><td>20 Ours bruns affamés <em>ou</em> 15 Arcs du Serment craintif</td><td>Objet aléatoire</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 21-30 -->
+      <div class="qpanel" id="h21">
+        <table class="qt">
+          <thead><tr><th scope="col">Niv.</th><th scope="col">Mission</th><th scope="col">Récompenses spéciales</th></tr></thead>
+          <tbody>
+            <tr><td>21</td><td>20 Arcs du Serment craintif <em>ou</em> 10 Tigres blancs affamés</td><td>Objet aléatoire · Yang</td></tr>
+            <tr><td>22</td><td>25 Tigres blancs affamés <em>ou</em> 10 Cdts du Serment craintif</td><td>Chaussures fil d'Or +0 · 10k–100k Yang</td></tr>
+            <tr><td>23</td><td>20 Cdts du Serment craintif <em>ou</em> 40 Soldats T.Noire du Mal</td><td>Collier de jade +0 · 10k–100k Yang</td></tr>
+            <tr><td>24</td><td>60 Soldats T.Noire du Mal <em>ou</em> 80 Maniacs du Vent Noir</td><td>Boucles d'oreilles jade +0 · 10k–100k Yang</td></tr>
+            <tr><td>25</td><td>80 Forts Soldats Barbares <em>ou</em> 20 Joh-Hwans T.Noire</td><td>Bracelet de jade +0 · 10k–100k Yang</td></tr>
+            <tr><td>26</td><td>80 Forts Minions Barbares <em>ou</em> 20 Pho-Hwangs T.Noire</td><td>Objet aléatoire · 10k–100k Yang</td></tr>
+            <tr><td>27</td><td>30 Pho-Hwangs T.Noire <em>ou</em> 20 Forts Généraux Barbares</td><td>Objet aléatoire · 10k–100k Yang</td></tr>
+            <tr><td>28</td><td>35 Joh-Hwangs T.Noire <em>ou</em> 30 Forts Généraux Barbares</td><td>Objet aléatoire · 10k–100k Yang</td></tr>
+            <tr><td>29</td><td>30 Orcs d'élite <em>ou</em> 30 Faibles Singes Soldats</td><td>Coffre du dieu dragon · 10k–100k Yang</td></tr>
+            <tr><td>30</td><td>40 Éclaireurs orcs d'élite <em>ou</em> 30 Faibles Singes lanceurs</td><td>Élixir du soleil (p) · 10k–100k Yang</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 31-40 -->
+      <div class="qpanel" id="h31">
+        <table class="qt">
+          <thead><tr><th scope="col">Niv.</th><th scope="col">Mission</th><th scope="col">Récompenses spéciales</th></tr></thead>
+          <tbody>
+            <tr><td>31</td><td>50 Combattants orcs d'élite <em>ou</em> 45 Faibles Singes Combattants</td><td>Élixir de la lune (p) · 20k–100k Yang</td></tr>
+            <tr><td>32</td><td>45 Rois scorpions <em>ou</em> 40 Faibles Singes généraux</td><td>20k–100k Yang</td></tr>
+            <tr><td>33</td><td>35 Orcs intrépides <em>ou</em> 30 Œils Volants</td><td>Collier d'ébène +0 · 20k–100k Yang</td></tr>
+            <tr><td>34</td><td>40 Éclaireurs orcs intrépides <em>ou</em> 40 Rois scorpions</td><td>Bracelet d'ébène +0 · 20k–100k Yang</td></tr>
+            <tr><td>35</td><td>40 Combattants orcs intrépides <em>ou</em> 20 Jeunes Araignées</td><td>Boucles d'oreilles ébène +0 · 20k–100k Yang</td></tr>
+            <tr><td>36</td><td>30 Sorciers orcs intrépides <em>ou</em> 30 Jeunes venimeuses</td><td>20k–100k Yang</td></tr>
+            <tr><td>37</td><td>30 Généraux orcs intrépides <em>ou</em> 20 Jeunes hommes scorpions</td><td>20k–100k Yang</td></tr>
+            <tr><td>38</td><td>30 Hauts fanatiques <em>ou</em> 25 Araignées venimeuses</td><td>20k–100k Yang</td></tr>
+            <tr><td>39</td><td>30 Hauts arahans <em>ou</em> 30 Araignées venimeuses</td><td>20k–100k Yang</td></tr>
+            <tr><td>40</td><td>30 Combattants Hauts arahans <em>ou</em> 35 Archers scorpions</td><td>Élixir du soleil (p) · 20k–100k Yang</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 41-50 -->
+      <div class="qpanel" id="h41">
+        <table class="qt">
+          <thead><tr><th scope="col">Niv.</th><th scope="col">Mission</th><th scope="col">Récompenses spéciales</th></tr></thead>
+          <tbody>
+            <tr><td>41</td><td>40 Hauts arahans élites <em>ou</em> 40 Épéistes serpents</td><td>Élixir de la lune (p) · 40k–150k Yang</td></tr>
+            <tr><td>42</td><td>40 Hauts juges <em>ou</em> 45 Araignées rouges venimeuses</td><td>40k–150k Yang</td></tr>
+            <tr><td>43</td><td>40 Hauts Tourmenteurs <em>ou</em> 30 Araignées à griffes</td><td>40k–150k Yang</td></tr>
+            <tr><td>44</td><td>40 Hauts évocateurs <em>ou</em> 30 Soldats Araignées</td><td>40k–150k Yang</td></tr>
+            <tr><td>45</td><td>50 Orcs noirs intrépides <em>ou</em> 35 Forts bandits du désert</td><td>40k–150k Yang</td></tr>
+            <tr><td>46</td><td>30 Arahans bestiaux <em>ou</em> 40 Singes Soldats</td><td>Coffre du dieu dragon · 40k–150k Yang</td></tr>
+            <tr><td>47</td><td>35 Combattants arahans bestiaux <em>ou</em> 40 Singes lanceurs</td><td>40k–150k Yang</td></tr>
+            <tr><td>48</td><td>40 Chefs arahans bestiaux <em>ou</em> 40 Singes Combattants</td><td>40k–150k Yang</td></tr>
+            <tr><td>49</td><td>40 Juges bestiaux <em>ou</em> 45 Forts Singes lanceurs</td><td>Élixir du soleil (p) · 40k–150k Yang</td></tr>
+            <tr><td>50</td><td>40 Tourmenteurs bestiaux <em>ou</em> 45 Forts Singes Combattants</td><td>Élixir de la lune (p) · 40k–150k Yang</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 51-60 -->
+      <div class="qpanel" id="h51">
+        <table class="qt">
+          <thead><tr><th scope="col">Niv.</th><th scope="col">Mission</th><th scope="col">Récompenses spéciales</th></tr></thead>
+          <tbody>
+            <tr><td>51</td><td>50 Soldats gren. arboricoles <em>ou</em> 30 Jeunes Araignées venimeuses</td><td>Coffre du dieu dragon · 60k–200k Yang</td></tr>
+            <tr><td>52</td><td>50 Chefs gren. arboricoles <em>ou</em> 45 Araignées mortelles</td><td>60k–200k Yang</td></tr>
+            <tr><td>53</td><td>50 Croques-mitaines <em>ou</em> 50 Araignées rouges venimeuses furieuses</td><td>60k–200k Yang</td></tr>
+            <tr><td>54</td><td>50 Grands chefs gren. arbori. <em>ou</em> 30 Araignées à griffes (niv.56)</td><td>Collier larme céleste +0 · 60k–200k Yang</td></tr>
+            <tr><td>55</td><td>50 Gal Grenouilles-taureaux <em>ou</em> 35 Soldats Araignées venimeuses</td><td>Bracelet larme céleste +0 · 60k–200k Yang</td></tr>
+            <tr><td>56</td><td>80 Soldats démoniaques <em>ou</em> 30 Âmes furieuses</td><td>Boucles oreilles larme C. +0 · 60k–200k Yang</td></tr>
+            <tr><td>57</td><td>80 Archers démons <em>ou</em> 40 Chiens infectés enragés</td><td>60k–200k Yang</td></tr>
+            <tr><td>58</td><td>80 Lanciers démoniaques <em>ou</em> 40 Pestiférés furieux</td><td>60k–200k Yang</td></tr>
+            <tr><td>59</td><td>80 Chamanes démoniaques <em>ou</em> 45 Combattants pestiférés furieux</td><td>Élixir du soleil (p) · 60k–200k Yang</td></tr>
+            <tr><td>60</td><td>80 Vils Soldats démoniaques <em>ou</em> 40 Lanciers pestiférés furieux</td><td>Casque niv.60 selon classe +0 · 60k–200k Yang</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 61-70 -->
+      <div class="qpanel" id="h61">
+        <table class="qt">
+          <thead><tr><th scope="col">Niv.</th><th scope="col">Mission</th><th scope="col">Récompenses spéciales</th></tr></thead>
+          <tbody>
+            <tr><td>61</td><td>60 Vils lanciers démoniaques <em>ou</em> 60 Archers pestiférés furieux</td><td>Élixir de la lune (p) · 60k–200k Yang</td></tr>
+            <tr><td>62</td><td>60 Destructeurs <em>ou</em> 55 Glaces enchantées</td><td>Coffre du dieu dragon · 60k–200k Yang</td></tr>
+            <tr><td>63</td><td>60 Golems de pierre <em>ou</em> 45 Baleines de glace</td><td>60k–200k Yang</td></tr>
+            <tr><td>64</td><td>60 Golems de pierre <em>ou</em> 45 Lions de glace</td><td>60k–200k Yang</td></tr>
+            <tr><td>65</td><td>60 Berserkers <em>ou</em> 40 Yétis</td><td>Chausses d'euphorie +0 · 60k–200k Yang</td></tr>
+            <tr><td>66</td><td>60 Golems Géants de Pierre <em>ou</em> 45 Golems de glace</td><td>Armure niv.66 selon classe +0 · 60k–200k Yang</td></tr>
+            <tr><td>67</td><td>60 Milliers Combattants <em>ou</em> 50 Tigres minions</td><td>60k–200k Yang</td></tr>
+            <tr><td>68</td><td>60 Ogres Guerriers <em>ou</em> 50 Esprits flammes</td><td>60k–200k Yang</td></tr>
+            <tr><td>69</td><td>60 Ogres Bouchers <em>ou</em> 50 Flammes</td><td>Élixir du soleil (p) · 60k–200k Yang</td></tr>
+            <tr><td>70</td><td>60 Ogres Berserkers <em>ou</em> 55 Guerriers flammes</td><td>Élixir de la lune (p) · 60k–200k Yang</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 71-80 -->
+      <div class="qpanel" id="h71">
+        <table class="qt">
+          <thead><tr><th scope="col">Niv.</th><th scope="col">Mission</th><th scope="col">Récompenses spéciales</th></tr></thead>
+          <tbody>
+            <tr><td>71</td><td>65 Esprits de la souche</td><td>Coffre du dieu dragon</td></tr>
+            <tr><td>72</td><td>65 Esprits de la souche</td><td>—</td></tr>
+            <tr><td>73</td><td>65 Dryades</td><td>—</td></tr>
+            <tr><td>74</td><td>65 Esprits du saule pleureur</td><td>Arme niv.75 selon classe +0 (liée)</td></tr>
+            <tr><td>75</td><td>65 Arbres maléfiques</td><td>Arme niv.75 selon classe +0 (liée)</td></tr>
+            <tr><td>76</td><td>65 Esprits rouges de l'arbre</td><td>Coffre du dieu dragon · Arme niv.75 +0 (liée)</td></tr>
+            <tr><td>77</td><td>65 Esprits rouges de la souche</td><td>—</td></tr>
+            <tr><td>78</td><td>65 Dryades rouges</td><td>—</td></tr>
+            <tr><td>79</td><td>65 Saules pleureurs rouges</td><td>Élixir du soleil (p)</td></tr>
+            <tr><td>80</td><td>65 Arbres maléfiques rouges</td><td>Élixir de la lune (p)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="qpanel" id="h81">
+        <table class="qt">
+          <thead><tr><th>Niv.</th><th>Mission</th><th>Récompenses spéciales</th></tr></thead>
+          <tbody>
+            <tr><td>81</td><td>70 Glaçons d'enfer</td><td>Coffre du dieu dragon</td></tr>
+            <tr><td>82</td><td>70 Baleines de glace d'enfer</td><td>—</td></tr>
+            <tr><td>83</td><td>70 Insectes de glace d'enfer</td><td>—</td></tr>
+            <tr><td>84</td><td>70 Hommes de glace d'enfer</td><td>—</td></tr>
+            <tr><td>85</td><td>70 Yétis d'enfer</td><td>—</td></tr>
+            <tr><td>86</td><td>75 Golems de glace d'enfer</td><td>—</td></tr>
+            <tr><td>87</td><td>75 Guerriers Setaou</td><td>—</td></tr>
+            <tr><td>88</td><td>75 Chasseurs Setaou</td><td>—</td></tr>
+            <tr><td>89</td><td>75 Voyantes Setaou</td><td>Élixir du soleil (p)</td></tr>
+            <tr><td>90</td><td>75 Voyantes Setaou</td><td>Élixir de la lune (p)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 91-99 -->
+
+      <!-- 81-90 -->
+      </div>
+
+        <div class="qc-panel" id="panel-bio">
+          <button class="qcp-close" data-close-quest="bio">Fermer ✕</button>
+          <div class="qcp-head">
+            <div class="qcp-title">Missions biologiques</div>
+            <div class="qcp-sub">Bonus permanents cumulatifs · Commencer dès le niveau 30 · PNJ Chaegirab puis Seon-Pyeong</div>
+          </div>
+      <div class="ptitle"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>Missions biologiques — Bonus permanents</div>
+      <div class="pnj-row">
+        <div class="pnj-portrait">
+          <img src="assets/chaegirab.png" alt="Chaegirab" onerror="this.src='';this.style.background='rgba(40,14,2,.8)'">
+          <span>Chaegirab</span>
+        </div>
+        <div class="pnj-content">
+          <div class="tbox" style="margin-bottom:0"><strong>Important :</strong> Ces quêtes doivent être commencées le plus tôt possible — elles sont longues mais les bonus sont permanents. Chaegirab n'étudie qu'<strong>un objet toutes les 2 heures</strong>. Taux ~50% — utilisez un <strong>Accélérateur</strong> pour réduire le délai et un <strong>Élixir du chercheur</strong> pour augmenter les chances.</div>
+        </div>
+      </div>
+
+      <!-- Quêtes spéciales niv 4-25 -->
+      <div class="ptitle" style="margin-top:1.2rem"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01"/></svg>Quêtes spéciales (niv. 4–25)</div>
+      <div class="ibox">Ces 6 quêtes ont des récompenses faibles — elles ne sont pas prioritaires.</div>
+      <div class="sg" style="margin-bottom:1.5rem">
+        <div class="sc"><div class="scn">Niv. 4</div><div class="scd">Ramassez des Fleurs de pêcher</div></div>
+        <div class="sc"><div class="scn">Niv. 7</div><div class="scd">Ramassez des Campanules</div></div>
+        <div class="sc"><div class="scn">Niv. 10</div><div class="scd">Ramassez des Fleurs Kaki</div></div>
+        <div class="sc"><div class="scn">Niv. 15</div><div class="scd">Collectez des Racines de Gango</div></div>
+        <div class="sc"><div class="scn">Niv. 20</div><div class="scd">Collectez des Lilas</div></div>
+        <div class="sc"><div class="scn">Niv. 25</div><div class="scd">Ramassez des Champignons Tue</div></div>
+      </div>
+
+      <!-- Recherches du biologiste niv 30-90 -->
+      <div class="ptitle"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>Recherches du biologiste (niv. 30–90) — <span style="color:var(--gold);font-size:.75em">Bonus permanents</span></div>
+      <div class="bio-grid" style="margin-top:.6rem">
+        <div class="bio-card">
+          <div class="bio-lvl">Niveau 30</div>
+          <div class="bio-name">Biologiste 1</div>
+          <div class="bio-obj"><img src="assets/molaire.png" alt="" onerror="this.style.display='none'">Molaire d'orc ×10 · Pierre d'âme de Jinunggy</div>
+          <span class="bio-reward">+10 Vitesse de déplacement</span>
+        </div>
+        <div class="bio-card">
+          <div class="bio-lvl">Niveau 40</div>
+          <div class="bio-name">Biologiste 2</div>
+          <div class="bio-obj"><img src="assets/livre-maudit.png" alt="" onerror="this.style.display='none'">Livre maléfique ×15 · Pierre d'âme du Temple</div>
+          <span class="bio-reward">+5 Vitesse d'attaque</span>
+        </div>
+        <div class="bio-card">
+          <div class="bio-lvl">Niveau 50</div>
+          <div class="bio-name">Biologiste 3</div>
+          <div class="bio-obj"><img src="assets/souvenir-demon.png" alt="" onerror="this.style.display='none'">Souvenir de Démon ×15 · Pierre d'âme de Sagyi</div>
+          <span class="bio-reward">+60 Défense</span>
+        </div>
+        <div class="bio-card">
+          <div class="bio-lvl">Niveau 60</div>
+          <div class="bio-name">Biologiste 4</div>
+          <div class="bio-obj"><img src="assets/orbe-glace.png" alt="" onerror="this.style.display='none'">Orbe de glace ×20 · Pierre d'âme d'Aurtumryu</div>
+          <span class="bio-reward">+50 Valeur d'attaque</span>
+        </div>
+        <div class="bio-card">
+          <div class="bio-lvl">Niveau 70</div>
+          <div class="bio-name">Biologiste 5</div>
+          <div class="bio-obj"><img src="assets/zelkova.png" alt="" onerror="this.style.display='none'">Rameau de Zelkova ×25 · Pierre d'âme de Gyimok</div>
+          <span class="bio-reward">+11 Vit. dépl. · +10% Défense</span>
+        </div>
+        <div class="bio-card">
+          <div class="bio-lvl">Niveau 80</div>
+          <div class="bio-name">Biologiste 6</div>
+          <div class="bio-obj">Certificat de Tugyis ×30 · Pierre d'âme de Tugyis</div>
+          <span class="bio-reward">+6 Vit. attaque · +10% Val. attaque</span>
+        </div>
+        <div class="bio-card">
+          <div class="bio-lvl">Niveau 85</div>
+          <div class="bio-name">Biologiste 7</div>
+          <div class="bio-obj">Rameau d'arbre fant. Rge ×40 · Pierre d'âme du Bois Rge</div>
+          <span class="bio-reward">+10% Chance parer (race)</span>
+        </div>
+        <div class="bio-card">
+          <div class="bio-lvl">Niveau 90</div>
+          <div class="bio-name">Biologiste 8</div>
+          <div class="bio-obj">Certificat du Chef ×50 · Pierre d'âme du Chef</div>
+          <span class="bio-reward">+8% Bonus contre les races</span>
+        </div>
+      </div>
+
+      <!-- Seon-Pyeong -->
+      <div class="ptitle"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>Recherches de Seon-Pyeong (niv. 92–94) — <span style="color:var(--gold);font-size:.75em">Choix de bonus</span></div>
+      <div class="ibox"><strong>Différences :</strong> Voir Seon-Pyeong (pas Chaegirab). Attente réduite à <strong>12 heures</strong>. Un choix entre 3 bonus est proposé à la fin. Il est possible de recommencer une quête avec le <strong>Parchemin du chercheur</strong>.</div>
+      <div class="bio-grid">
+        <div class="bio-card">
+          <div class="bio-lvl">Niveau 92</div>
+          <div class="bio-name">Seon-Pyeong 1</div>
+          <div class="bio-obj">Joyau de Cruauté ×10</div>
+          <span class="bio-reward">Au choix : +1000 PV de base · +120 Défense · +51 Val. attaque</span>
+        </div>
+        <div class="bio-card">
+          <div class="bio-lvl">Niveau 94</div>
+          <div class="bio-name">Seon-Pyeong 2</div>
+          <div class="bio-obj">Joyau de Sagesse ×20 · Pierre d'âme de Beran-S.</div>
+          <span class="bio-reward">Au choix : +1100 PV de base · +140 Défense · +60 Val. attaque</span>
+        </div>
+      </div>
+
+</div>
+
+        <!-- ═══ PANNEAU LIVRES DE QUÊTES ═══ -->
+
+        <div class="qc-panel" id="panel-livres">
+          <button class="qcp-close" data-close-quest="livres">Fermer ✕</button>
+          <div class="qcp-head">
+            <div class="qcp-title">Livres de quêtes</div>
+            <div class="qcp-sub">7 niveaux de difficulté · Récompenses aléatoires · Obtenables sur les monstres ou en boutique</div>
+          </div>
+      <div class="ibox">Les livres de quêtes s'obtiennent de diverses façons (quêtes, monstres, boutique). Chaque livre donne une quête aléatoire à réaliser contre une récompense aléatoire parmi la liste indiquée.</div>
+
+      <!-- ONGLETS LIVRES -->
+      <div class="qtabs" id="livres-tabs">
+        <button class="qtab active" data-panel="lf">Facile</button>
+        <button class="qtab" data-panel="ln">Normal</button>
+        <button class="qtab" data-panel="ld">Difficile</button>
+        <button class="qtab" data-panel="le">Expert</button>
+      </div>
+
+      <!-- FACILE -->
+      <div class="qpanel active" id="lf">
+        <table class="qt">
+          <thead><tr><th style="width:38%">Nom de la quête</th><th style="width:28%">Mission</th><th>Récompenses possibles</th></tr></thead>
+          <tbody>
+            <tr><td>L'apparition des loups gris 1</td><td>Tuer 10 Loups gris</td><td>10k EXP + Peau de patte d'ours · 20k EXP + 5k Yang · 20k EXP + Fourrure de tigre · 80k EXP + 5k Yang · 10k Yang + Bile d'ours+ · 10k Yang + Fourrure de tigre · 30k EXP + 20k Yang</td></tr>
+            <tr><td>L'apparition des loups gris 2</td><td>Tuer 30 Loups alphas gris</td><td>10k EXP + Peau de patte d'ours · 20k EXP + 5k Yang · 20k EXP + Fourrure de tigre · 80k EXP + 5k Yang · 10k Yang + Bile d'ours+ · 10k Yang + Fourrure de tigre · 30k EXP + 20k Yang</td></tr>
+            <tr><td>À propos des tigres et des ours</td><td>Tuer 25 Tigres et 30 Ours</td><td>10k EXP + Peau de patte d'ours · 20k EXP + 20k Yang · 20k EXP + Peau de tigre blanc · 50k EXP + Groin · 50k EXP + 50k Yang</td></tr>
+            <tr><td>L'Ouragan des loups bleus</td><td>Tuer 35 Loups bleus et 25 Loups alphas bleus</td><td>30k EXP + 5k Yang + Griffe de loup · 5k Yang + Griffe de tigre · 20k Yang + Griffe de loup+</td></tr>
+            <tr><td>Soucis concernant les villages</td><td>Tuer 40 Sangliers</td><td>20k EXP + 40k Yang · 20k EXP + 50k Yang · 20k EXP + Bile d'ours+ · 5k Yang + Peau de patte d'ours · 5k Yang + Fourrure de tigre · 10k Yang + Bile d'ours+</td></tr>
+            <tr><td>Soucis concernant les villages 2</td><td>Tuer 30 Sangliers rouges</td><td>10k EXP + 100k Yang · 20k EXP + 10k Yang · 20k EXP + 20k Yang · 20k EXP + 50k Yang · 30k EXP + 5k Yang · 30k EXP + Fourrure de loup+ · 10k Yang + Dent de sanglier sauvage</td></tr>
+            <tr><td>Brisez le Metin de Combat</td><td>Détruire 3 Metins de Combat</td><td>EXP · Yang · Groin · Bile d'ours+</td></tr>
+            <tr><td>Détruisez le Metin de Bataille</td><td>Détruire 2 Metins de Bataille</td><td>EXP · Yang</td></tr>
+            <tr><td>Brisez le Metin de Cupidité</td><td>Détruire 2 Metins de Cupidité</td><td>EXP · Yang</td></tr>
+            <tr><td>La marche des ours affamés</td><td>Tuer 25 Ours noirs et 25 Grizzly</td><td>EXP · Yang</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- NORMAL -->
+      <div class="qpanel" id="ln">
+        <table class="qt">
+          <thead><tr><th style="width:38%">Nom de la quête</th><th style="width:28%">Mission</th><th>Récompenses possibles</th></tr></thead>
+          <tbody>
+            <tr><td>Chasser l'armée blanche</td><td>Tuer 20 Cdts du Serment Blanc</td><td>EXP · Yang · Dent de barbare</td></tr>
+            <tr><td>L'attaque des Se-Rangs</td><td>Tuer 10 Se-Rangs</td><td>30k EXP + Toile d'araignée · 30–100k EXP + Yang · 30–80k Yang + objets (Amulette d'orc+, Molaire d'orc, Poche d'œuf, Glande venin, Pince scorpion, Lame rouillée, Yeux d'araignée, Uniforme noir usé+, Dent d'orc+)</td></tr>
+            <tr><td>Donjon singes facile 1</td><td>Tuer 30 Faibles Singes Soldats + 30 Faibles Singes lanceurs</td><td>EXP · Yang · Molaire d'orc</td></tr>
+            <tr><td>Donjon singes facile 2</td><td>Tuer 15 Faibles Singes Combattants + 15 Faibles Singes généraux</td><td>EXP · Yang · Dard de scorpion</td></tr>
+            <tr><td>Donjon normal des Singes 1</td><td>Tuer 30 Singes Soldats + 30 Singes lanceurs</td><td>50–100k EXP + Yang · 10k–200k Yang + objets (Toile d'araignée, Molaire d'orc, Dent d'orc+, Yeux d'araignée, Glande venin, Uniforme noir usé+, Poche d'œuf)</td></tr>
+            <tr><td>Donjon normal des Singes 2</td><td>Tuer 15 Singes Combattants + 15 Singes généraux</td><td>EXP · Yang · Queue de scorpion+ · Natte de ruban rouge</td></tr>
+            <tr><td>Brisez la Metin Noire</td><td>Détruire 2 Metins Noires</td><td>20–100k EXP + Yang · 10–80k Yang + objets (Toile d'araignée, Lame rouillée, Pince de scorpion, Poche d'œuf, Uniforme noir usé+, Glande venin, Yeux d'araignée)</td></tr>
+            <tr><td>Brisez le Metin des Ténèbres</td><td>Détruire 3 Metins des Ténèbres</td><td>EXP · Yang · Glande venin d'araignée · Yeux d'araignée</td></tr>
+            <tr><td>Brisez la Metin de Jalousie</td><td>Détruire 2 Metins de Jalousie</td><td>EXP · Yang · Natte de ruban rouge</td></tr>
+            <tr><td>L'attaque des barbares</td><td>Tuer 30 Soldats Barbares + 30 Minions Barbares</td><td>EXP · Yang · Uniforme noir usé · Crème de visage</td></tr>
+            <tr><td>Le Vent Noir agité</td><td>Tuer 25 Jak-To + 25 To-Su du Vent Noir</td><td>EXP · Yang · Shuriken</td></tr>
+            <tr><td>Ils sèment le vent…</td><td>Tuer 4 Chuong</td><td>EXP · Yang · Dard de scorpion</td></tr>
+            <tr><td>La Grande Révolte des orcs 1</td><td>Tuer 30 Orcs d'élite + 30 Éclaireurs orcs élites</td><td>20–80k EXP + Yang · 10–80k Yang + objets (Uniforme noir usé, Shuriken, Natte ruban blanc+, Dent de barbare, Porcelaine brisée, Crème de visage, Morceau de gemme, Manuel d'Ésotérisme)</td></tr>
+            <tr><td>La Grande Révolte des orcs 2</td><td>Tuer 20 Combattants orcs élites + 15 Sorciers orcs élites</td><td>EXP · Yang · Amulette d'orc+ · Lame rouillée · Pince de scorpion</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- DIFFICILE -->
+      <div class="qpanel" id="ld">
+        <table class="qt">
+          <thead><tr><th style="width:38%">Nom de la quête</th><th style="width:28%">Mission</th><th>Récompenses possibles</th></tr></thead>
+          <tbody>
+            <tr><td>Le fléau des scorpions</td><td>Tuer 30 Rois scorpions + 20 Jeunes hommes scorpions</td><td>Yang · EXP · Manuel d'Ésotérisme+ · Médicament inconnu+</td></tr>
+            <tr><td>Chunwa Bong-Ki</td><td>Tuer 45 Soldats gren. arboricoles + 35 Chefs gren. arboricoles</td><td>Yang · EXP</td></tr>
+            <tr><td>Les bras droits de l'Esprit du Tigre Jaune</td><td>Tuer 30 Gal grenouilles-taureaux</td><td>Yang · EXP · Peau de serpent · Corne de baleine</td></tr>
+            <tr><td>La compagnie de la mort 1</td><td>Tuer 30 Soldats démoniaques + 20 Archers démons</td><td>Yang · EXP · Crinière flamboyante · Orbe de glace+ · Manuel d'Ésotérisme+ · Médicament inconnu+</td></tr>
+            <tr><td>La compagnie de la mort 2</td><td>Tuer 30 Lanciers démoniaques + 25 Chamanes démoniaques</td><td>Yang · EXP · Souvenir de Démon · Fourrure de Yéti · Orbe de glace+</td></tr>
+            <tr><td>Le secret de la tour démoniaque</td><td>Tuer 45 Vils lanciers démoniaques</td><td>Yang · EXP</td></tr>
+            <tr><td>Les Maîtres de la Tour Démoniaque</td><td>Tuer 60 Vils chamanes démoniaques</td><td>Yang · EXP · Pelote</td></tr>
+            <tr><td>Les disciples des ténèbres 1</td><td>Tuer 30 Fanatiques funestes + 30 Arahans funestes</td><td>Yang · EXP · Morceau de tissu+</td></tr>
+            <tr><td>Les disciples des ténèbres 2</td><td>Tuer 20 Combattants funestes + 25 Chefs arahans funestes</td><td>Yang · EXP · Morceau de tissu+ · Pattes de grenouille</td></tr>
+            <tr><td>Les disciples des ténèbres 3</td><td>Tuer 40 Bourreaux funestes + 40 Invocateurs funestes</td><td>Yang · EXP · Morceau de tissu+</td></tr>
+            <tr><td>Donjon difficile des Singes 1</td><td>Tuer 30 Forts Singes Soldats + 30 Forts Singes lanceurs</td><td>Yang · EXP · Corne de baleine</td></tr>
+            <tr><td>Donjon difficile des Singes 2</td><td>Tuer 15 Forts Singes Combattants + 15 Forts Singes généraux</td><td>Yang · EXP · Livre maudit+ · Livre maléfique</td></tr>
+            <tr><td>Elles ont 8 pattes (1)</td><td>Tuer 35 Jeunes Araignées venimeuses + 35 Araignées mortelles</td><td>Yang · EXP · Feuille · Langue de grenouille · Médicament inconnu</td></tr>
+            <tr><td>Elles ont 8 pattes (2)</td><td>Tuer 35 Jeunes Araignées venimeuses + 35 Araignées mortelles</td><td>Yang · EXP · Feuille · Langue de grenouille · Shuriken+ · Talisman inconnu+</td></tr>
+            <tr><td>Elles ont 8 pattes (3)</td><td>Tuer 35 Araignées rouges furieuses + 35 Araignées à griffes (niv.56)</td><td>Yang · EXP · Feuille · Langue de grenouille · Queue de serpent · Shuriken+ · Talisman inconnu+</td></tr>
+            <tr><td>Elles ont 8 pattes (4)</td><td>Tuer 40 Soldats Araignées venimeuses</td><td>Yang · EXP · Feuille · Talisman inconnu+ · Queue de serpent · Gemme de Démon+</td></tr>
+            <tr><td>La colère de l'araignée 1</td><td>Tuer 40 Jeunes araignées</td><td>Yang · EXP · Feuille · Morceau de tissu+ · Pattes d'araignée</td></tr>
+            <tr><td>La colère de l'araignée 2</td><td>Tuer 40 Araignées venimeuses</td><td>Yang · EXP · Feuille · Gemme du Démon · Pattes d'araignée</td></tr>
+            <tr><td>Brisez les metins d'âme</td><td>Détruire 2 Metins d'Âme</td><td>Yang · EXP · Pattes d'araignée · Symbole de Guerrier</td></tr>
+            <tr><td>Brisez le Metin de l'Ombre</td><td>Détruire 2 Metins de l'Ombre</td><td>Yang · EXP · Pattes d'araignée · Croc de tigre de combat · Talisman inconnu+ · Morceau de tissu</td></tr>
+            <tr><td>Détruisez la Metin de Force</td><td>Détruire 2 Metins de Force</td><td>Yang · EXP · Crinière flamboyante · Souvenir de Démon</td></tr>
+            <tr><td>Propriétaire du mont Sohan ?</td><td>Tuer 35 Hommes de glace furieux + 30 Yétis</td><td>Yang · EXP · Livre maudit+ · Corne de baleine</td></tr>
+            <tr><td>Les monstres des glaces !</td><td>Tuer 45 Glaces enchantées</td><td>Yang · EXP · Livre maléfique</td></tr>
+            <tr><td>La glace fondra un jour</td><td>Tuer 25 Golems de glace</td><td>Yang · EXP</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- EXPERT -->
+      <div class="qpanel" id="le">
+        <table class="qt">
+          <thead><tr><th style="width:38%">Nom de la quête</th><th style="width:28%">Mission</th><th>Récompenses possibles</th></tr></thead>
+          <tbody>
+            <tr><td>Esprit des flammes ! Son identité</td><td>Tuer 50 Esprits flammes</td><td>Yang · EXP · Souvenir de Démon+ · Épingle de cheveux déco. · Bile d'ours · Pince de scorpion · Crème de visage</td></tr>
+            <tr><td>Les guerriers de flamme</td><td>Tuer 60 Guerriers flammes</td><td>Yang · EXP · Souvenir de Démon+ · Épingle de cheveux déco. · Bile d'ours · Pince de scorpion · Crème de visage · Poche d'œuf d'araignée · Molaire d'orc · Groin</td></tr>
+            <tr><td>Réduisez le nombre de tigres de combat</td><td>Tuer 60 Tigres minions combattants + 40 Tigres de combat</td><td>Yang · EXP · Épingle de cheveux déco. · Bile d'ours · Pince de scorpion · Crème de visage · Poche d'œuf · Molaire d'orc · Groin</td></tr>
+            <tr><td>Explorer Doyyumhwan</td><td>Tuer 45 Tigres minions combattants</td><td>Yang · EXP · Porcelaine brisée · Peau de tigre blanc · Pelote · Dard de scorpion · Fourrure de loup+ · Fourrure de tigre</td></tr>
+            <tr><td>Études des flammes</td><td>Tuer 40 Flammes</td><td>Yang · EXP · Épingle de cheveux déco. · Crème de visage · Molaire d'orc · Groin</td></tr>
+            <tr><td>Examinez les arbres fantômes</td><td>Tuer 30 Arbres fantômes</td><td>Yang · EXP · Symbole du Roi sage · Gants du Roi sage · Cape de l'évadé · L'Art de guerre Wu-Zi · L'Art de guerre Sun-Zi · WeiLiao Zi · Pierre d'âme</td></tr>
+            <tr><td>Le secret de la forêt fantôme</td><td>Tuer 30 Dryades + 40 Esprits de la souche</td><td>Yang · EXP · Symbole du Roi sage · Gants du Roi sage · Cape de l'évadé · L'Art de guerre Wu-Zi · L'Art de guerre Sun-Zi · WeiLiao Zi · Pierre d'âme · Haricot Zen</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+
+
+
+
+
+
+
+
+</div>
+
+        <!-- ═══ PANNEAU ÉQUITATION ═══ -->
+
+        <div class="qc-panel" id="panel-equit">
+          <button class="qcp-close" data-close-quest="equit">Fermer ✕</button>
+          <div class="qcp-head">
+            <div class="qcp-title">Missions d'équitation</div>
+            <div class="qcp-sub">21 médailles équestres au total · Poney → Débutant → Combat → Militaire</div>
+          </div>
+      <div class="ibox"><strong>Prérequis :</strong> 1 Médaille équestre par mission — <strong>21 au total</strong>. Pour les missions 1, 11 et 21 : si vous ratez le temps imparti vous perdez la médaille. Pour les autres missions : si vous descendez du cheval, mourrez ou passez un portail, attente ~24h mais la médaille n'est <em>pas</em> perdue. Il arrive que le Palefrenier annonce un échec même si la mission est réussie — vous pouvez directement recommencer sans perdre la médaille.</div>
+
+      <!-- Progression 4 paliers -->
+      <div class="horse-track" style="margin-bottom:1.4rem">
+        <div class="horse-step">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          <div class="hs-lvl">Niv. 10 requis</div>
+          <div class="hs-name">Poney</div>
+          <div class="hs-mission">Ticket d'équitation → monture temporaire 10 min, déplacement uniquement. Interdiction de monter/descendre sous peine de le perdre. Mourir = perte du Poney.</div>
+          <span class="hs-reward">Monture temporaire</span>
+        </div>
+        <div class="horse-step">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.25C17.25 22.15 21 17.25 21 12V7L12 2z"/></svg>
+          <div class="hs-lvl">Niv. 25 requis</div>
+          <div class="hs-name">Cheval débutant</div>
+          <div class="hs-mission">Niv.1 : tuer 20 Archers Barbares en ≤30 min → Dessin de cheval après 10h (100.000 Yang). La compétence Équitation s'active uniquement à ce moment. Monter/descendre à volonté (Ctrl+H).</div>
+          <span class="hs-reward">Déplacement rapide · Ctrl+H</span>
+        </div>
+        <div class="horse-step">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <div class="hs-lvl">Niv. 35 requis</div>
+          <div class="hs-name">Cheval de Combat</div>
+          <div class="hs-mission">Niv.11 : tuer 100 Archers serpent ou Archers scorpion en ≤2h → Livre cheval de combat après 12h (500.000 Yang). Possible en groupe — le chef doit posséder la quête.</div>
+          <span class="hs-reward">Frappe statique à cheval</span>
+        </div>
+        <div class="horse-step">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/><circle cx="12" cy="12" r="3"/></svg>
+          <div class="hs-lvl">Niv. 50 requis</div>
+          <div class="hs-name">Cheval Militaire</div>
+          <div class="hs-mission">Niv.21 : tuer 300 Archers démon dans la Tour de Gumsan en ≤30 min → Livre équit. militaire après 12h (1.000.000 Yang). Possible en groupe — le chef doit posséder la quête.</div>
+          <span class="hs-reward">Frappe statique + dynamique</span>
+        </div>
+      </div>
+
+      <!-- Détail missions débutant -->
+      <div class="ptitle" style="margin-top:0"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>Détail — Cheval débutant (niv. 1–10)</div>
+      <table class="qt" style="margin-bottom:1.3rem">
+        <thead><tr><th>Niv.</th><th>Mission</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Tuer 20 Archers Barbares en ≤30 min → Dessin de cheval après 10h (100.000 Yang). La compétence d'équitation n'est activée qu'à ce moment là.</td></tr>
+          <tr><td>2</td><td>Se déplacer aux points indiqués — Joan · Pyungmoo · Yongan</td></tr>
+          <tr><td>3</td><td>Se déplacer aux points indiqués — Joan · Pyungmoo · Yongan</td></tr>
+          <tr><td>4</td><td>Se déplacer aux points indiqués — Joan · Pyungmoo · Yongan</td></tr>
+          <tr><td>5</td><td>Se déplacer aux points indiqués — Joan · Pyungmoo · Yongan</td></tr>
+          <tr><td>6</td><td>Se déplacer aux points indiqués — Désert de Yongbi · Vallée de Seungryong</td></tr>
+          <tr><td>7</td><td>Se déplacer aux points indiqués — Désert de Yongbi · Vallée de Seungryong</td></tr>
+          <tr><td>8</td><td>Se déplacer aux points indiqués — Désert de Yongbi · Vallée de Seungryong</td></tr>
+          <tr><td>9</td><td>Se déplacer aux points indiqués — Mont Sohan · Doyyumhwan</td></tr>
+          <tr><td>10</td><td>Se déplacer aux points indiqués — Mont Sohan · Doyyumhwan</td></tr>
+        </tbody>
+      </table>
+
+      <!-- Détail missions combat -->
+      <div class="ptitle" style="margin-top:0"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>Détail — Cheval de Combat (niv. 11–20)</div>
+      <div class="ibox" style="margin-bottom:.8rem">Toutes les missions 12 à 20 doivent être réalisées <strong>sans descendre du cheval</strong>.</div>
+      <table class="qt" style="margin-bottom:1.3rem">
+        <thead><tr><th>Niv.</th><th>Mission</th></tr></thead>
+        <tbody>
+          <tr><td>11</td><td>Tuer 100 Archers serpent ou Archers scorpion en ≤2h → Livre cheval de combat après 12h (500.000 Yang). En groupe : le chef doit posséder la quête.</td></tr>
+          <tr><td>12</td><td>Tuer 5 Bo — Bakra · Bokjung · Jayang</td></tr>
+          <tr><td>13</td><td>Tuer 5 Chuong — Bakra · Bokjung · Jayang</td></tr>
+          <tr><td>14</td><td>Tuer 10 Généraux orcs élites — Vallée de Seungryong</td></tr>
+          <tr><td>15</td><td>Tuer 10 Orcs noirs — Vallée de Seungryong</td></tr>
+          <tr><td>16</td><td>Tuer 10 Bourreaux funestes — Vallée de Seungryong</td></tr>
+          <tr><td>17</td><td>Tuer 10 Araignées à griffes — Kuahlo Dong</td></tr>
+          <tr><td>18</td><td>Tuer 20 Hors-la-loi du Désert — Désert de Yongbi</td></tr>
+          <tr><td>19</td><td>Tuer 10 Golems de glace — Mont Sohan</td></tr>
+          <tr><td>20</td><td>Tuer 20 Tigres de combat — Doyyumhwan</td></tr>
+        </tbody>
+      </table>
+
+      <!-- Détail mission militaire -->
+      <div class="ptitle" style="margin-top:0"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>Détail — Cheval Militaire (niv. 21)</div>
+      <div class="ibox">Tuer <strong>300 Archers démon</strong> dans la <strong>Tour de Gumsan</strong> en ≤30 min. Si réussie → Livre équit. militaire après 12h (1.000.000 Yang). En groupe : le chef doit posséder la quête. Débloque les <strong>compétences à cheval dynamiques</strong> (frappe en déplacement).</div>
+
+</div>
+
+        <!-- ═══ PANNEAU LISTE DES QUÊTES ═══ -->
+
+        <div class="qc-panel" id="panel-liste">
+          <button class="qcp-close" data-close-quest="liste">Fermer ✕</button>
+          <div class="qcp-head">
+            <div class="qcp-title">Quête principale</div>
+            <div class="qcp-sub">Niveaux 1 à 84 · Nom · Récompenses · PNJ</div>
+          </div>
+          <!-- ONGLETS -->
+      <div class="qtabs">
+        <button class="qtab active" data-panel="q1">Niv. 1–10</button>
+        <button class="qtab" data-panel="q11">Niv. 11–20</button>
+        <button class="qtab" data-panel="q21">Niv. 21–30</button>
+        <button class="qtab" data-panel="q31">Niv. 31–40</button>
+        <button class="qtab" data-panel="q41">Niv. 41–50</button>
+        <button class="qtab" data-panel="q51">Niv. 51–60</button>
+        <button class="qtab" data-panel="q61">Niv. 61–70</button>
+        <button class="qtab" data-panel="q71">Niv. 71–84</button>
+      </div>
+
+      <!-- NIV 1-10 -->
+      <div class="qpanel active" id="q1">
+        <table class="qt">
+          <thead><tr><th>Niv.</th><th>Nom de la quête</th><th>Récompenses</th><th>PNJ</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Bienvenue sur Metin</td><td>300 EXP · 200 Yang · 4× Potion rouge (p) · Bijoux en bois +0</td><td class="pnj-badge">Automatique</td></tr>
+            <tr><td>2</td><td>Lettre du Garde du Village</td><td>550 EXP · 1.000 Yang · 15× Potion rouge (p)</td><td class="pnj-badge">Automatique</td></tr>
+            <tr><td>3</td><td>Aidez la Marchande</td><td>850 EXP · 5.000 Yang · 20× Potion bleue (p)</td><td class="pnj-badge">Automatique</td></tr>
+            <tr><td>4</td><td>Un nouvel arôme</td><td>1.000 EXP · 500 Yang</td><td class="pnj-badge">Marchande</td></tr>
+            <tr><td>5</td><td>L'apprentissage</td><td>4 pts de compétences</td><td class="pnj-badge">Automatique</td></tr>
+            <tr><td>6</td><td>La mission du Forgeron</td><td>5.000 EXP · 1.500 Yang · Fourrure de loup+</td><td class="pnj-badge">Automatique</td></tr>
+            <tr><td>6</td><td>La Marchande</td><td>1.500 EXP · 1.000 Yang</td><td class="pnj-badge">Marchande</td></tr>
+            <tr><td>7</td><td>Le dîner</td><td>1.000 EXP · 1.500 Yang</td><td class="pnj-badge">Marchande</td></tr>
+            <tr><td>7</td><td>Encore une autre faveur</td><td>1.500 EXP · 5.000 Yang</td><td class="pnj-badge">Automatique</td></tr>
+            <tr><td>7</td><td>Le mariage de la fille</td><td>4.000 EXP · 5.000 Yang · Arme +3 (selon classe)</td><td class="pnj-badge">Octavio</td></tr>
+            <tr><td>8</td><td>Ingrédients pour le médicament</td><td>3.000 EXP · 5.000 Yang · Fourrure de loup</td><td class="pnj-badge">Baek-Go</td></tr>
+            <tr><td>9</td><td>Une lettre du Forgeron</td><td>4.000 EXP · 3.000 Yang</td><td class="pnj-badge">Forgeron</td></tr>
+            <tr><td>9</td><td>Parlez au Garde du Village</td><td>9.500 EXP · 2.000 Yang</td><td class="pnj-badge">Automatique</td></tr>
+            <tr><td>10</td><td>Allez voir le capitaine</td><td>9.500 EXP · 2.000 Yang</td><td class="pnj-badge">Automatique</td></tr>
+            <tr><td>10</td><td>Trouvez Soon</td><td>7.000 EXP · 10.000 Yang</td><td class="pnj-badge">Aranyo</td></tr>
+            <tr><td>10</td><td>Aidez Soon</td><td>6.000 EXP · 2.000 Yang</td><td class="pnj-badge">Soon</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- NIV 11-20 -->
+      <div class="qpanel" id="q11">
+        <table class="qt">
+          <thead><tr><th>Niv.</th><th>Nom de la quête</th><th>Récompenses</th><th>PNJ</th></tr></thead>
+          <tbody>
+            <tr><td>11</td><td>La commande d'armure</td><td>26.000 EXP · 15.000 Yang · Groin</td><td class="pnj-badge">Magasin d'armures</td></tr>
+            <tr><td>12</td><td>Allez parler au Capitaine</td><td>24.000 EXP · 3.500 Yang</td><td class="pnj-badge">Automatique</td></tr>
+            <tr><td>12</td><td>Le meilleur livre de cuisine</td><td>12.000 EXP · 5.000 Yang · Griffe de loup</td><td class="pnj-badge">Octavio</td></tr>
+            <tr><td>13</td><td>Trouvez une fourrure de loup</td><td>15.000 EXP · Armure niv.9 (selon classe)</td><td class="pnj-badge">Vieille dame</td></tr>
+            <tr><td>14</td><td>Détruisez les pierres metin</td><td>48.000 EXP · 10.000 Yang · Pierre d'esprit</td><td class="pnj-badge">Automatique</td></tr>
+            <tr><td>15</td><td>Trouvez Yu-Hwan le musicien</td><td>45.000 EXP · 2.000 Yang</td><td class="pnj-badge">Automatique</td></tr>
+            <tr><td>15</td><td>Le gâteau de riz</td><td>26.000 EXP · 10.000 Yang</td><td class="pnj-badge">Ah-Yu</td></tr>
+            <tr><td>16</td><td>Capturez l'espion</td><td>100.000 EXP · 5.000 Yang</td><td class="pnj-badge">Automatique</td></tr>
+            <tr><td>16</td><td>Trouvez la hache d'or</td><td>36.000 EXP · 10.000 Yang · Ornement</td><td class="pnj-badge">Forgeron</td></tr>
+            <tr><td>17</td><td>Le cadeau pour Chaegirab</td><td>40.000 EXP · 10.000 Yang · Livre de compétence <em>ou</em> 20.000 EXP · 20.000 Yang · Pépite d'or</td><td class="pnj-badge">Wonda-Rim</td></tr>
+            <tr><td>18</td><td>Trouvez l'épingle à cheveux</td><td>60.000 EXP · 10.000 Yang · Ticket d'équitation</td><td class="pnj-badge">Marchande</td></tr>
+            <tr><td>19</td><td>Trouvez mon frère</td><td>122.000 EXP · 5.000 Yang</td><td class="pnj-badge">Mirine</td></tr>
+            <tr><td>20</td><td>Tuez Mi-Jung du serment blanc</td><td>122.000 EXP · 20.000 Yang · Bracelet d'argent</td><td class="pnj-badge">Gardien du village</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- NIV 21-30 -->
+      <div class="qpanel" id="q21">
+        <table class="qt">
+          <thead><tr><th>Niv.</th><th>Nom de la quête</th><th>Récompenses</th><th>PNJ</th></tr></thead>
+          <tbody>
+            <tr><td>21</td><td>Cherchez les matériaux</td><td>122.000 EXP · 20.000 Yang · Arme 20+3 (selon classe)</td><td class="pnj-badge">Magasin d'armes</td></tr>
+            <tr><td>22</td><td>Le gardien malade</td><td>50.000 EXP · 12.000 Yang · Chaussures de fil d'or +4 · 5× Potion violette (g)</td><td class="pnj-badge">Automatique</td></tr>
+            <tr><td>23</td><td>Tuez Eun-Jung du serment blanc</td><td>150.000 EXP · 25.000 Yang · Collier d'or +4</td><td class="pnj-badge">Gardien du village</td></tr>
+            <tr><td>25</td><td>La cavalerie lourde</td><td>150.000 EXP · 30.000 Yang · Boucles d'oreilles d'or</td><td class="pnj-badge">Capitaine</td></tr>
+            <tr><td>25</td><td>Vaincre les Jin-Hees</td><td>Anneau de couple</td><td class="pnj-badge">Vieille dame</td></tr>
+            <tr><td>26</td><td>Le déserteur</td><td>35.000 EXP · 17.500–35.000 Yang · Rose jaune</td><td class="pnj-badge">Yang-Shin</td></tr>
+            <tr><td>27</td><td>Tuer les Goo-Paes</td><td>300.000 EXP · 10.000 Yang</td><td class="pnj-badge">Ariyoung</td></tr>
+            <tr><td>27</td><td>Détruisez la metin noire</td><td>1.000.000 EXP · 15.000 Yang · Natte de ruban rouge · Ornement</td><td class="pnj-badge">Capitaine</td></tr>
+            <tr><td>28</td><td>Le soucis d'Ah-Yu</td><td>850.000 EXP <em>ou</em> 500.000 EXP · 40.000 Yang</td><td class="pnj-badge">Ah-Yu</td></tr>
+            <tr><td>29</td><td>La porcelaine brisée</td><td>600.000 EXP · 38.000 Yang</td><td class="pnj-badge">Yonah</td></tr>
+            <tr><td>30</td><td>Les Lances</td><td>300.000 EXP · 20.000 Yang</td><td class="pnj-badge">Ah-Yu</td></tr>
+            <tr><td>30</td><td>Le secret des Pierres Metin</td><td>1.500.000 EXP · 20.000 Yang</td><td class="pnj-badge">Uriel</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- NIV 31-40 -->
+      <div class="qpanel" id="q31">
+        <table class="qt">
+          <thead><tr><th>Niv.</th><th>Nom de la quête</th><th>Récompenses</th><th>PNJ</th></tr></thead>
+          <tbody>
+            <tr><td>31</td><td>Ramenez les fleurs</td><td>400.000 EXP · 12.000 Yang</td><td class="pnj-badge">Huahn-So</td></tr>
+            <tr><td>32</td><td>Les pages du livre secret 1</td><td>1.250.000 EXP · 50.000 Yang · Larme de la Déesse</td><td class="pnj-badge">Uriel</td></tr>
+            <tr><td>32</td><td>Les pages du livre secret 2</td><td>1.250.000 EXP · 50.000 Yang · 10× Drapeau blanc</td><td class="pnj-badge">Uriel</td></tr>
+            <tr><td>33</td><td>La nouvelle arme</td><td>200.000 EXP · 20.000 Yang · Arme 25+3</td><td class="pnj-badge">Forgeron</td></tr>
+            <tr><td>34</td><td>La nouvelle armure</td><td>200.000 EXP · 20.000 Yang · Armure 26+3</td><td class="pnj-badge">Forgeron</td></tr>
+            <tr><td>35</td><td>La hache de Deokbae</td><td>400.000 EXP · 30.000 Yang</td><td class="pnj-badge">Deokbae</td></tr>
+            <tr><td>36</td><td>Le frère disparu</td><td>600.000 EXP · 35.000 Yang</td><td class="pnj-badge">Mirine</td></tr>
+            <tr><td>37</td><td>L'araignée à clochette</td><td>700.000 EXP · 30.000 Yang</td><td class="pnj-badge">Yu-Rang</td></tr>
+            <tr><td>38</td><td>Le Livre du Temple</td><td>850.000 EXP · 20.000 Yang</td><td class="pnj-badge">Soon</td></tr>
+            <tr><td>39</td><td>Le Gâteau de riz perdu</td><td>900.000 EXP · 25.000 Yang</td><td class="pnj-badge">Yu-Rang</td></tr>
+            <tr><td>40</td><td>Les pages du livre secret 3</td><td>2.000.000 EXP · 50.000 Yang · Bénédiction de Vie</td><td class="pnj-badge">Uriel</td></tr>
+            <tr><td>40</td><td>Les pages du livre secret 4</td><td>2.750.000 EXP · 50.000 Yang · Bénédiction Magique</td><td class="pnj-badge">Uriel</td></tr>
+            <tr><td>40</td><td>Les pages du livre secret 5</td><td>750.000 EXP + 2.000.000 EXP (niv.47) · 50.000 Yang · Bénédiction Magique</td><td class="pnj-badge">Uriel</td></tr>
+            <tr><td>40</td><td>Tuez les Généraux du vent noir</td><td>1.000.000 EXP · Anneau de Langage 30j</td><td class="pnj-badge">Capitaine</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- NIV 41-50 -->
+      <div class="qpanel" id="q41">
+        <table class="qt">
+          <thead><tr><th>Niv.</th><th>Nom de la quête</th><th>Récompenses</th><th>PNJ</th></tr></thead>
+          <tbody>
+            <tr><td>41</td><td>La demande du Marchand</td><td>1.100.000 EXP · Collier d'or · Bracelet d'or · Boucles d'oreilles d'or</td><td class="pnj-badge">Marchand Ambulant</td></tr>
+            <tr><td>42</td><td>Grouic Grouic</td><td>600.000 EXP · 500.000 Yang · 3× Carpe amour grillé</td><td class="pnj-badge">Octavio</td></tr>
+            <tr><td>43</td><td>Allez voir Wonda-Rim</td><td>1.250.000 EXP · 32.000 Yang</td><td class="pnj-badge">Wonda-Rim</td></tr>
+            <tr><td>44</td><td>La carte au trésor de Soon</td><td>1.400.000 EXP · 25.000 Yang · Casque 41 (selon classe)</td><td class="pnj-badge">Soon</td></tr>
+            <tr><td>45</td><td>Le trésor du chasseur</td><td>1.500.000 EXP · 35.000 Yang · 20× Cape de bravoure</td><td class="pnj-badge">Yang-Shin</td></tr>
+            <tr><td>46</td><td>Laissez les morts reposer en paix</td><td>1.700.000 EXP · 30.000 Yang · 3× Diamant</td><td class="pnj-badge">Maître Dragon</td></tr>
+            <tr><td>47</td><td>L'étable a des ennuis</td><td>1.800.000 EXP · Livre de quête difficile</td><td class="pnj-badge">Yonah</td></tr>
+            <tr><td>47</td><td>Les pages du livre secret 6</td><td>3.000.000 EXP · 75.000 Yang · Bénédiction du Dragon</td><td class="pnj-badge">Automatique</td></tr>
+            <tr><td>47</td><td>Les pages du livre secret 7</td><td>3.000.000 EXP · 75.000 Yang</td><td class="pnj-badge">Automatique</td></tr>
+            <tr><td>47</td><td>Les pages du livre secret 8</td><td>3.000.000 EXP · 70.000 Yang · 20× Cape de bravoure</td><td class="pnj-badge">Automatique</td></tr>
+            <tr><td>48</td><td>Un médicament pour Balso</td><td>1.900.000 EXP · 30.000 Yang</td><td class="pnj-badge">Balso le traître</td></tr>
+            <tr><td>49</td><td>Œil d'araignée spéciaux</td><td>2.100.000 EXP · 20.000 Yang</td><td class="pnj-badge">Octavio</td></tr>
+            <tr><td>50</td><td>Les pages du livre secret 9</td><td>5.000.000 EXP · 125.000 Yang · Symbole du Roi sage</td><td class="pnj-badge">Uriel</td></tr>
+            <tr><td>50</td><td>Les pages du livre secret 10</td><td>5.500.000 EXP · 137.500 Yang · Gants du Roi sage</td><td class="pnj-badge">Automatique</td></tr>
+            <tr><td>50</td><td>Les pages du livre secret 11</td><td>6.000.000 EXP · 150.000 Yang · Médaille du Dragon</td><td class="pnj-badge">Automatique</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- NIV 51-60 -->
+      <div class="qpanel" id="q51">
+        <table class="qt">
+          <thead><tr><th>Niv.</th><th>Nom de la quête</th><th>Récompenses</th><th>PNJ</th></tr></thead>
+          <tbody>
+            <tr><td>51</td><td>Le secret de la porcelaine céladon</td><td>2.500.000 EXP · 35.000 Yang · Chaussures de jade +3</td><td class="pnj-badge">Yonah</td></tr>
+            <tr><td>52</td><td>Une bonne nuit de sommeil</td><td>3.800.000 EXP · 270.000 Yang · Manuel (selon classe)</td><td class="pnj-badge">Capitaine</td></tr>
+            <tr><td>53</td><td>La porcelaine vert pâle</td><td>3.000.000 EXP · 30.000 Yang</td><td class="pnj-badge">Yonah</td></tr>
+            <tr><td>54</td><td>Les provisions</td><td>3.750.000 EXP · 125.000 Yang · Bouclier tigre singe +3</td><td class="pnj-badge">Capitaine</td></tr>
+            <tr><td>55</td><td>Les pages du livre secret 12</td><td>7.500.000 EXP · 162.500 Yang</td><td class="pnj-badge">Automatique</td></tr>
+            <tr><td>55</td><td>Les pages du livre secret 13</td><td>14.500.000 EXP · 175.000 Yang · Livre du Chef</td><td class="pnj-badge">Automatique</td></tr>
+            <tr><td>55</td><td>La situation de Balso</td><td>4.000.000 EXP · 65.000 Yang</td><td class="pnj-badge">Balso le traître</td></tr>
+            <tr><td>56</td><td>Soutien de dispositif de guerre</td><td>4.500.000 EXP · 50.000 Yang · 3× Attaque perçante · 3× Attaque critique</td><td class="pnj-badge">Capitaine</td></tr>
+            <tr><td>57</td><td>Trouvez des pattes de grenouilles</td><td>5.000.000 EXP · 50.000 Yang</td><td class="pnj-badge">Magasinier</td></tr>
+            <tr><td>58</td><td>Rencontrez l'espion</td><td>5.500.000 EXP · 50.000 Yang · 3× Gardon rouge</td><td class="pnj-badge">Capitaine</td></tr>
+            <tr><td>59</td><td>Bingsu?</td><td>6.000.000 EXP · 70.000 Yang · Parchemin de guerre</td><td class="pnj-badge">Taurean</td></tr>
+            <tr><td>60</td><td>Temple obscur</td><td>7.000.000 EXP · 70.000 Yang · Livre du chef</td><td class="pnj-badge">Soon</td></tr>
+            <tr><td>60</td><td>Nation obscure I</td><td>12.000.000 EXP · 175.000 Yang · 10× Parchemin d'exorcisme · Fleurs · Lilas</td><td class="pnj-badge">Uriel</td></tr>
+            <tr><td>60</td><td>Nation obscure II</td><td>9.700.000 EXP · 3× Lecture concentrée · Toile d'araignée · Glande venin</td><td class="pnj-badge">Uriel</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- NIV 61-70 -->
+      <div class="qpanel" id="q61">
+        <table class="qt">
+          <thead><tr><th>Niv.</th><th>Nom de la quête</th><th>Récompenses</th><th>PNJ</th></tr></thead>
+          <tbody>
+            <tr><td>66</td><td>Le journal</td><td>9.500.000 EXP · 3× Parchemin de Bénédiction · Queue de scorpion</td><td class="pnj-badge">Uriel</td></tr>
+            <tr><td>66</td><td>Lettre anonyme</td><td>≤30 min : 4.500.000 EXP · 200.000 Yang + objets · Sinon : 4.000.000 EXP · 100.000 Yang</td><td class="pnj-badge">Gardien du village</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- NIV 71-80 -->
+      <div class="qpanel" id="q71">
+        <table class="qt">
+          <thead><tr><th>Niv.</th><th>Nom de la quête</th><th>Récompenses</th><th>PNJ</th></tr></thead>
+          <tbody>
+            <tr><td>72</td><td>La découverte</td><td>12.350.000 EXP · Anneau d'EXP (1h) · Morceau de tissu · Médicament inconnu</td><td class="pnj-badge">Lee Chung</td></tr>
+            <tr><td>72</td><td>Trésor glacé</td><td>40.000.000 EXP · 225.000 Yang · 3× Élixir du chercheur · Gants de voleur · Médaille de Chance</td><td class="pnj-badge">Lee Chung</td></tr>
+            <tr><td>75</td><td>Dans la grotte</td><td>Pierre de sang</td><td class="pnj-badge">Seon-Hae</td></tr>
+            <tr><td>75</td><td>Journal intime d'une légende</td><td>89.000.000 EXP · 1.200.000 Yang · Journal légendaire</td><td class="pnj-badge">Heuk-Young</td></tr>
+            <tr><td>78</td><td>Quartz de l'enfer rouge</td><td>36.000.000 EXP · Élixir du soleil (g) · Orbe de bénédiction · Médaille d'attention 4h</td><td class="pnj-badge">Lee Chung</td></tr>
+            <tr><td>78</td><td>Dernier élément</td><td>48.000.000 EXP · 230.000 Yang · Élixir de la lune (g) · Cuivre magique · Livre du chef</td><td class="pnj-badge">Lee Chung</td></tr>
+            <tr><td>80</td><td>Le Sombre Masque de Bois</td><td>120.000.000 EXP · 3.000.000 Yang <em>ou</em> 70.000.000 EXP · 7× Médaille du Dragon <em>ou</em> pack objets du dieu dragon</td><td class="pnj-badge">Soon</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- NIV 81-90 -->
+      
+
+      <!-- NIV 91-99 -->
+      
+        </div><!-- /panel-liste -->
+
+      </div><!-- /qgrid -->
+
+    </div><!-- /mmo-bd -->
+  </div><!-- /mmo -->
+</section>
+
+<!-- ══ CARTES ══ -->
+<div class="sep" aria-hidden="true"><span class="sep-l"></span><span class="sep-r"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/></svg>Cartes &amp; Empires</span><span class="sep-l"></span></div>
+<section class="panel" id="cartes">
+  <div class="mmo">
+    <div class="mmo-hd">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
+      <span class="mmo-ht">Cartes &amp; Empires</span>
+      <span class="mmo-hs">Le monde de Metin2</span>
+    </div>
+    <div class="mmo-bd">
+
+      <!-- CARTE DU MONDE -->
+      <div class="worldmap-wrap">
+        <img class="worldmap-img" src="assets/CarteDuMonde.png" alt="Carte du Monde Metin2" loading="lazy" decoding="async">
+        <!-- Zones cliquables par-dessus la carte -->
+        <!-- zone Chunjo retirée -->
+        <div class="wm-zone wm-jinno" title="Empire Jinno">
+          <img src="assets/Empirejinno.png" alt="Jinno" onerror="this.style.background='#1a0a00'; this.style.padding='4px'; this.alt='Jinno'">
+          <span>Jinno</span>
+        </div>
+        <div class="wm-zone wm-shinsoo" title="Empire Shinsoo">
+          <img src="assets/Empireshinsoo.png" alt="Shinsoo" onerror="this.style.display='none'">
+          <span>Shinsoo</span>
+        </div>
+      </div>
+
+      <!-- EMPIRES DÉTAIL -->
+      <div class="ptitle"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.25C17.25 22.15 21 17.25 21 12V7L12 2z"/></svg>Les 3 Empires</div>
+      <div class="eg">
+        <div class="ec c">
+          <div class="ec-header-img">
+            <img src="assets/Joan-Panorama.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+            <div class="ec-header-ov"></div>
+          </div>
+          <div class="ec-body">
+            <img class="empire-logo" src="assets/Empirechunjo.png" alt="Chunjo" loading="lazy" onerror="this.style.display='none'">
+            <div class="en">Chunjo</div>
+            <div class="ei">Ouest · Théocratique<br>Map 1 : <strong>Joan</strong> · Map 2 : Bokjung<br>Capitale : Waryong</div>
+          </div>
+        </div>
+        <div class="ec j">
+          <div class="ec-header-img">
+            <img src="assets/Pyungmoo-Panorama.jpg" alt="Pyungmoo" loading="lazy" onerror="this.src='assets/Pyungmoo.jpg'; this.onerror=function(){this.style.opacity='0.1'}">
+            <div class="ec-header-ov"></div>
+          </div>
+          <div class="ec-body">
+            <img class="empire-logo" src="assets/Empirejinno.png" alt="Jinno" loading="lazy" onerror="this.style.display='none'">
+            <div class="en">Jinno</div>
+            <div class="ei">Est · Militaire<br>Map 1 : <strong>Pyungmoo</strong> · Map 2 : Bakra<br>Capitale : Imha</div>
+          </div>
+        </div>
+        <div class="ec s">
+          <div class="ec-header-img">
+            <img src="assets/Yongan-Panorama.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
+            <div class="ec-header-ov"></div>
+          </div>
+          <div class="ec-body">
+            <img class="empire-logo" src="assets/Empireshinsoo.png" alt="Shinsoo" loading="lazy" onerror="this.style.display='none'">
+            <div class="en">Shinsoo</div>
+            <div class="ei">Sud · Commerce<br>Map 1 : <strong>Yongan</strong> · Map 2 : Jayang<br>Capitale : Jungrang</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ZONES DE JEU -->
+      <div class="ptitle"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 10-16 0c0 3 2.7 6.9 8 11.7z"/></svg>Zones de jeu</div>
+      <div class="sg">
+        <div class="sc"><img class="sc-img" src="assets/Joan-Panorama.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'; this.src='assets/Fond2015.jpg'; this.onerror=null"><div class="scn">Joan · Pyungmoo · Yongan</div><div class="scd">Cartes de départ des 3 empires</div><span class="badge">1–25</span></div>
+        <div class="sc"><img class="sc-img" src="assets/Desertyongbi-Panorama.jpg" onerror="this.src='assets/DesertdeYongbi-Panorama.jpg'; this.onerror=function(){this.src='assets/Desertyongbi.jpg'; this.onerror=function(){this.style.opacity='0.3';}}" alt="" loading="lazy" onerror="this.src='assets/desert-map.jpg'"><div class="scn">Désert de Yongbi</div><div class="scd">Hors-la-loi · Orcs noirs · Araignées</div><span class="badge">25–45</span></div>
+        <div class="sc"><img class="sc-img" src="assets/Seungryong-Panorama.jpg" onerror="this.src='assets/ValleedeSeungryong-Panorama.jpg'; this.onerror=function(){this.src='assets/Seungryong.jpg'; this.onerror=function(){this.style.opacity='0.3';}}" alt="" loading="lazy" onerror="this.src='assets/vallee-map.jpg'"><div class="scn">Vallée Seungryong</div><div class="scd">Araignées · Arahan bestial · Singes</div><span class="badge">30–55</span></div>
+        <div class="sc"><img class="sc-img" src="assets/MontSohan-Panorama.jpg" onerror="this.src='assets/MontSohan-Panorama.jpg'; this.onerror=function(){this.src='assets/Sohan.jpg'; this.onerror=function(){this.style.opacity='0.3';}}" alt="" loading="lazy" onerror="this.src='assets/sohan-map.jpg'"><div class="scn">Mont Sohan</div><div class="scd">Golems de glace · Yétis</div><span class="badge">50–70</span></div>
+        <div class="sc"><img class="sc-img" src="assets/Doyyumhwan-Panorama.jpg" onerror="this.src='assets/Doyyumhwan-Panorama.jpg'; this.onerror=function(){this.src='assets/Doyyumhwan.jpg'; this.onerror=function(){this.style.opacity='0.3';}}" alt="" loading="lazy" onerror="this.src='assets/doyyum-map.jpg'"><div class="scn">Doyyumhwan</div><div class="scd">Tigres de combat · Ogres · Flammes</div><span class="badge">60–75</span></div>
+        <div class="sc"><img class="sc-img" src="assets/BoisRouge-Panorama.jpg" onerror="this.src='assets/BoisRouge-Panorama.jpg'; this.onerror=function(){this.src='assets/BoisRouge.jpg'; this.onerror=function(){this.style.opacity='0.3';}}" alt="" loading="lazy" onerror="this.src='assets/foret-map.jpg'"><div class="scn">Bois Rouge</div><div class="scd">Arbres maléfiques · Dryades rouges</div><span class="badge">70–85</span></div>
+        <div class="sc"><img class="sc-img" src="assets/GrottedelExil-Panorama.jpg" onerror="this.src='assets/GrottedelExil-Panorama.jpg'; this.onerror=function(){this.src='assets/GrottedelExil.jpg'; this.onerror=function(){this.style.opacity='0.3';}}" alt="" loading="lazy" onerror="this.src='assets/grotte-map.jpg'"><div class="scn">Grotte de l'Exil</div><div class="scd">Setaou · Monstres de glace d'enfer</div><span class="badge">80–90</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ SAVIEZ-VOUS ══ -->
+<div class="sep" aria-hidden="true"><span class="sep-l"></span><span class="sep-r"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01"/></svg>Saviez-vous</span><span class="sep-l"></span></div>
+<section class="panel" id="saviez-vous">
+  <div class="svw">
+    <div style="font-family:'Alegreya SC',serif;font-size:.56rem;letter-spacing:4px;color:var(--copper-l);text-transform:uppercase;margin-bottom:1.2rem;display:flex;align-items:center;justify-content:center;gap:.5rem" aria-hidden="true">
+      <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01"/></svg>
+      Le Savoir du Sage
+    </div>
+    <div class="svt" id="svtext" aria-live="polite">Chargement...</div>
+    <button class="svb" id="svbtn">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+      Astuce suivante
+    </button>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logos">
+    <img src="assets/gameforge-logo.png" alt="Gameforge" onerror="this.style.display='none'">
+    <img src="assets/webzen-logo.png" alt="Webzen" onerror="this.style.display='none'">
+    <img src="assets/Mr2_logo.png" alt="Metin2" onerror="this.style.display='none'">
+  </div>
+  <div class="footer-txt">— © M2Return. Projet communautaire. Tous droits réservés. —
+<a href="#hero" id="btt" aria-label="Retour en haut">
+  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="18 15 12 9 6 15"/></svg>
+</a>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var vid = document.getElementById('bgvid');
+  var btn = document.getElementById('video-play-btn');
+  if (!btn || !vid) return;
+  vid.addEventListener('play', function() { btn.classList.add('hidden'); });
+  vid.play().then(function() { btn.classList.add('hidden'); }).catch(function() {});
+});
+</script>
+<script src="js/app-standalone.js"></script>
+</body>
+</html>

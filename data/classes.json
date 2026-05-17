@@ -1,0 +1,219 @@
+[
+  {
+    "id": "guerrier",
+    "name": "Guerrier",
+    "image": "assets/Bandeaurougehomme.png",
+    "roles": ["tank", "dps", "farm"],
+    "specs": ["Corps-à-corps", "Mental"],
+    "description": "Grâce à leur habileté ainsi qu'à leur lourde armure, les Guerriers jouent un rôle important dans les combats au corps-à-corps. Ils aspirent à toujours plus de force physique et de sérénité. Selon leur spécialité, ils peuvent semer la terreur grâce à leurs armes à deux mains ou repousser toutes les attaques en utilisant habilement épée et bouclier.",
+    "stats": {
+      "depart": { "STR": 6, "VIT": 4, "INT": 3, "DEX": 3 },
+      "hautNiveau": { "STR": 90, "VIT": 90, "INT": 16, "DEX": 90 }
+    },
+    "builds": [
+      {
+        "name": "Corps à Corps",
+        "description": "Particulièrement prisé en PvE surtout en bas level, mais peut être également redoutable en PvP.",
+        "pvE": [
+          { "name": "Aura de l'épée",    "icon": "assets/Auradelepee.jpg",     "bonus": "STR" },
+          { "name": "Moulinet à l'épée", "icon": "assets/Moulinet.jpg",         "bonus": "STR · DEX · VIT" },
+          { "name": "Berserk",            "icon": "assets/Berserk.jpg",          "bonus": "Aucun bonus" },
+          { "name": "Accélération",       "icon": "assets/Acceleration.jpg",     "bonus": "STR · DEX · VIT" },
+          { "name": "Triple lacération",  "icon": "assets/Triplelaceration.jpg", "bonus": "STR" }
+        ],
+        "pvP": [
+          { "name": "Aura de l'épée",    "icon": "assets/Auradelepee.jpg",     "bonus": "STR" },
+          { "name": "Accélération",       "icon": "assets/Acceleration.jpg",     "bonus": "STR · DEX · VIT" },
+          { "name": "Berserk",            "icon": "assets/Berserk.jpg",          "bonus": "Aucun bonus" },
+          { "name": "Moulinet à l'épée", "icon": "assets/Moulinet.jpg",         "bonus": "STR · DEX · VIT" },
+          { "name": "Triple lacération",  "icon": "assets/Triplelaceration.jpg", "bonus": "STR" }
+        ]
+      },
+      {
+        "name": "Mental",
+        "description": "Principalement utilisé en PvP, mais peut être également utile en PvE. Corps puissant niveau G1 empêche de tomber en combat.",
+        "pvE": [
+          { "name": "Corps puissant",       "icon": "assets/Attaquedelapaume.jpg", "bonus": "VIT · STR — Déf. ↑" },
+          { "name": "Charge",               "icon": "",                             "bonus": "STR · DEX · VIT — Zone + assomme" },
+          { "name": "Attaque de la paume",  "icon": "assets/Attaquedelapaume.jpg", "bonus": "STR · VIT" },
+          { "name": "Attaque de l'esprit",  "icon": "assets/Frappedelesprit.jpg",  "bonus": "STR · VIT — éjecte" },
+          { "name": "Coup d'épée",          "icon": "",                             "bonus": "STR · DEX · VIT — assomme" }
+        ],
+        "pvP": [
+          { "name": "Corps puissant",       "icon": "assets/Attaquedelapaume.jpg", "bonus": "VIT · STR — Déf. ↑" },
+          { "name": "Attaque de l'esprit",  "icon": "assets/Frappedelesprit.jpg",  "bonus": "STR · VIT — éjecte" },
+          { "name": "Attaque de la paume",  "icon": "assets/Attaquedelapaume.jpg", "bonus": "STR · VIT" },
+          { "name": "Charge",               "icon": "",                             "bonus": "STR · DEX · VIT — Zone + assomme" },
+          { "name": "Coup d'épée",          "icon": "",                             "bonus": "STR · DEX · VIT — assomme" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sura",
+    "name": "Sura",
+    "image": "assets/CoupesportiveSuraF.png",
+    "roles": ["dps", "farm"],
+    "specs": ["Armes Magiques", "Magie Noire"],
+    "description": "Les Suras sont des combattants ayant reçu des pouvoirs magiques lorsqu'ils acceptèrent de laisser la graine du Mal pousser dans leur bras. Capables de manier leur épée au combat rapproché ou de provoquer des dommages à distance grâce à la magie.",
+    "stats": {
+      "depart": { "STR": 5, "VIT": 3, "INT": 5, "DEX": 3 },
+      "hautNiveau": { "STR": 16, "VIT": 90, "INT": 90, "DEX": 90 }
+    },
+    "builds": [
+      {
+        "name": "Arme Magique (AM)",
+        "description": "Principalement PvE, mais redoutable en PvP à haut niveau. La Lame Enchantée augmente l'attaque et vole de la vie.",
+        "pvE": [
+          { "name": "Lame Enchantée",       "icon": "", "bonus": "INT — Att. ↑ + vol de vie" },
+          { "name": "Armure Enchantée",     "icon": "", "bonus": "INT — Déf. ↑ + renvoi dégâts" },
+          { "name": "Peur",                 "icon": "", "bonus": "Aucun — Réduit dégâts physiques" },
+          { "name": "Tourbillon du Dragon", "icon": "", "bonus": "INT · DEX · STR — Zone + ignore déf." },
+          { "name": "Toucher brûlant",      "icon": "", "bonus": "INT · DEX · STR — Frontal + ignore déf." },
+          { "name": "Contre-sort",          "icon": "", "bonus": "INT · DEX — Distance + supprime buffs" }
+        ],
+        "pvP": [
+          { "name": "Lame Enchantée",       "icon": "", "bonus": "INT — Att. ↑ + vol de vie" },
+          { "name": "Peur",                 "icon": "", "bonus": "Aucun — Réduit dégâts + annule aggro" },
+          { "name": "Contre-sort",          "icon": "", "bonus": "INT · DEX — Supprime buffs ennemis" },
+          { "name": "Tourbillon du Dragon", "icon": "", "bonus": "INT · DEX · STR — Zone + éjecte" },
+          { "name": "Toucher brûlant",      "icon": "", "bonus": "INT · DEX · STR — Ignore déf." },
+          { "name": "Armure Enchantée",     "icon": "", "bonus": "INT — Renvoie dégâts physiques" }
+        ]
+      },
+      {
+        "name": "Magie Noire (MN)",
+        "description": "Principalement PvP, mais utile en PvE. Attaques magiques à distance en rafale.",
+        "pvE": [
+          { "name": "Attaque de flammes",      "icon": "", "bonus": "INT · STR · VIT — Zone + met à terre" },
+          { "name": "Protection des Ténèbres", "icon": "", "bonus": "INT — Déf. ↑ + réduit dégâts mag." },
+          { "name": "Attaque des Ténèbres",    "icon": "", "bonus": "INT · DEX — Distance multi-cibles" },
+          { "name": "Orbe des Ténèbres",       "icon": "", "bonus": "INT · DEX · VIT — Distance multi-cibles" },
+          { "name": "Frappe de l'Esprit",      "icon": "assets/Frappedelesprit.jpg", "bonus": "INT · DEX · VIT — Ralentit les cibles" },
+          { "name": "Esprit de flammes",       "icon": "", "bonus": "INT · VIT · STR — Attaque répétée" }
+        ],
+        "pvP": [
+          { "name": "Esprit de flammes",       "icon": "", "bonus": "INT · VIT · STR — Attaque répétée" },
+          { "name": "Protection des Ténèbres", "icon": "", "bonus": "INT — Déf. ↑ + réduit dégâts" },
+          { "name": "Orbe des Ténèbres",       "icon": "", "bonus": "INT · DEX · VIT — Distance multi-cibles" },
+          { "name": "Attaque des Ténèbres",    "icon": "", "bonus": "INT · DEX — Distance multi-cibles" },
+          { "name": "Frappe de l'Esprit",      "icon": "assets/Frappedelesprit.jpg", "bonus": "INT · DEX · VIT — Ralentit les cibles" },
+          { "name": "Attaque de flammes",      "icon": "", "bonus": "INT · STR · VIT — Zone + met à terre" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "ninja",
+    "name": "Ninja",
+    "image": "assets/CoupeauxepaulesNinjaF.png",
+    "roles": ["dps"],
+    "specs": ["Assassin", "Archer"],
+    "description": "Les Ninjas sont de puissants assassins professionnels qui excellent dans les embuscades. Ils portent une armure légère pour privilégier la mobilité et la rapidité. Maîtres du combat à la dague et à l'arc selon leur spécialisation.",
+    "stats": {
+      "depart": { "STR": 4, "VIT": 3, "INT": 3, "DEX": 6 },
+      "hautNiveau": { "STR": 90, "VIT": 90, "INT": 16, "DEX": 90 }
+    },
+    "builds": [
+      {
+        "name": "Assassin",
+        "description": "Très polyvalent — excellent en PvE et redoutable en PvP. L'Embuscade inflige des dégâts massifs dans le dos depuis l'état furtif.",
+        "pvE": [
+          { "name": "Embuscade",          "icon": "", "bonus": "DEX · STR — Dégâts ↑ de dos en furtif" },
+          { "name": "Dague filante",      "icon": "", "bonus": "DEX · STR — Tourbillon + empoisonne" },
+          { "name": "Attaque rapide",     "icon": "", "bonus": "DEX · STR — Téléportée + furtif ↑" },
+          { "name": "Brume empoisonnée",  "icon": "", "bonus": "DEX · STR — Distance + empoisonne" },
+          { "name": "Furtif",             "icon": "", "bonus": "Aucun — Invisibilité + dégâts ↑" }
+        ],
+        "pvP": [
+          { "name": "Embuscade",          "icon": "", "bonus": "DEX · STR — Dégâts ↑ de dos en furtif" },
+          { "name": "Furtif",             "icon": "", "bonus": "Aucun — Invisibilité + dégâts ↑" },
+          { "name": "Dague filante",      "icon": "", "bonus": "DEX · STR — Tourbillon + empoisonne" },
+          { "name": "Brume empoisonnée",  "icon": "", "bonus": "DEX · STR — Distance + empoisonne" },
+          { "name": "Attaque rapide",     "icon": "", "bonus": "DEX · STR — Téléportée + furtif ↑" }
+        ]
+      },
+      {
+        "name": "Archer",
+        "description": "Redoutable en PvP, peut rencontrer quelques difficultés en PvE. Foulée de plume augmente la mobilité.",
+        "pvE": [
+          { "name": "Foulée de plume",      "icon": "", "bonus": "Aucun — Vitesse déplacement ↑" },
+          { "name": "Flèche empoisonnée",   "icon": "", "bonus": "DEX · STR — Distance + empoisonne" },
+          { "name": "Flèche de feu",        "icon": "", "bonus": "DEX · STR — Distance multi-cibles" },
+          { "name": "Tir à répétition",     "icon": "", "bonus": "DEX · STR — Distance rafale" },
+          { "name": "Pluie de flèches",     "icon": "", "bonus": "DEX · STR — Zone à distance" }
+        ],
+        "pvP": [
+          { "name": "Flèche de feu",        "icon": "", "bonus": "DEX · STR — Distance multi-cibles" },
+          { "name": "Flèche empoisonnée",   "icon": "", "bonus": "DEX · STR — Distance + empoisonne" },
+          { "name": "Tir à répétition",     "icon": "", "bonus": "DEX · STR — Distance rafale" },
+          { "name": "Pluie de flèches",     "icon": "", "bonus": "DEX · STR — Zone à distance" },
+          { "name": "Foulée de plume",      "icon": "", "bonus": "Aucun — Vitesse déplacement ↑" }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "chamane",
+    "name": "Chamane",
+    "image": "assets/Coiffuretraditionnellerougehomme.png",
+    "roles": ["support", "dps"],
+    "specs": ["Dragon", "Soin"],
+    "conseil": "Montez les statistiques par niveau ainsi : 2 INT + 1 VIT",
+    "description": "Les Chamanes sont des sages qui utilisent la magie et les sorts. Leurs pouvoirs mystiques sont d'une efficacité redoutable tant au combat que dans le soutien. En fonction de leur spécialisation, elles peuvent augmenter leurs attaques ou se consacrer aux sorts de soins.",
+    "stats": {
+      "depart": { "STR": 3, "VIT": 4, "INT": 6, "DEX": 3 },
+      "hautNiveau": { "STR": 16, "VIT": 90, "INT": 90, "DEX": 90 }
+    },
+    "builds": [
+      {
+        "name": "Dragon",
+        "description": "Très polyvalent — excellent en PvE et redoutable en PvP. Dégâts offensifs augmentés si le personnage porte un gong.",
+        "pvE": [
+          { "name": "Rugissement du Dragon", "icon": "", "bonus": "INT · STR — Zone + feu + met à terre" },
+          { "name": "Aide du Dragon",        "icon": "", "bonus": "INT — Attaque critique ↑" },
+          { "name": "Dragon chassant",       "icon": "", "bonus": "INT · DEX — Frontal + feu durable" },
+          { "name": "Bénédiction",           "icon": "", "bonus": "INT · DEX — Réduit dégâts physiques reçus" },
+          { "name": "Talisman volant",       "icon": "", "bonus": "INT · STR — Distance multi-cibles" },
+          { "name": "Reflet",                "icon": "", "bonus": "INT · STR — Renvoie dégâts physiques" }
+        ],
+        "pvP": [
+          { "name": "Rugissement du Dragon", "icon": "", "bonus": "INT · STR — Zone + feu + met à terre" },
+          { "name": "Dragon chassant",       "icon": "", "bonus": "INT · DEX — Frontal + feu durable" },
+          { "name": "Aide du Dragon",        "icon": "", "bonus": "INT — Attaque critique ↑" },
+          { "name": "Talisman volant",       "icon": "", "bonus": "INT · STR — Distance multi-cibles" },
+          { "name": "Bénédiction",           "icon": "", "bonus": "INT · DEX — Réduit dégâts physiques reçus" },
+          { "name": "Reflet",                "icon": "", "bonus": "INT · STR — Renvoie dégâts physiques" }
+        ],
+        "buff": [
+          { "name": "Aide du Dragon",        "bonus": "INT — Critique ↑" },
+          { "name": "Bénédiction",           "bonus": "INT · DEX — Réduit dégâts physiques" },
+          { "name": "Reflet",                "bonus": "INT · STR — Renvoie dégâts" },
+          { "name": "Rugissement du Dragon", "bonus": "INT · STR — Zone + feu" },
+          { "name": "Dragon chassant",       "bonus": "INT · DEX — Frontal + feu" },
+          { "name": "Talisman volant",       "bonus": "INT · STR — Distance multi-cibles" }
+        ]
+      },
+      {
+        "name": "Soin",
+        "description": "Redoutable en PvP, peut rencontrer des difficultés en PvE. Dégâts offensifs augmentés si le personnage porte un éventail.",
+        "pvE": [
+          { "name": "Invocation de Foudre", "icon": "", "bonus": "INT · STR — Distance + assomme" },
+          { "name": "Soin",                 "icon": "", "bonus": "INT — Restaure PV + soigne effets négatifs" },
+          { "name": "Promptitude",          "icon": "", "bonus": "DEX — Vitesse déplacement + sort ↑" },
+          { "name": "Jet de Foudre",        "icon": "", "bonus": "INT · DEX — Distance multi-cibles" },
+          { "name": "Attaque renforcée",    "icon": "", "bonus": "INT · STR — Puissance d'attaque ↑" },
+          { "name": "Griffe de Foudre",     "icon": "", "bonus": "INT · STR — Réaction en chaîne" }
+        ],
+        "pvP": [
+          { "name": "Soin",                 "icon": "", "bonus": "INT — Restaure PV + soigne effets négatifs" },
+          { "name": "Promptitude",          "icon": "", "bonus": "DEX — Vitesse déplacement + sort ↑" },
+          { "name": "Invocation de Foudre", "icon": "", "bonus": "INT · STR — Distance + assomme" },
+          { "name": "Jet de Foudre",        "icon": "", "bonus": "INT · DEX — Distance multi-cibles" },
+          { "name": "Griffe de Foudre",     "icon": "", "bonus": "INT · STR — Réaction en chaîne" },
+          { "name": "Attaque renforcée",    "icon": "", "bonus": "INT · STR — Puissance d'attaque ↑" }
+        ]
+      }
+    ]
+  }
+]
