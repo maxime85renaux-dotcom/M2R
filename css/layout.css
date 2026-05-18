@@ -90,17 +90,6 @@
 }
 
 
-
-#bgvid {
-  position: absolute;
-  inset: 0;
-  width: 100%; height: 100%;
-  object-fit: cover;
-  opacity: .5;
-  z-index: 0;
-  transition: transform .1s linear;
-}
-
 .h-ov {
   position: absolute;
   inset: 0;
@@ -108,9 +97,7 @@
   background: linear-gradient(
     180deg,
     rgba(0,0,0,.18) 0%,
-    rgba(0,0,0,.06) 38%,
-    rgba(0,0,0,.6)  76%,
-    rgba(6,2,0,1)   100%
+    transparent 40%
   );
 }
 
@@ -147,6 +134,27 @@
   filter:
     drop-shadow(0 0 22px rgba(225,165,35,.52))
     drop-shadow(0 0 55px rgba(180,55,15,.28));
+}
+.logo-particle-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: .8rem;
+}
+canvas#ptc {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.logo-particle-wrap canvas {
+  position: absolute;
+  inset: -80px;
+  width: calc(100% + 160px);
+  height: calc(100% + 160px);
+  pointer-events: none;
 }
 
 .h-eyebrow {
@@ -427,4 +435,59 @@ footer {
   font-size: .7rem;
   letter-spacing: 1.5px;
   font-family: var(--font-label);
+}
+
+/* ── PANNEAUX ZONES ── */
+.zone-panel {
+  display: none;
+  grid-column: 1 / -1;
+  background: linear-gradient(180deg, rgba(38,16,4,.96), rgba(18,7,0,.98));
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 1.4rem 1.6rem;
+  margin-top: .4rem;
+  position: relative;
+}
+.zone-panel.open { display: block; }
+.zp-close {
+  position: absolute;
+  top: .8rem;
+  right: .8rem;
+  background: rgba(160,100,30,.18);
+  border: 1px solid var(--border);
+  color: var(--mut);
+  font-family: var(--font-label);
+  font-size: .55rem;
+  letter-spacing: 1px;
+  padding: .3rem .7rem;
+  border-radius: 2px;
+  cursor: pointer;
+}
+.zp-close:hover { color: var(--gold); border-color: var(--gold); }
+.zp-head {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+  padding-bottom: .7rem;
+  border-bottom: 1px solid rgba(160,110,35,.25);
+}
+.zp-name {
+  font-family: var(--font-label);
+  font-size: .9rem;
+  color: var(--gold);
+  letter-spacing: 1px;
+}
+.zp-sub {
+  font-size: .7rem;
+  color: var(--mut);
+  font-style: italic;
+}
+.zp-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+@media (max-width: 640px) {
+  .zp-cols { grid-template-columns: 1fr; }
 }

@@ -1,0 +1,27 @@
+var _____WB$wombat$assign$function_____=function(name){return (self._wb_wombat && self._wb_wombat.local_init && self._wb_wombat.local_init(name))||self[name];};if(!self.__WB_pmw){self.__WB_pmw=function(obj){this.__WB_source=obj;return this;}}{
+let window = _____WB$wombat$assign$function_____("window");
+let self = _____WB$wombat$assign$function_____("self");
+let document = _____WB$wombat$assign$function_____("document");
+let location = _____WB$wombat$assign$function_____("location");
+let top = _____WB$wombat$assign$function_____("top");
+let parent = _____WB$wombat$assign$function_____("parent");
+let frames = _____WB$wombat$assign$function_____("frames");
+let opens = _____WB$wombat$assign$function_____("opens");
+(function(a){a.fn.bgIframe=a.fn.bgiframe=function(c){if(a.browser.msie&&/6.0/.test(navigator.userAgent)){c=a.extend({top:"auto",left:"auto",width:"auto",height:"auto",opacity:true,src:"javascript:false;"},c||{});var d=function(e){return e&&e.constructor==Number?e+"px":e},b='<iframe class="bgiframe"frameborder="0"tabindex="-1"src="'+c.src+'"style="display:block;position:absolute;z-index:-1;'+(c.opacity!==false?"filter:Alpha(Opacity='0');":"")+"top:"+(c.top=="auto"?"expression(((parseInt(this.parentNode.currentStyle.borderTopWidth)||0)*-1)+'px')":d(c.top))+";left:"+(c.left=="auto"?"expression(((parseInt(this.parentNode.currentStyle.borderLeftWidth)||0)*-1)+'px')":d(c.left))+";width:"+(c.width=="auto"?"expression(this.parentNode.offsetWidth+'px')":d(c.width))+";height:"+(c.height=="auto"?"expression(this.parentNode.offsetHeight+'px')":d(c.height))+';"/>';return this.each(function(){if(a("> iframe.bgiframe",this).length==0){this.insertBefore(document.createElement(b),this.firstChild)}})}return this}})(jQuery);
+}
+
+/*
+     FILE ARCHIVED ON 17:03:29 May 13, 2016 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 17:24:25 May 17, 2026.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+/*
+playback timings (ms):
+  capture_cache.get: 0.423
+  load_resource: 104.267 (2)
+  PetaboxLoader3.resolve: 78.286 (2)
+  PetaboxLoader3.datanode: 24.272 (2)
+*/

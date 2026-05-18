@@ -48,39 +48,3 @@
     grid-template-columns: 1fr;
   }
 }
-
-/* ── BOUTON PLAY VIDÉO MOBILE ── */
-.video-play-btn {
-  display: none;
-}
-@media (max-width: 860px) {
-  .video-play-btn {
-    display: flex;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 5;
-    background: rgba(0,0,0,.55);
-    border: 2px solid rgba(200,150,30,.6);
-    border-radius: 50%;
-    width: 56px;
-    height: 56px;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: background .2s, border-color .2s;
-  }
-  .video-play-btn:hover,
-  .video-play-btn:focus {
-    background: rgba(0,0,0,.75);
-    border-color: var(--gold);
-  }
-  .video-play-btn svg {
-    fill: var(--gold);
-    margin-left: 3px;
-  }
-  .video-play-btn.hidden {
-    display: none;
-  }
-}

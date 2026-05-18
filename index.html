@@ -43,10 +43,6 @@
 
 <!-- HERO -->
 <section id="hero" aria-label="Accueil">
-  <button class="video-play-btn" id="video-play-btn" aria-label="Lancer la vidéo" onclick="var v=document.getElementById('bgvid');v.play();this.classList.add('hidden')">
-    <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-  </button>
-  <div class="h-ov" aria-hidden="true"></div>
   <img class="hero-char left" src="assets/warrior-render.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
   <img class="hero-char right" src="assets/sura-render.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
   <img class="hero-metin" src="assets/metin-stone.png" alt="" aria-hidden="true" onerror="this.style.display='none'">
@@ -54,9 +50,12 @@
   <div class="rays" aria-hidden="true"></div>
   <div class="h-content">
     <div class="h-eyebrow">Le retour au source</div>
-    <img class="hero-logo"
-     src="assets/metin2return_pas_coller_png_.webp"
-     style="width:300px; height:300px;">
+    <div class="logo-particle-wrap">
+      <canvas id="logo-particles" aria-hidden="true"></canvas>
+      <img class="hero-logo"
+       src="assets/metin2return_pas_coller_png_.webp"
+       style="width:300px; height:300px;">
+    </div>
     <h1 class="h-title"><span class="h-sub-word">WIKI</span></h1>
     <div class="h-divider" aria-hidden="true">
       <span></span><em><svg width="12" height="12" viewBox="0 0 24 24" fill="var(--gold)"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg></em><span></span>
@@ -1274,75 +1273,391 @@
     </div>
     <div class="mmo-bd">
 
-      <!-- CARTE DU MONDE -->
-      <div class="worldmap-wrap">
-        <img class="worldmap-img" src="assets/CarteDuMonde.png" alt="Carte du Monde Metin2" loading="lazy" decoding="async">
-        <!-- Zones cliquables par-dessus la carte -->
-        <!-- zone Chunjo retirée -->
-        <div class="wm-zone wm-jinno" title="Empire Jinno">
-          <img src="assets/Empirejinno.png" alt="Jinno" onerror="this.style.background='#1a0a00'; this.style.padding='4px'; this.alt='Jinno'">
-          <span>Jinno</span>
-        </div>
-        <div class="wm-zone wm-shinsoo" title="Empire Shinsoo">
-          <img src="assets/Empireshinsoo.png" alt="Shinsoo" onerror="this.style.display='none'">
-          <span>Shinsoo</span>
-        </div>
-      </div>
+      <!-- ── CARTE EMPIRE INTERACTIVE ── -->
+      <div class="em-wrap">
 
-      <!-- EMPIRES DÉTAIL -->
-      <div class="ptitle"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.25C17.25 22.15 21 17.25 21 12V7L12 2z"/></svg>Les 3 Empires</div>
-      <div class="eg">
-        <div class="ec c">
-          <div class="ec-header-img">
-            <img src="assets/Joan-Panorama.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
-            <div class="ec-header-ov"></div>
+        <!-- Carte unique avec zones cliquables SVG -->
+        <div class="em-map-zone">
+          <!-- Images superposées, une seule visible -->
+          <div class="em-img-stack">
+            <img class="em-img active" data-emp="c" src="assets/Cartejaune.jpg" alt="Carte Chunjo">
+            <img class="em-img" data-emp="j" src="assets/Cartebleu.jpg" alt="Carte Jinno">
+            <img class="em-img" data-emp="s" src="assets/Carterouge.jpg" alt="Carte Shinsoo">
           </div>
-          <div class="ec-body">
-            <img class="empire-logo" src="assets/Empirechunjo.png" alt="Chunjo" loading="lazy" onerror="this.style.display='none'">
-            <div class="en">Chunjo</div>
-            <div class="ei">Ouest · Théocratique<br>Map 1 : <strong>Joan</strong> · Map 2 : Bokjung<br>Capitale : Waryong</div>
+
+          <!-- SVG zones cliquables par-dessus -->
+          <svg class="em-svg" viewBox="0 0 480 380" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <!-- Zone Chunjo : haut-gauche -->
+            <!-- Chunjo : haut-gauche, ~45% de la largeur -->
+            <polygon class="em-zone em-zone--c" data-emp="c"
+              points="0,0 200,0 215,20 230,60 220,120 200,160 165,190 120,205 60,210 0,200"
+              title="Chunjo"/>
+            <!-- Jinno : droite, de haut jusqu'à ~65% hauteur -->
+            <polygon class="em-zone em-zone--j" data-emp="j"
+              points="215,20 480,0 480,0 480,240 400,250 330,230 280,190 250,150 230,100 230,60"
+              title="Jinno"/>
+            <!-- Shinsoo : tout le bas -->
+            <polygon class="em-zone em-zone--s" data-emp="s"
+              points="0,200 60,210 120,205 165,190 200,160 220,120 250,150 280,190 330,230 400,250 480,240 480,380 0,380"
+              title="Shinsoo"/>
+          </svg>
+
+          <!-- Labels flottants sur la carte -->
+          <div class="em-label em-label--c" data-emp="c">
+            <img src="assets/Empirechunjo.png" alt="" onerror="this.style.display='none'">
+            <span>Chunjo</span>
+          </div>
+          <div class="em-label em-label--j" data-emp="j">
+            <img src="assets/Empirejinno.png" alt="" onerror="this.style.display='none'">
+            <span>Jinno</span>
+          </div>
+          <div class="em-label em-label--s" data-emp="s">
+            <img src="assets/Empireshinsoo.png" alt="" onerror="this.style.display='none'">
+            <span>Shinsoo</span>
           </div>
         </div>
-        <div class="ec j">
-          <div class="ec-header-img">
-            <img src="assets/Pyungmoo-Panorama.jpg" alt="Pyungmoo" loading="lazy" onerror="this.src='assets/Pyungmoo.jpg'; this.onerror=function(){this.style.opacity='0.1'}">
-            <div class="ec-header-ov"></div>
+
+        <!-- Panneau infos (à droite) -->
+        <div class="em-info" id="em-info">
+
+          <div class="em-info-panel active" data-info="c">
+            <div class="em-info-title em-c">Chunjo</div>
+            <div class="em-info-sub">Ouest · Théocratique · <em>Les Fidèles</em></div>
+            <div class="em-info-divider em-div--c"></div>
+            <div class="em-info-grid">
+              <div class="em-row"><span class="em-lbl">Capitale</span><span class="em-val">Waryong</span></div>
+              <div class="em-row"><span class="em-lbl">Map 1</span><span class="em-val">Joan</span></div>
+              <div class="em-row"><span class="em-lbl">Map 2</span><span class="em-val">Bokjung</span></div>
+              <div class="em-row"><span class="em-lbl">Région</span><span class="em-val">Ouest</span></div>
+              <div class="em-row"><span class="em-lbl">Style</span><span class="em-val">Théocratie</span></div>
+            </div>
+              <div class="em-desc">Guidé par les anciens et la foi, Chunjo est l'empire de la sagesse et du mysticisme. Ses terres dorées s'étendent à l'ouest du monde connu.</div>
+            </div>
+
+          <div class="em-info-panel" data-info="j">
+            <div class="em-info-title em-j">Jinno</div>
+            <div class="em-info-sub">Est · Militaire · <em>Les Guerriers</em></div>
+            <div class="em-info-divider em-div--j"></div>
+            <div class="em-info-grid">
+              <div class="em-row"><span class="em-lbl">Capitale</span><span class="em-val">Imha</span></div>
+              <div class="em-row"><span class="em-lbl">Map 1</span><span class="em-val">Pyungmoo</span></div>
+              <div class="em-row"><span class="em-lbl">Map 2</span><span class="em-val">Bakra</span></div>
+              <div class="em-row"><span class="em-lbl">Région</span><span class="em-val">Est</span></div>
+              <div class="em-row"><span class="em-lbl">Style</span><span class="em-val">Militaire</span></div>
+            </div>
+            <div class="em-desc">Discipliné et puissant, Jinno règne par la force de ses armées. Ses terres verdâtres à l'est sont protégées par des légions de guerriers d'élite.</div>
           </div>
-          <div class="ec-body">
-            <img class="empire-logo" src="assets/Empirejinno.png" alt="Jinno" loading="lazy" onerror="this.style.display='none'">
-            <div class="en">Jinno</div>
-            <div class="ei">Est · Militaire<br>Map 1 : <strong>Pyungmoo</strong> · Map 2 : Bakra<br>Capitale : Imha</div>
+
+          <div class="em-info-panel" data-info="s">
+            <div class="em-info-title em-s">Shinsoo</div>
+            <div class="em-info-sub">Sud · Commerce · <em>Les Marchands</em></div>
+            <div class="em-info-divider em-div--s"></div>
+            <div class="em-info-grid">
+              <div class="em-row"><span class="em-lbl">Capitale</span><span class="em-val">Jungrang</span></div>
+              <div class="em-row"><span class="em-lbl">Map 1</span><span class="em-val">Yongan</span></div>
+              <div class="em-row"><span class="em-lbl">Map 2</span><span class="em-val">Jayang</span></div>
+              <div class="em-row"><span class="em-lbl">Région</span><span class="em-val">Sud</span></div>
+              <div class="em-row"><span class="em-lbl">Style</span><span class="em-val">Commerce</span></div>
+            </div>
+            <div class="em-desc">Prospère et ambitieux, Shinsoo contrôle les routes marchandes du sud. Sous ses dehors civils, il cache une armée redoutable et des alliances secrètes.</div>
           </div>
-        </div>
-        <div class="ec s">
-          <div class="ec-header-img">
-            <img src="assets/Yongan-Panorama.jpg" alt="" loading="lazy" onerror="this.style.display='none'">
-            <div class="ec-header-ov"></div>
-          </div>
-          <div class="ec-body">
-            <img class="empire-logo" src="assets/Empireshinsoo.png" alt="Shinsoo" loading="lazy" onerror="this.style.display='none'">
-            <div class="en">Shinsoo</div>
-            <div class="ei">Sud · Commerce<br>Map 1 : <strong>Yongan</strong> · Map 2 : Jayang<br>Capitale : Jungrang</div>
-          </div>
-        </div>
-      </div>
+
+        </div><!-- /em-info -->
+      </div><!-- /em-wrap -->
 
       <!-- ZONES DE JEU -->
       <div class="ptitle"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 10-16 0c0 3 2.7 6.9 8 11.7z"/></svg>Zones de jeu</div>
-      <div class="sg">
-        <div class="sc"><img class="sc-img" src="assets/Joan-Panorama.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'; this.src='assets/Fond2015.jpg'; this.onerror=null"><div class="scn">Joan · Pyungmoo · Yongan</div><div class="scd">Cartes de départ des 3 empires</div><span class="badge">1–25</span></div>
-        <div class="sc"><img class="sc-img" src="assets/Desertyongbi-Panorama.jpg" onerror="this.src='assets/DesertdeYongbi-Panorama.jpg'; this.onerror=function(){this.src='assets/Desertyongbi.jpg'; this.onerror=function(){this.style.opacity='0.3';}}" alt="" loading="lazy" onerror="this.src='assets/desert-map.jpg'"><div class="scn">Désert de Yongbi</div><div class="scd">Hors-la-loi · Orcs noirs · Araignées</div><span class="badge">25–45</span></div>
-        <div class="sc"><img class="sc-img" src="assets/Seungryong-Panorama.jpg" onerror="this.src='assets/ValleedeSeungryong-Panorama.jpg'; this.onerror=function(){this.src='assets/Seungryong.jpg'; this.onerror=function(){this.style.opacity='0.3';}}" alt="" loading="lazy" onerror="this.src='assets/vallee-map.jpg'"><div class="scn">Vallée Seungryong</div><div class="scd">Araignées · Arahan bestial · Singes</div><span class="badge">30–55</span></div>
-        <div class="sc"><img class="sc-img" src="assets/MontSohan-Panorama.jpg" onerror="this.src='assets/MontSohan-Panorama.jpg'; this.onerror=function(){this.src='assets/Sohan.jpg'; this.onerror=function(){this.style.opacity='0.3';}}" alt="" loading="lazy" onerror="this.src='assets/sohan-map.jpg'"><div class="scn">Mont Sohan</div><div class="scd">Golems de glace · Yétis</div><span class="badge">50–70</span></div>
-        <div class="sc"><img class="sc-img" src="assets/Doyyumhwan-Panorama.jpg" onerror="this.src='assets/Doyyumhwan-Panorama.jpg'; this.onerror=function(){this.src='assets/Doyyumhwan.jpg'; this.onerror=function(){this.style.opacity='0.3';}}" alt="" loading="lazy" onerror="this.src='assets/doyyum-map.jpg'"><div class="scn">Doyyumhwan</div><div class="scd">Tigres de combat · Ogres · Flammes</div><span class="badge">60–75</span></div>
-        <div class="sc"><img class="sc-img" src="assets/BoisRouge-Panorama.jpg" onerror="this.src='assets/BoisRouge-Panorama.jpg'; this.onerror=function(){this.src='assets/BoisRouge.jpg'; this.onerror=function(){this.style.opacity='0.3';}}" alt="" loading="lazy" onerror="this.src='assets/foret-map.jpg'"><div class="scn">Bois Rouge</div><div class="scd">Arbres maléfiques · Dryades rouges</div><span class="badge">70–85</span></div>
-        <div class="sc"><img class="sc-img" src="assets/GrottedelExil-Panorama.jpg" onerror="this.src='assets/GrottedelExil-Panorama.jpg'; this.onerror=function(){this.src='assets/GrottedelExil.jpg'; this.onerror=function(){this.style.opacity='0.3';}}" alt="" loading="lazy" onerror="this.src='assets/grotte-map.jpg'"><div class="scn">Grotte de l'Exil</div><div class="scd">Setaou · Monstres de glace d'enfer</div><span class="badge">80–90</span></div>
-      </div>
+      <div class="sg" id="zone-grid">
+  <div class="sc zone-card" data-zone="joan"><img class="sc-img" src="assets/Joan-Panorama.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'; this.src='assets/Fond2015.jpg'; this.onerror=null"><div class="scn">Joan · Pyungmoo · Yongan</div><div class="scd">Cartes de départ des 3 empires</div><span class="badge">1–25</span></div>
+  <div class="sc zone-card" data-zone="yongbi"><img class="sc-img" src="assets/Desertdeyongbi.png" onerror="this.src='assets/DesertdeYongbi-Panorama.jpg'; this.onerror=function(){this.src='assets/Desertyongbi.jpg'; this.onerror=function(){this.style.opacity='0.3';}}" alt="" loading="lazy"><div class="scn">Désert de Yongbi</div><div class="scd">Hors-la-loi · Orcs noirs · Araignées</div><span class="badge">25–45</span></div>
+  <div class="sc zone-card" data-zone="seungryong"><img class="sc-img" src="assets/Valleedeseungryong.png" onerror="this.src='assets/ValleedeSeungryong-Panorama.jpg'; this.onerror=function(){this.src='assets/Seungryong.jpg'; this.onerror=function(){this.style.opacity='0.3';}}" alt="" loading="lazy"><div class="scn">Vallée Seungryong</div><div class="scd">Araignées · Arahan bestial · Singes</div><span class="badge">30–55</span></div>
+  <div class="sc zone-card" data-zone="sohan"><img class="sc-img" src="assets/Montsohan.png" onerror="this.src='assets/MontSohan-Panorama.jpg'; this.onerror=function(){this.src='assets/Sohan.jpg'; this.onerror=function(){this.style.opacity='0.3';}}" alt="" loading="lazy"><div class="scn">Mont Sohan</div><div class="scd">Golems de glace · Yétis</div><span class="badge">50–70</span></div>
+  <div class="sc zone-card" data-zone="doyyumhwan"><img class="sc-img" src="assets/Doyyumhwan.png" onerror="this.src='assets/Doyyumhwan-Panorama.jpg'; this.onerror=function(){this.src='assets/Doyyumhwan.jpg'; this.onerror=function(){this.style.opacity='0.3';}}" alt="" loading="lazy"><div class="scn">Doyyumhwan</div><div class="scd">Tigres de combat · Ogres · Flammes</div><span class="badge">60–75</span></div>
+  <div class="sc zone-card" data-zone="boisrouge"><img class="sc-img" src="assets/Boisrouge.png" onerror="this.src='assets/BoisRouge-Panorama.jpg'; this.onerror=function(){this.src='assets/BoisRouge.jpg'; this.onerror=function(){this.style.opacity='0.3';}}" alt="" loading="lazy"><div class="scn">Bois Rouge</div><div class="scd">Arbres maléfiques · Dryades rouges</div><span class="badge">70–85</span></div>
+  <div class="sc zone-card" data-zone="grotte"><img class="sc-img" src="assets/Grottedelexil.png" onerror="this.src='assets/GrottedelExil-Panorama.jpg'; this.onerror=function(){this.src='assets/GrottedelExil.jpg'; this.onerror=function(){this.style.opacity='0.3';}}" alt="" loading="lazy"><div class="scn">Grotte de l'Exil</div><div class="scd">Setaou · Monstres de glace d'enfer</div><span class="badge">80–90</span></div>
+  <div class="sc zone-card" data-zone="tourdemons"><img class="sc-img" src="assets/Tourdesdemons.png" onerror="this.style.opacity='0.3'" alt="" loading="lazy"><div class="scn">Tour des Démons</div><div class="scd">Mort-vivants · Boss · 8 étages</div><span class="badge">40–75</span></div>
 
+  <!-- ══ PANNEAU JOAN ══ -->
+  <div class="zone-panel" id="zpanel-joan">
+    <button class="zp-close" data-close-zone="joan">Fermer ✕</button>
+    <div class="zp-head"><span class="zp-name">Joan · Pyungmoo · Yongan</span><span class="zp-sub">Premiers villages · Niv. 1–25</span></div>
+    <div class="zp-cols">
+      <div class="zp-col">
+        <div class="ptitle" style="margin-top:0">Présentation</div>
+        <p class="cp-desc">Les trois premiers villages correspondent chacun à un empire : <strong>Joan</strong> pour Chunjo, <strong>Pyungmoo</strong> pour Jinno, <strong>Yongan</strong> pour Shinsoo. Ce sont les cartes de départ du jeu — on y trouve toutes les boutiques essentielles : Forgeron, Magasin d'armes, Magasin d'armures, Marchande et Magasinier.</p>
+        <div class="ptitle">Accès</div>
+        <div class="ibox">Accessible dès le niveau 1. Téléportation via l'Anneau, l'Alliance, le Parchemin du lieu et la Carte de monstre autorisés.</div>
+        <div class="ptitle">Zones limitrophes</div>
+        <p class="cp-desc">Premier village ➔ Deuxième village · Vallée de Seungryong · Désert de Yongbi</p>
+      </div>
+      <div class="zp-col">
+        <div class="ptitle" style="margin-top:0">Monstres principaux</div>
+        <div class="cp-skills">
+          <div class="cp-skill">Chien errant / Chien errant affamé <span>Niv. 1</span></div>
+          <div class="cp-skill">Loup / Loup affamé <span>Niv. 3</span></div>
+          <div class="cp-skill">Loup alpha / Loup alpha affamé <span>Niv. 4</span></div>
+          <div class="cp-skill">Loup bleu / Loup bleu affamé <span>Niv. 6</span></div>
+          <div class="cp-skill">Sanglier sauvage affamé <span>Niv. 7</span></div>
+          <div class="cp-skill">Loup alpha bleu affamé <span>Niv. 9</span></div>
+          <div class="cp-skill">Sanglier rouge affamé <span>Niv. 11</span></div>
+          <div class="cp-skill">Tigre blanc affamé <span>Niv. 21</span></div>
+        </div>
+        <div class="ptitle">Pierres Metin</div>
+        <div class="cp-skills">
+          <div class="cp-skill">Metin de la Tristesse <span>Niv. 5</span></div>
+          <div class="cp-skill">Metin de Combat <span>Niv. 10</span></div>
+          <div class="cp-skill">Metin de Bataille <span>Niv. 15</span></div>
+          <div class="cp-skill">Metin de Cupidité <span>Niv. 20</span></div>
+        </div>
+        <div class="ptitle">Boss</div>
+        <div class="ibox">Aucun boss fixe — zone de départ.</div>
+      </div>
     </div>
   </div>
-</section>
 
+  <!-- ══ PANNEAU YONGBI ══ -->
+  <div class="zone-panel" id="zpanel-yongbi">
+    <button class="zp-close" data-close-zone="yongbi">Fermer ✕</button>
+    <div class="zp-head"><span class="zp-name">Désert de Yongbi</span><span class="zp-sub">Zone neutre · Niv. 25–45</span></div>
+    <div class="zp-cols">
+      <div class="zp-col">
+        <div class="ptitle" style="margin-top:0">Présentation</div>
+        <p class="cp-desc">Le désert de Yongbi est une carte classique comportant de nombreux monstres et pierres Metin ainsi qu'un boss. Moins rentable en EXP que la Vallée de Seungryong, elle propose cependant <strong>trois types de pierres Metin</strong> différentes. La taille de la carte les rend plus difficiles à trouver.</p>
+        <div class="ptitle">Accès</div>
+        <div class="ibox">Accessible dès le niveau 1. Via le Téléporteur à partir du niveau 10 ou via le Vieil homme des deuxièmes villages. Téléportation autorisée (Anneau, Alliance, Parchemin du lieu, Carte de monstre).</div>
+        <div class="ptitle">Zones limitrophes</div>
+        <p class="cp-desc">Deuxième village ➔ Désert de Yongbi ➔ Jungsun Dong · Sangsun Dong · Donjon des araignées 1 · Grande Vallée</p>
+      </div>
+      <div class="zp-col">
+        <div class="ptitle" style="margin-top:0">Monstres principaux</div>
+        <div class="cp-skills">
+          <div class="cp-skill">Soldat / Commandant du Serment craintif <span>Niv. 22–25</span></div>
+          <div class="cp-skill">Soldat / Minion / Général Fort Barbare <span>Niv. 25–30</span></div>
+          <div class="cp-skill">Jak-To / To-Su du Vent Noir <span>Niv. 26</span></div>
+          <div class="cp-skill">Joh-Hwang / Pho-Hwang T.Noire <span>Niv. 27–28</span></div>
+          <div class="cp-skill">Hors-la-loi du désert <span>Niv. 35–40</span></div>
+          <div class="cp-skill">Orc d'élite / Éclaireur / Combattant <span>Niv. 30–35</span></div>
+        </div>
+        <div class="ptitle">Pierres Metin</div>
+        <div class="cp-skills">
+          <div class="cp-skill">Metin Noire <span>Niv. 25</span></div>
+          <div class="cp-skill">Metin des Ténèbres <span>Niv. 30</span></div>
+          <div class="cp-skill">Metin de Jalousie <span>Niv. 35</span></div>
+        </div>
+        <div class="ptitle">Boss</div>
+        <div class="ibox">Chuong — Niv. 35 · Mini-boss Bo (Niv. 30) · Drops : Yang, objets rares, équipement</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ PANNEAU SEUNGRYONG ══ -->
+  <div class="zone-panel" id="zpanel-seungryong">
+    <button class="zp-close" data-close-zone="seungryong">Fermer ✕</button>
+    <div class="zp-head"><span class="zp-name">Vallée de Seungryong</span><span class="zp-sub">Zone neutre · Niv. 30–55</span></div>
+    <div class="zp-cols">
+      <div class="zp-col">
+        <div class="ptitle" style="margin-top:0">Présentation</div>
+        <p class="cp-desc">La vallée de Seungryong est une carte classique comportant de nombreux monstres et un boss. C'est une <strong>zone très importante pour les joueurs de bas niveaux</strong> car elle permet de gagner de l'expérience rapidement.</p>
+        <div class="ptitle">Accès</div>
+        <div class="ibox">Accessible dès le niveau 1. Via le Téléporteur à partir du niveau 10 ou via le Vieil homme des premiers et deuxièmes villages. Téléportation autorisée (Anneau, Alliance, Parchemin du lieu, Carte de monstre).</div>
+        <div class="ptitle">Zones limitrophes</div>
+        <p class="cp-desc">Premier village ➔ Vallée de Seungryong ➔ Temple Hwang · Grotte de l'Exil · Désert de Yongbi</p>
+      </div>
+      <div class="zp-col">
+        <div class="ptitle" style="margin-top:0">Monstres principaux</div>
+        <div class="cp-skills">
+          <div class="cp-skill">Araignée venimeuse / Araignée à griffes <span>Niv. 38–45</span></div>
+          <div class="cp-skill">Fanatique / Arahan bestial <span>Niv. 40–48</span></div>
+          <div class="cp-skill">Combattant / Chef arahan bestial <span>Niv. 44–47</span></div>
+          <div class="cp-skill">Juge / Tourmenteur bestial <span>Niv. 48–50</span></div>
+          <div class="cp-skill">Orc intrépide (plusieurs types) <span>Niv. 33–40</span></div>
+          <div class="cp-skill">Singe Soldat / Lanceur / Combattant <span>Niv. 46–50</span></div>
+        </div>
+        <div class="ptitle">Pierres Metin</div>
+        <div class="cp-skills">
+          <div class="cp-skill">Metin de l'Ombre <span>Niv. 30</span></div>
+          <div class="cp-skill">Metin d'Âme <span>Niv. 35</span></div>
+          <div class="cp-skill">Metin de Force <span>Niv. 40</span></div>
+          <div class="cp-skill">Metin de Meurtre <span>Niv. 45</span></div>
+        </div>
+        <div class="ptitle">Boss</div>
+        <div class="ibox">Se-Rang — Niv. 45 · Mini-boss Orc Général (Niv. 40) · Drops : Yang, équipement, objets rares</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ PANNEAU SOHAN ══ -->
+  <div class="zone-panel" id="zpanel-sohan">
+    <button class="zp-close" data-close-zone="sohan">Fermer ✕</button>
+    <div class="zp-head"><span class="zp-name">Mont Sohan</span><span class="zp-sub">Zone neutre · Niv. 50–70</span></div>
+    <div class="zp-cols">
+      <div class="zp-col">
+        <div class="ptitle" style="margin-top:0">Présentation</div>
+        <p class="cp-desc">Le Mont Sohan est une carte classique comportant de nombreux monstres et pierres Metin ainsi qu'un boss. Cette zone permet de rejoindre le <strong>Bois enchanté</strong> et d'accéder à l'observatoire de Nemere.</p>
+        <div class="ptitle">Accès</div>
+        <div class="ibox">Accessible dès le niveau 1. Via le Téléporteur à partir du niveau 10. Téléportation autorisée (Anneau, Alliance, Parchemin du lieu, Carte de monstre).</div>
+        <div class="ptitle">Zones limitrophes</div>
+        <p class="cp-desc">Vallée de Seungryong ➔ Mont Sohan ➔ Bois enchanté · Doyyumhwan · Observatoire de Nemere</p>
+      </div>
+      <div class="zp-col">
+        <div class="ptitle" style="margin-top:0">Monstres principaux</div>
+        <div class="cp-skills">
+          <div class="cp-skill">Soldat / Archer / Lancier / Chamane démoniaque <span>Niv. 55–60</span></div>
+          <div class="cp-skill">Vils soldats / Vils lanciers démoniaques <span>Niv. 60–62</span></div>
+          <div class="cp-skill">Glace enchantée / Baleine de glace <span>Niv. 57–63</span></div>
+          <div class="cp-skill">Lion de glace / Golem de glace <span>Niv. 63–66</span></div>
+          <div class="cp-skill">Homme de glace furieux / Yéti <span>Niv. 64–65</span></div>
+          <div class="cp-skill">Pestiféré furieux (plusieurs types) <span>Niv. 57–60</span></div>
+        </div>
+        <div class="ptitle">Pierres Metin</div>
+        <div class="cp-skills">
+          <div class="cp-skill">Metin Déchue <span>Niv. 50</span></div>
+          <div class="cp-skill">Metin de Mort <span>Niv. 55</span></div>
+          <div class="cp-skill">Metin du Diable <span>Niv. 60</span></div>
+          <div class="cp-skill">Metin de la Foudre <span>Niv. 65</span></div>
+        </div>
+        <div class="ptitle">Boss</div>
+        <div class="ibox">Nemere — Boss de la zone · Clone disponible en event Chasseur de Boss · Drops : équipement niv. 60+, Yang, objets rares</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ PANNEAU DOYYUMHWAN ══ -->
+  <div class="zone-panel" id="zpanel-doyyumhwan">
+    <button class="zp-close" data-close-zone="doyyumhwan">Fermer ✕</button>
+    <div class="zp-head"><span class="zp-name">Doyyumhwan</span><span class="zp-sub">Terre de Feu · Niv. 60–75</span></div>
+    <div class="zp-cols">
+      <div class="zp-col">
+        <div class="ptitle" style="margin-top:0">Présentation</div>
+        <p class="cp-desc">Doyyumhwan, aussi appelée <strong>Terre de Feu</strong>, est une carte hostile peuplée de créatures de feu, de tigres de combat et d'ogres. Zone idéale pour les joueurs entre 60 et 75 souhaitant progresser rapidement en EXP et récupérer des drops intéressants.</p>
+        <div class="ptitle">Accès</div>
+        <div class="ibox">Accessible dès le niveau 1. Via le Téléporteur à partir du niveau 10. Téléportation autorisée.</div>
+        <div class="ptitle">Zones limitrophes</div>
+        <p class="cp-desc">Mont Sohan ➔ Doyyumhwan ➔ Bois Rouge · Bois Enchanté</p>
+      </div>
+      <div class="zp-col">
+        <div class="ptitle" style="margin-top:0">Monstres principaux</div>
+        <div class="cp-skills">
+          <div class="cp-skill">Esprit des flammes / Flammes <span>Niv. 69–70</span></div>
+          <div class="cp-skill">Guerrier des flammes <span>Niv. 71</span></div>
+          <div class="cp-skill">Tigre minion combattant / Tigre de combat <span>Niv. 69–70</span></div>
+          <div class="cp-skill">Ogre Guerrier / Ogre Boucher <span>Niv. 67–69</span></div>
+          <div class="cp-skill">Ogre Berserker <span>Niv. 70</span></div>
+          <div class="cp-skill">Milliers Combattants <span>Niv. 67</span></div>
+        </div>
+        <div class="ptitle">Pierres Metin</div>
+        <div class="cp-skills">
+          <div class="cp-skill">Metin du Chaos <span>Niv. 60</span></div>
+          <div class="cp-skill">Metin de la Rancune <span>Niv. 65</span></div>
+          <div class="cp-skill">Metin Éternelle <span>Niv. 70</span></div>
+        </div>
+        <div class="ptitle">Boss</div>
+        <div class="ibox">Roi Flamme (Razador) — Niv. 75 · Clone disponible en event Chasseur de Boss · Drops : Yang, équipement niv. 66–75, objets rares</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ PANNEAU BOIS ROUGE ══ -->
+  <div class="zone-panel" id="zpanel-boisrouge">
+    <button class="zp-close" data-close-zone="boisrouge">Fermer ✕</button>
+    <div class="zp-head"><span class="zp-name">Bois Rouge</span><span class="zp-sub">Zone neutre · Niv. 70–85</span></div>
+    <div class="zp-cols">
+      <div class="zp-col">
+        <div class="ptitle" style="margin-top:0">Présentation</div>
+        <p class="cp-desc">Le Bois Rouge est une carte classique comportant peu de monstres différents ainsi que des pierres Metin. Zone très intéressante car les pierres Metin y font tomber pour la première fois des <strong>Capes de bravoure</strong>, des <strong>Anneaux d'expérience</strong> et des <strong>Gants de voleur</strong>. Pas de veine sur la carte.</p>
+        <div class="ptitle">Accès</div>
+        <div class="ibox">Accessible dès le niveau 1. Via le Téléporteur à partir du niveau 10. Téléportation autorisée (Anneau, Alliance, Parchemin du lieu, Carte de monstre).</div>
+        <div class="ptitle">Zones limitrophes</div>
+        <p class="cp-desc">Doyyumhwan ➔ Bois Rouge ➔ Grande Vallée · Grotte de l'Exil</p>
+      </div>
+      <div class="zp-col">
+        <div class="ptitle" style="margin-top:0">Monstres principaux</div>
+        <div class="cp-skills">
+          <div class="cp-skill">Esprit rouge de l'arbre <span>Niv. 74 — Agressif</span></div>
+          <div class="cp-skill">Esprit rouge de la souche <span>Niv. 76 — Agressif</span></div>
+          <div class="cp-skill">Dryade rouge <span>Niv. 77 — Agressif</span></div>
+          <div class="cp-skill">Saule pleureur rouge <span>Niv. 80 — Agressif</span></div>
+          <div class="cp-skill">Arbre maléfique rouge <span>Niv. 80 — Agressif</span></div>
+        </div>
+        <div class="ptitle">Pierres Metin</div>
+        <div class="cp-skills">
+          <div class="cp-skill">Metin des êtres sylvestres <span>Niv. 70</span></div>
+          <div class="cp-skill">Metin de Damnation <span>Niv. 75</span></div>
+          <div class="cp-skill">Metin de Mort Rouge <span>Niv. 80</span></div>
+        </div>
+        <div class="ptitle">Drops notables (pierres Metin)</div>
+        <div class="ibox">Cape de bravoure · Anneau d'expérience · Gants de voleur · Pas de boss fixe sur cette carte</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ PANNEAU GROTTE ══ -->
+  <div class="zone-panel" id="zpanel-grotte">
+    <button class="zp-close" data-close-zone="grotte">Fermer ✕</button>
+    <div class="zp-head"><span class="zp-name">Grotte de l'Exil</span><span class="zp-sub">Zone neutre · Niv. 80–90</span></div>
+    <div class="zp-cols">
+      <div class="zp-col">
+        <div class="ptitle" style="margin-top:0">Présentation</div>
+        <p class="cp-desc">La Grotte de l'Exil comporte deux types de créatures distincts : les <strong>monstres de glace</strong> (versions renforcées de ceux du Mont Sohan) et les <strong>Setaou</strong>, communément appelés mercenaires. Les deux types sont agressifs. À noter : la capacité Peur des Sura AM annule l'aggro des créatures de glace mais <strong>pas</strong> des Setaou.</p>
+        <div class="ptitle">Accès</div>
+        <div class="ibox">Accessible via Téléporteur ou Vieil Homme. Une <strong>Pierre de sang</strong> est nécessaire pour entrer. L'Amulette de la grotte permet d'être téléporté directement devant l'entrée (obtenue auprès de Heuk-Young avec une Pierre de Glyphe + de l'or).</div>
+        <div class="ptitle">Zones limitrophes</div>
+        <p class="cp-desc">Bois Rouge · Map Orc ➔ Grotte de l'Exil ➔ Grotte de l'Exil 2</p>
+      </div>
+      <div class="zp-col">
+        <div class="ptitle" style="margin-top:0">Monstres principaux</div>
+        <div class="cp-skills">
+          <div class="cp-skill">Glaçon d'enfer / Baleine de glace d'enfer <span>Niv. 81 — Agressif</span></div>
+          <div class="cp-skill">Insecte de glace d'enfer <span>Niv. 81 — Agressif</span></div>
+          <div class="cp-skill">Homme de glace d'enfer / Yéti d'enfer <span>Niv. 84–85</span></div>
+          <div class="cp-skill">Golem de glace d'enfer <span>Niv. 86</span></div>
+          <div class="cp-skill">Guerrier / Chasseur Setaou <span>Niv. 87–88</span></div>
+          <div class="cp-skill">Voyante Setaou <span>Niv. 89–90</span></div>
+        </div>
+        <div class="ptitle">Pierres Metin</div>
+        <div class="cp-skills">
+          <div class="cp-skill">Metin de Glace d'Enfer <span>Niv. 80</span></div>
+          <div class="cp-skill">Metin des Setaou <span>Niv. 85</span></div>
+        </div>
+        <div class="ptitle">Boss</div>
+        <div class="ibox">Grande Sorcière de Glace — Niv. 89 · Invoque des Golems · Beran-Setaou (Grotte 2) · Clone disponible en event Chasseur de Boss · Drops : collier en cristal, équipement haut niveau</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ PANNEAU TOUR DES DÉMONS ══ -->
+  <div class="zone-panel" id="zpanel-tourdemons">
+    <button class="zp-close" data-close-zone="tourdemons">Fermer ✕</button>
+    <div class="zp-head"><span class="zp-name">Tour des Démons</span><span class="zp-sub">Instance · Niv. minimum 40 · 8 étages</span></div>
+    <div class="zp-cols">
+      <div class="zp-col">
+        <div class="ptitle" style="margin-top:0">Présentation</div>
+        <p class="cp-desc">La Tour des Démons est une instance présente depuis la création du jeu. Elle est composée d'un rez-de-chaussée et de <strong>8 étages</strong>. Tous les monstres sont de type <strong>mort-vivant</strong> associés à l'élément Obscurité. De nombreux monstres se réincarnent en version plus puissante une fois tués.</p>
+        <div class="ptitle">Accès</div>
+        <div class="ibox">Niveau minimum : <strong>40</strong>. Entrée via le <strong>Garde de la Tour</strong> au Temple de Hwang. Aucun temps d'attente entre plusieurs instances. Durée maximale : <strong>3 heures</strong>. Montures autorisées. Téléportation possible depuis le premier village à partir du niveau 60.</div>
+        <div class="ptitle">Infos importantes</div>
+        <div class="ibox">— Impossible de faire/défaire un groupe à partir du 1er étage.<br>— Une déconnexion renvoie immédiatement hors de l'instance.<br>— Étage 5 : niveau 75 requis pour accéder aux étages supérieurs.</div>
+      </div>
+      <div class="zp-col">
+        <div class="ptitle" style="margin-top:0">Déroulement par étage</div>
+        <div class="cp-skills">
+          <div class="cp-skill">Rez-de-chaussée <span>Détruire la Metin de Force</span></div>
+          <div class="cp-skill">Étage 1 <span>Tuer tous les monstres</span></div>
+          <div class="cp-skill">Étage 2 <span>Tuer le Roi Démon + monstres</span></div>
+          <div class="cp-skill">Étage 3 <span>Trouver et détruire la bonne Metin Déchue (1/7)</span></div>
+          <div class="cp-skill">Étage 4 <span>Déverrouiller 5 sceaux anciens (250 Vils Archers)</span></div>
+          <div class="cp-skill">Étage 5 <span>Tuer le Roi Démon Élite — Forgeron spécial disponible</span></div>
+          <div class="cp-skill">Étage 6 <span>Détruire la bonne Metin de Meurtre (~10% chance)</span></div>
+          <div class="cp-skill">Étage 7 <span>Obtenir une Clé de Zin-Bong sur l'Esprit éternel (1/50)</span></div>
+          <div class="cp-skill">Étage 8 <span>Tuer la Faucheuse pour terminer l'instance</span></div>
+        </div>
+        <div class="ptitle">Boss</div>
+        <div class="ibox">Roi Démon (étage 2) · Roi Démon Élite (étage 5) · Faucheuse (étage 8, boss final)</div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
 <!-- ══ SAVIEZ-VOUS ══ -->
 <div class="sep" aria-hidden="true"><span class="sep-l"></span><span class="sep-r"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01"/></svg>Saviez-vous</span><span class="sep-l"></span></div>
 <section class="panel" id="saviez-vous">
@@ -1359,6 +1674,83 @@
   </div>
 </section>
 
+<!-- ══ CHRONOLOGIE ══ -->
+<div class="sep" aria-hidden="true"><span class="sep-l"></span><span class="sep-r"><svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>Chronologie</span><span class="sep-l"></span></div>
+<section class="panel" id="chronologie">
+  <div class="tl-fresco">
+    <div class="tl-rail" aria-hidden="true"><div class="tl-fill" id="tl-fill"></div></div>
+    <div class="tl-glow-line" aria-hidden="true"></div>
+    <div class="tl-node" style="--pos:0%">
+      <div class="tl-stem tl-stem--top"></div>
+      <div class="tl-pin-wrap"><div class="tl-pin-ring"></div><div class="tl-pin"></div></div>
+      <div class="tl-label tl-label--top">
+        <span class="tl-yr">2004</span><span class="tl-diamond" aria-hidden="true"></span>
+        <span class="tl-ev">Lancement Officiel</span>
+        <span class="tl-desc">Sortie de Metin2 en Corée du Sud — naissance des trois empires rivaux.</span>
+      </div>
+    </div>
+    <div class="tl-node" style="--pos:37%">
+      <div class="tl-stem tl-stem--bot"></div>
+      <div class="tl-pin-wrap"><div class="tl-pin-ring"></div><div class="tl-pin"></div></div>
+      <div class="tl-label tl-label--bot">
+        <span class="tl-yr">2007</span><span class="tl-diamond" aria-hidden="true"></span>
+        <span class="tl-ev">L'Âge d'Or en France</span>
+        <span class="tl-desc">Arrivée des serveurs francophones et explosion de la communauté.</span>
+      </div>
+    </div>
+    <div class="tl-node tl-node--now" style="--pos:100%">
+      <div class="tl-stem tl-stem--top"></div>
+      <div class="tl-pin-wrap"><div class="tl-pin-ring"></div><div class="tl-pin"></div></div>
+      <div class="tl-label tl-label--top">
+        <span class="tl-yr">2026</span><span class="tl-diamond" aria-hidden="true"></span>
+        <span class="tl-ev">M2Return — Wiki</span>
+        <span class="tl-desc">Le retour aux sources. La communauté reprend vie.</span>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ══ TRAILER ══ -->
+<div class="sep" aria-hidden="true"><span class="sep-l"></span><span class="sep-r"><svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>Trailer</span><span class="sep-l"></span></div>
+<section class="panel" id="trailer">
+  <div class="mmo">
+    <div class="mmo-hd">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      <span class="mmo-ht">Bande Annonce</span>
+      <span class="mmo-hs">Metin2 Return · 2026</span>
+    </div>
+    <div class="mmo-bd">
+      <div class="yt-wrap">
+        <div class="yt-corners">
+          <span class="yt-c yt-c--tl"></span>
+          <span class="yt-c yt-c--tr"></span>
+          <span class="yt-c yt-c--bl"></span>
+          <span class="yt-c yt-c--br"></span>
+        </div>
+        <iframe
+          class="yt-frame"
+          src="https://www.youtube.com/embed/OT-D7w66E5Y?rel=0&modestbranding=1&color=white"
+          title="Bande annonce Metin2 Return"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          loading="lazy">
+        </iframe>
+      </div>
+      <div class="yt-desc">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.25C17.25 22.15 21 17.25 21 12V7L12 2z"/></svg>
+        <div>
+          <div class="yt-desc-title">Découvrez M2Return</div>
+          <div class="yt-desc-body"> Replongez-vous au cœur du prime.
+Le temps s’est arrêté. Le monde d’autrefois renaît, plus vivant que jamais.
+
+Ici, tout est comme avant : les sensations, les combats, la communauté, la vraie aventure.
+Pas de nouveautés inutiles, pas d’artifices — juste l’expérience pure, pensée pour les nostalgiques et les passionnés.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <footer>
   <div class="footer-logos">
     <img src="assets/gameforge-logo.png" alt="Gameforge" onerror="this.style.display='none'">
@@ -1368,16 +1760,6 @@
   <div class="footer-txt">— © M2Return. Projet communautaire. Tous droits réservés. —
 <a href="#hero" id="btt" aria-label="Retour en haut">
   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="18 15 12 9 6 15"/></svg>
-</a>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  var vid = document.getElementById('bgvid');
-  var btn = document.getElementById('video-play-btn');
-  if (!btn || !vid) return;
-  vid.addEventListener('play', function() { btn.classList.add('hidden'); });
-  vid.play().then(function() { btn.classList.add('hidden'); }).catch(function() {});
-});
-</script>
-<script src="js/app-standalone.js"></script>
+</a><script src="js/app-standalone.js"></script>
 </body>
 </html>

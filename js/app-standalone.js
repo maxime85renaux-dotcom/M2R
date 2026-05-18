@@ -5,13 +5,18 @@
    ══════════════════════════════════════════════ */
 
 document.addEventListener('DOMContentLoaded', () => {
-  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) initParticles();
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    initParticles();
+    initLogoParticles();
+  }
   initClasses();
+  initEmpireMap();
   initQuests();
   initTabs();
   initNavbar();
   initParallax();
   initSaviez();
+  initTimeline();
   initQuestRows();
   initBioCards();
   initChasseRows();
@@ -35,6 +40,7 @@ function initParticles() {
   resize();
   window.addEventListener('resize', resize);
   for (let i=0; i<45; i++) { const p=mk(); p.y=Math.random()*H; pts.push(p); }
+
   (function frame() {
     ctx.clearRect(0,0,W,H);
     if (Math.random()<.32) pts.push(mk());
@@ -49,8 +55,82 @@ function initParticles() {
   })();
 }
 
+/* ── PARTICULES LOGO ── */
+function initLogoParticles() {
+  const canvas = document.getElementById('logo-particles');
+  if (!canvas) return;
+
+  const ctx = canvas.getContext('2d');
+  const wrap = canvas.closest('.logo-particle-wrap');
+  let W, H, pts = [];
+
+  function resize() {
+    const rect = wrap.getBoundingClientRect();
+    W = canvas.width  = rect.width  + 160;
+    H = canvas.height = rect.height + 160;
+  }
+
+  function mk() {
+    return { x: Math.random()*W, y: H+8, vx: (Math.random()-.5)*.3,
+      vy: -(Math.random()*.48+.2), r: Math.random()*1.5+.28,
+      life: 1, decay: Math.random()*.0025+.0015, hue: Math.random()*25+8 };
+  }
+
+  window.addEventListener('resize', resize);
+
+  // Différé au premier rAF : le layout CSS (inset:-80px) est appliqué,
+  // getBoundingClientRect() retourne les bonnes dimensions — pas de flash
+  requestAnimationFrame(() => {
+    resize();
+    for (let i=0; i<45; i++) { const p=mk(); p.y=Math.random()*H; pts.push(p); }
+    (function frame() {
+      ctx.clearRect(0,0,W,H);
+      if (Math.random()<.32) pts.push(mk());
+      pts = pts.filter(p => p.life>0);
+      pts.forEach(p => {
+        p.x+=p.vx; p.y+=p.vy; p.life-=p.decay; p.vx+=(Math.random()-.5)*.035;
+        ctx.save(); ctx.globalAlpha=p.life*.45;
+        ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fillStyle=`hsl(${p.hue},86%,62%)`; ctx.fill(); ctx.restore();
+      });
+      requestAnimationFrame(frame);
+    })();
+  });
+}
+
 /* ── CLASSES ── */
 const CLASS_IDS = ['guerrier','sura','ninja','chamane'];
+
+/* ── CARTE EMPIRE INTERACTIVE ── */
+function initEmpireMap() {
+  const zones  = document.querySelectorAll('.em-zone');
+  const imgs   = document.querySelectorAll('.em-img');
+  const labels = document.querySelectorAll('.em-label');
+  const panels = document.querySelectorAll('.em-info-panel');
+  if (!zones.length) return;
+
+  function selectEmpire(emp) {
+    // Images
+    imgs.forEach(i => i.classList.toggle('active', i.dataset.emp === emp));
+    // Zones SVG
+    zones.forEach(z => z.classList.toggle('active', z.dataset.emp === emp));
+    // Labels
+    labels.forEach(l => l.classList.toggle('active', l.dataset.emp === emp));
+    // Infos
+    panels.forEach(p => p.classList.toggle('active', p.dataset.info === emp));
+  }
+
+  zones.forEach(zone => {
+    zone.addEventListener('click', () => selectEmpire(zone.dataset.emp));
+    zone.addEventListener('mouseenter', () => {
+      // Curseur change selon la zone
+      zone.style.cursor = 'pointer';
+    });
+  });
+
+  // Chunjo actif par défaut
+  selectEmpire('c');
+}
 
 function initClasses() {
   const grid = document.getElementById('class-grid');
@@ -192,6 +272,27 @@ function initParallax() {
 }
 
 /* ── SAVIEZ-VOUS ── */
+/* ── CHRONOLOGIE ── */
+function initTimeline() {
+  const fill = document.getElementById('tl-fill');
+  if (!fill) return;
+
+  const first = new Date(2004, 0, 1).getTime();
+  const last  = new Date(2026, 0, 1).getTime();
+  const pct   = Math.min(100, Math.max(0, (Date.now() - first) / (last - first) * 100));
+
+  const observer = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) {
+      setTimeout(() => { fill.style.width = pct + '%'; }, 200);
+      observer.disconnect();
+    }
+  }, { threshold: .2 });
+
+  const section = document.getElementById('chronologie');
+  if (section) observer.observe(section);
+  else fill.style.width = pct + '%';
+}
+
 function initSaviez() {
   const textEl = document.getElementById('svtext');
   const btn    = document.getElementById('svbtn');
@@ -929,6 +1030,28 @@ function upgradeLabels(container) {
     el.innerHTML = makeSvg(iconType) + '<span>' + el.textContent.trim() + '</span>';
   });
 }
+// Zones cartes
+document.querySelectorAll('.zone-card').forEach(card => {
+  card.addEventListener('click', () => {
+    const zone = card.dataset.zone;
+    const panel = document.getElementById('zpanel-' + zone);
+    const isOpen = panel.classList.contains('open');
+    document.querySelectorAll('.zone-panel.open').forEach(p => p.classList.remove('open'));
+    document.querySelectorAll('.sc.active-zone').forEach(c => c.classList.remove('active-zone'));
+    if (!isOpen) {
+      panel.classList.add('open');
+      card.classList.add('active-zone');
+      panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  });
+});
+document.querySelectorAll('.zp-close').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const zone = btn.dataset.closeZone;
+    document.getElementById('zpanel-' + zone).classList.remove('open');
+    document.querySelector('[data-zone="' + zone + '"]').classList.remove('active-zone');
+  });
+});
 
 /* Upgrade les .q-recompenses : tente d'y injecter des images d'items */
 function upgradeRewards(container) {

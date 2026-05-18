@@ -388,7 +388,7 @@
 .qt td, .qt th { padding: .38rem .55rem; vertical-align: middle; }
 .qt td { word-break: break-word; overflow-wrap: break-word; }
 .qt { width: 100%; }
-.qt td:last-child { white-space: nowrap; min-width: 80px; }
+.qt td:last-child { white-space: normal; min-width: 80px; word-break: break-word; }
 .qt tbody tr.q-row td { cursor: pointer; }
 .qt thead th {
   font-family: var(--font-label);
@@ -492,48 +492,36 @@
 
 /* ── ÉQUITATION ── */
 .horse-track {
-  display: flex;
-  align-items: stretch;
-  gap: 0;
-  margin-bottom: 1.5rem;
-  overflow-x: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: .6rem;
+  margin-bottom: 1.4rem;
 }
 .horse-step {
-  flex: 1;
-  min-width: 140px;
   background: linear-gradient(180deg, rgba(42,16,3,.96), rgba(22,8,0,.99));
   border: 1px solid var(--border);
-  padding: 1.1rem .9rem;
-  text-align: center;
+  border-radius: 4px;
+  padding: .9rem .8rem;
+  text-align: left;
   position: relative;
-  transition: all .18s;
-}
-.horse-step:not(:last-child)::after {
-  content: '›';
-  position: absolute;
-  right: -10px; top: 50%;
-  transform: translateY(-50%);
-  color: var(--gold-d);
-  font-size: 1.2rem;
-  z-index: 2;
-  background: var(--panel);
-  padding: 0 2px;
+  transition: border-color .15s, background .15s;
 }
 .horse-step:hover {
   border-color: var(--gold-d);
   background: linear-gradient(180deg, rgba(50,20,4,.97), rgba(28,10,0,.99));
 }
-.horse-step svg { display: block; margin: 0 auto .45rem; color: var(--gold); }
-.hs-lvl  { font-family: var(--font-label); font-size: .56rem; letter-spacing: 2px; color: var(--copper-l); text-transform: uppercase; margin-bottom: .2rem; }
-.hs-name { font-family: var(--font-title); font-size: .8rem; font-weight: 700; color: var(--gold-l); margin-bottom: .35rem; }
-.hs-mission { font-size: .73rem; color: var(--mut); line-height: 1.5; margin-bottom: .35rem; }
+.horse-step:not(:last-child)::after { display: none; }
+.horse-step svg { display: inline-block; vertical-align: middle; margin-right: .35rem; color: var(--gold); margin-bottom: .3rem; }
+.hs-lvl  { font-family: var(--font-label); font-size: .54rem; letter-spacing: 2px; color: var(--copper-l); text-transform: uppercase; margin-bottom: .15rem; display: block; }
+.hs-name { font-family: var(--font-title); font-size: .82rem; font-weight: 700; color: var(--gold-l); margin-bottom: .3rem; display: block; }
+.hs-mission { font-size: .76rem; color: var(--mut); line-height: 1.5; margin-bottom: .3rem; display: block; }
 .hs-reward {
-  font-size: .68rem;
+  font-size: .66rem;
   color: var(--parch);
   background: rgba(130,80,10,.2);
   border: 1px solid rgba(170,115,20,.3);
   border-radius: 2px;
-  padding: 3px 7px;
+  padding: 2px 6px;
   display: inline-block;
 }
 
@@ -608,59 +596,6 @@
   margin-top: .36rem;
 }
 
-/* ── EMPIRES ── */
-.eg { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1.8rem; }
-.ec {
-  background: linear-gradient(180deg, rgba(22,8,0,.98), rgba(12,4,0,.99));
-  border-radius: 3px;
-  overflow: hidden;
-  box-shadow: inset 0 1px 0 var(--ins-t), 0 4px 14px rgba(0,0,0,.55);
-  transition: all .22s;
-}
-.ec:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(0,0,0,.8); }
-.ec.c { border: 1px solid rgba(185,50,50,.55); }
-.ec.j { border: 1px solid rgba(50,78,185,.55); }
-.ec.s { border: 1px solid rgba(50,160,78,.55); }
-
-/* Panorama en haut de la card empire */
-.ec-header-img {
-  position: relative;
-  height: 120px;
-  overflow: hidden;
-  background: #060100;
-}
-.ec-header-img img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  object-position: center;
-  display: block;
-  filter: brightness(.65) saturate(.75);
-  transition: transform .28s, filter .28s;
-}
-.ec:hover .ec-header-img img {
-  transform: scale(1.04);
-  filter: brightness(.78) saturate(.9);
-}
-.ec-header-ov {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 60%;
-  background: linear-gradient(transparent, rgba(8,2,0,.96));
-}
-
-/* Corps de la card */
-.ec-body {
-  padding: 1rem 1.2rem 1.2rem;
-  text-align: center;
-}
-.empire-logo { width: 50px; height: 50px; object-fit: contain; margin: 0 auto .55rem; display: block; filter: drop-shadow(0 0 7px rgba(190,140,38,.4)); transition: filter .2s; }
-.ec:hover .empire-logo { filter: drop-shadow(0 0 14px rgba(190,140,38,.7)); }
-.empire-fallback { width: 50px; height: 50px; margin: 0 auto .55rem; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 1.4rem; background: rgba(0,0,0,.4); border: 2px solid currentColor; }
-.en { font-family: var(--font-title); font-size: .9rem; font-weight: 700; margin-bottom: .35rem; }
-.ec.c .en { color: #f0a898; }
-.ec.j .en { color: #98b0f0; }
-.ec.s .en { color: #90d8a8; }
-.ei { font-size: .74rem; color: var(--mut); line-height: 1.7; }
 /* ── SAVIEZ-VOUS ── */
 .svw {
   background: var(--panel);
@@ -702,41 +637,6 @@
 .svb:hover { background: linear-gradient(180deg, rgba(145,40,14,.93), rgba(82,18,5,.97)); border-color: var(--gold); color: var(--gold-l); }
 .svb svg { color: var(--gold); }
 
-/* ── CARTE DU MONDE ── */
-.worldmap-wrap {
-  position: relative;
-  max-width: 520px;
-  margin: 0 auto 2rem;
-  border-radius: 4px;
-  overflow: hidden;
-  box-shadow: 0 0 40px rgba(0,0,0,.7), 0 0 80px rgba(160,90,25,.12);
-  border: 1px solid rgba(160,110,35,.3);
-}
-.worldmap-img {
-  display: block;
-  width: 100%;
-  height: auto;
-  filter: brightness(.88) saturate(.9) contrast(1.05);
-  transition: filter .3s;
-}
-.worldmap-wrap:hover .worldmap-img {
-  filter: brightness(.96) saturate(1) contrast(1.05);
-}
-/* Badges d'empire par-dessus la carte */
-.wm-zone {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  pointer-events: none;
-}
-.wm-zone img { width: 28px; height: 28px; object-fit: contain; filter: drop-shadow(0 1px 4px rgba(0,0,0,.8)); }
-.wm-zone span { font-family: var(--font-label); font-size: .52rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold-b); text-shadow: 0 1px 3px rgba(0,0,0,1); white-space: nowrap; }
-/* Positions basées sur la photo CarteDuMonde.png : Chunjo=haut-gauche, Jinno=haut-droite, Shinsoo=bas-centre */
-.wm-chunjo  { top: 18%; left: 16%; }
-.wm-jinno   { top: 14%; right: 12%; }
-.wm-shinsoo { bottom: 20%; left: 38%; }
 
 /* ── LIGNES DE QUÊTES DÉPLIANTES ── */
 .qt tbody tr.q-row {
@@ -768,6 +668,7 @@
   border-top: none !important;
   max-width: 100%;
   width: 100%;
+  overflow: hidden;
 }
 .q-detail-inner {
   padding: .9rem 1rem 1rem 1.4rem;
@@ -780,7 +681,8 @@
 }
 /* 2 colonnes uniquement pour les panneaux qui ont assez de place */
 .q-detail-inner.q-two-col {
-  grid-template-columns: minmax(160px, 220px) 1fr;
+  grid-template-columns: minmax(200px, 260px) 1fr;
+  align-items: start;
 }
 .q-detail-col {
   min-width: 0;
@@ -1160,4 +1062,542 @@
   border-radius: 2px;
   flex-shrink: 0;
   image-rendering: pixelated;
+}
+/* ══════════════════════════════════════════════
+   CHRONOLOGIE — FRESQUE HORIZONTALE
+   ══════════════════════════════════════════════ */
+
+.tl-fresco {
+  position: relative;
+  padding: 5.5rem 3rem 5rem;
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+/* ── Ligne de fond ── */
+.tl-rail {
+  position: absolute;
+  top: 50%;
+  left: 3rem; right: 3rem;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--border) 10%, var(--border) 90%, transparent);
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+/* Halo ambiant sous la ligne */
+.tl-glow-line {
+  position: absolute;
+  top: 50%;
+  left: 3rem; right: 3rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(180,120,40,.18) 10%, rgba(180,120,40,.18) 90%, transparent);
+  transform: translateY(3px);
+  filter: blur(4px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Progression dorée ── */
+.tl-fill {
+  position: absolute;
+  left: 0; top: 0;
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--gold-d), var(--gold) 70%, var(--gold-l));
+  transition: width 2s cubic-bezier(.22,1,.36,1);
+  box-shadow: 0 0 10px rgba(220,160,40,.5), 0 0 22px rgba(220,160,40,.18);
+}
+
+/* ── Nœud ── */
+.tl-node {
+  position: absolute;
+  top: 50%;
+  left: var(--pos);
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 3;
+  cursor: default;
+}
+
+/* Tige verticale entre le point et le label */
+.tl-stem {
+  width: 1px;
+  height: 2.8rem;
+  background: linear-gradient(180deg, var(--border), transparent);
+  transition: background .35s, height .35s cubic-bezier(.34,1.56,.64,1);
+}
+.tl-stem--bot {
+  order: 2;
+  background: linear-gradient(0deg, var(--border), transparent);
+}
+.tl-stem--top { order: 0; }
+
+.tl-node:hover .tl-stem {
+  height: 3.4rem;
+  background: linear-gradient(180deg, var(--gold), transparent);
+}
+.tl-node:hover .tl-stem--bot {
+  background: linear-gradient(0deg, var(--gold), transparent);
+}
+
+/* ── Anneau + point ── */
+.tl-pin-wrap {
+  position: relative;
+  width: 28px; height: 28px;
+  display: flex; align-items: center; justify-content: center;
+  order: 1;
+  transition: transform .35s cubic-bezier(.34,1.56,.64,1);
+}
+.tl-node:hover .tl-pin-wrap {
+  transform: scale(1.35);
+}
+
+.tl-pin-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  opacity: 0;
+  transition: opacity .3s, border-color .3s, box-shadow .3s;
+}
+.tl-node:hover .tl-pin-ring,
+.tl-node--now .tl-pin-ring {
+  opacity: 1;
+  border-color: rgba(200,150,40,.5);
+  box-shadow: 0 0 12px rgba(220,160,40,.3);
+}
+
+.tl-pin {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--brm);
+  border: 2px solid var(--copper);
+  box-shadow: 0 0 0 2px rgba(180,120,48,.15);
+  z-index: 2;
+  transition: background .3s, border-color .3s, box-shadow .3s;
+}
+.tl-node:hover .tl-pin {
+  background: var(--gold);
+  border-color: var(--gold-l);
+  box-shadow: 0 0 14px rgba(222,160,40,.7), 0 0 0 3px rgba(222,160,40,.2);
+}
+.tl-node--now .tl-pin {
+  background: var(--gold);
+  border-color: var(--gold-l);
+  box-shadow: 0 0 12px rgba(222,160,40,.65), 0 0 0 3px rgba(222,160,40,.18);
+}
+
+/* ── Label ── */
+.tl-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 155px;
+  gap: .22rem;
+  transition: transform .35s cubic-bezier(.34,1.56,.64,1);
+}
+.tl-label--top { order: -1; padding-bottom: .5rem; }
+.tl-label--bot { order: 3;  padding-top: .5rem; }
+
+.tl-node:hover .tl-label { transform: translateY(-3px); }
+.tl-node:hover .tl-label--bot { transform: translateY(3px); }
+
+/* Année */
+.tl-yr {
+  font-family: var(--font-label);
+  font-size: .65rem;
+  letter-spacing: 4px;
+  color: var(--copper-l);
+  text-transform: uppercase;
+  transition: color .3s, letter-spacing .35s;
+}
+.tl-node:hover .tl-yr,
+.tl-node--now .tl-yr {
+  color: var(--gold-l);
+  letter-spacing: 5px;
+}
+
+/* Petit losange décoratif sous l'année */
+.tl-diamond {
+  display: block;
+  width: 5px; height: 5px;
+  background: var(--copper);
+  transform: rotate(45deg);
+  margin: .15rem auto;
+  opacity: .5;
+  transition: background .3s, opacity .3s, transform .35s;
+}
+.tl-node:hover .tl-diamond {
+  background: var(--gold);
+  opacity: 1;
+  transform: rotate(45deg) scale(1.4);
+}
+.tl-node--now .tl-diamond {
+  background: var(--gold);
+  opacity: .85;
+}
+
+/* Titre événement */
+.tl-ev {
+  font-family: var(--font-title);
+  font-size: .78rem;
+  color: var(--parch);
+  letter-spacing: 1px;
+  line-height: 1.3;
+  transition: color .3s;
+}
+.tl-node:hover .tl-ev {
+  color: var(--gold-b);
+}
+
+/* Description */
+.tl-desc {
+  font-family: var(--font-body);
+  font-size: .78rem;
+  color: var(--dim);
+  line-height: 1.55;
+  font-style: italic;
+  transition: color .3s;
+  max-width: 140px;
+}
+.tl-node:hover .tl-desc {
+  color: var(--mut);
+}
+
+/* ── Mobile ── */
+@media (max-width: 620px) {
+  .tl-fresco { padding: 2rem 1.5rem 2rem 2.8rem; min-height: 300px; }
+  .tl-rail { top: 1.5rem; bottom: 1.5rem; left: 1rem; right: auto;
+    width: 2px; height: auto; transform: none;
+    background: linear-gradient(180deg, transparent, var(--border) 10%, var(--border) 90%, transparent); }
+  .tl-glow-line { display: none; }
+  .tl-fill { width: 100% !important; height: 0%;
+    background: linear-gradient(180deg, var(--gold-d), var(--gold) 70%, var(--gold-l));
+    transition: height 2s cubic-bezier(.22,1,.36,1); }
+  .tl-node { position: static; transform: none; flex-direction: row;
+    align-items: flex-start; gap: .8rem; margin-bottom: 2rem; }
+  .tl-node:last-child { margin-bottom: 0; }
+  .tl-stem { display: none; }
+  .tl-pin-wrap { flex-shrink: 0; margin-top: .15rem; }
+  .tl-label, .tl-label--top, .tl-label--bot {
+    text-align: left; align-items: flex-start;
+    padding: 0; order: 1; width: auto; }
+  .tl-node:hover .tl-label,
+  .tl-node:hover .tl-label--bot { transform: none; }
+}
+
+/* ══ CARTE EMPIRE INTERACTIVE — UNIFIÉE ══ */
+
+.em-wrap {
+  display: flex;
+  gap: 1.8rem;
+  align-items: flex-start;
+  margin-bottom: 1.8rem;
+}
+
+/* ── Conteneur carte ── */
+.em-map-zone {
+  position: relative;
+  flex: 0 0 340px;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: 0 0 30px rgba(0,0,0,.7), 0 0 55px rgba(160,90,25,.1);
+  user-select: none;
+}
+
+/* Stack d'images superposées */
+.em-img-stack {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 479 / 374; /* dimensions réelles des cartes */
+  overflow: hidden;
+}
+.em-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0; left: 0;
+  opacity: 0;
+  transition: opacity .45s ease;
+  filter: brightness(.88) saturate(.82);
+}
+.em-img.active {
+  opacity: 1;
+  filter: brightness(.95) saturate(.95);
+}
+
+/* SVG zones cliquables */
+.em-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  cursor: pointer;
+}
+.em-zone {
+  fill: transparent;
+  stroke: transparent;
+  transition: fill .25s, stroke .25s;
+}
+/* Zone active = contour coloré */
+.em-zone--c.active { fill: rgba(232,190,80,.15); stroke: rgba(232,190,80,.6); stroke-width: 1.5; }
+.em-zone--j.active { fill: rgba(80,180,120,.15); stroke: rgba(80,180,120,.6); stroke-width: 1.5; }
+.em-zone--s.active { fill: rgba(220,60,60,.15);  stroke: rgba(220,60,60,.6);  stroke-width: 1.5; }
+/* Hover sur zone non-active */
+.em-zone--c:hover { fill: rgba(232,190,80,.08); stroke: rgba(232,190,80,.35); stroke-width: 1; }
+.em-zone--j:hover { fill: rgba(80,180,120,.08); stroke: rgba(80,180,120,.35); stroke-width: 1; }
+.em-zone--s:hover { fill: rgba(220,60,60,.08);  stroke: rgba(220,60,60,.35);  stroke-width: 1; }
+
+/* Labels flottants empire */
+.em-label {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: .35rem;
+  background: rgba(0,0,0,.58);
+  border: 1px solid rgba(255,255,255,.07);
+  backdrop-filter: blur(4px);
+  border-radius: 2px;
+  padding: .28rem .55rem;
+  pointer-events: none;
+  transition: opacity .3s, transform .3s, border-color .3s;
+  opacity: .7;
+}
+.em-label img { width: 16px; height: 16px; object-fit: contain; }
+.em-label span {
+  font-family: var(--font-label);
+  font-size: .52rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--parch-l);
+}
+.em-label--c { top: 10%; left: 8%; }
+.em-label--j { top: 12%; right: 6%; }
+.em-label--s { bottom: 14%; left: 50%; transform: translateX(-50%); }
+
+.em-label--c.active { opacity: 1; border-color: rgba(232,190,80,.5); transform: scale(1.06); }
+.em-label--j.active { opacity: 1; border-color: rgba(80,180,120,.5); transform: scale(1.06); }
+.em-label--s.active { opacity: 1; border-color: rgba(220,60,60,.5);  transform: translateX(-50%) scale(1.06); }
+
+/* ── Panneau infos ── */
+.em-info {
+  flex: 1;
+  min-width: 0;
+  position: relative;
+}
+.em-info-panel {
+  display: none;
+  flex-direction: column;
+  gap: .5rem;
+  animation: emFadeUp .35s ease forwards;
+}
+.em-info-panel.active { display: flex; }
+
+@keyframes emFadeUp {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.em-info-title {
+  font-family: var(--font-title);
+  font-size: 1.7rem;
+  font-weight: 900;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  line-height: 1;
+  text-shadow: 0 0 30px currentColor;
+}
+.em-c { color: #e8c870; }
+.em-j { color: #6ec8a0; }
+.em-s { color: #e87878; }
+
+.em-info-sub {
+  font-family: var(--font-body);
+  font-size: .82rem;
+  color: var(--mut);
+}
+.em-info-divider {
+  height: 1px;
+  margin: .3rem 0;
+  background: linear-gradient(90deg, currentColor, transparent);
+  opacity: .35;
+}
+.em-div--c { color: #e8c870; }
+.em-div--j { color: #6ec8a0; }
+.em-div--s { color: #e87878; }
+
+.em-info-grid {
+  display: flex;
+  flex-direction: column;
+  gap: .32rem;
+}
+.em-row {
+  display: flex;
+  gap: .7rem;
+  font-size: .8rem;
+}
+.em-lbl {
+  font-family: var(--font-label);
+  font-size: .58rem;
+  letter-spacing: 2px;
+  color: var(--copper-l);
+  text-transform: uppercase;
+  flex: 0 0 76px;
+  padding-top: .12rem;
+}
+.em-val { font-family: var(--font-body); color: var(--parch-l); }
+
+.em-desc {
+  font-family: var(--font-body);
+  font-size: .84rem;
+  color: var(--mut);
+  line-height: 1.75;
+  font-style: italic;
+  border-left: 2px solid var(--border);
+  padding-left: .9rem;
+  margin-top: .3rem;
+}
+.em-info-panel[data-info="c"] .em-desc { border-left-color: rgba(232,190,80,.35); }
+.em-info-panel[data-info="j"] .em-desc { border-left-color: rgba(80,180,120,.35); }
+.em-info-panel[data-info="s"] .em-desc { border-left-color: rgba(220,60,60,.35); }
+
+/* Responsive */
+@media (max-width: 680px) {
+  .em-wrap { flex-direction: column; }
+  .em-map-zone { flex: none; width: 100%; }
+}
+
+/* ══ TRAILER YOUTUBE ══ */
+.yt-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 3px;
+  overflow: hidden;
+  background: #050100;
+  border: 1px solid rgba(140,90,20,.35);
+  box-shadow:
+    0 0 50px rgba(0,0,0,.9),
+    0 0 90px rgba(180,100,20,.08),
+    inset 0 1px 0 rgba(240,195,60,.06);
+}
+
+.yt-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+/* Coins ornementaux */
+.yt-corners { position: absolute; inset: 0; pointer-events: none; z-index: 2; }
+.yt-c {
+  position: absolute;
+  width: 14px; height: 14px;
+  border-color: rgba(190,135,40,.45);
+  border-style: solid;
+}
+.yt-c--tl { top: 7px; left: 7px;  border-width: 1.5px 0 0 1.5px; }
+.yt-c--tr { top: 7px; right: 7px; border-width: 1.5px 1.5px 0 0; }
+.yt-c--bl { bottom: 7px; left: 7px;  border-width: 0 0 1.5px 1.5px; }
+.yt-c--br { bottom: 7px; right: 7px; border-width: 0 1.5px 1.5px 0; }
+
+/* Description sous la vidéo */
+.yt-desc {
+  display: flex;
+  align-items: flex-start;
+  gap: .9rem;
+  margin-top: 1.1rem;
+  padding: .9rem 1rem;
+  background: linear-gradient(90deg, rgba(75,30,5,.38), rgba(35,13,2,.28));
+  border: 1px solid rgba(150,90,22,.28);
+  border-left: 2px solid rgba(190,130,35,.45);
+  border-radius: 2px;
+}
+.yt-desc svg { color: var(--copper); flex-shrink: 0; margin-top: 2px; }
+.yt-desc-title {
+  font-family: var(--font-label);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--gold-l);
+  text-transform: uppercase;
+  margin-bottom: .3rem;
+}
+.yt-desc-body {
+  font-family: var(--font-body);
+  font-size: .83rem;
+  color: var(--mut);
+  line-height: 1.7;
+  font-style: italic;
+}
+/* ══ CORRECTIONS ÉQUITATION — normalise les tables 2-col ══ */
+#panel-equit .qt td:nth-child(2) {
+  font-weight: 400;
+  color: var(--tx);
+}
+#panel-equit .qt td:last-child {
+  color: var(--tx);
+  font-size: .8rem;
+  white-space: normal;
+}
+#panel-equit .qt th:first-child,
+#panel-equit .qt td:first-child { width: 42px; }
+
+/* ══ CORRECTIONS LIVRES — normalise colonne récompenses ══ */
+#panel-livres .qt td:last-child {
+  font-size: .75rem;
+  color: var(--mut);
+  white-space: normal;
+  word-break: break-word;
+  line-height: 1.6;
+}
+#panel-livres .qt td:nth-child(2) {
+  font-weight: 400;
+  color: var(--parch-l);
+}
+#panel-livres .qt td:nth-child(3) {
+  font-size: .73rem;
+  color: var(--mut);
+}
+
+/* ══ FIX CHEVAUCHEMENT RÉCOMPENSES / PROCESSUS ══
+   Force la colonne gauche à ne pas déborder sur le processus */
+.q-detail-col:first-child {
+  overflow: visible;
+}
+.q-detail-inner.q-two-col {
+  overflow: hidden;
+}
+
+/* ══ CORRECTIONS LISTE DE QUÊTES ══ */
+/* La table liste a 4 cols : Niv · Nom · Récompenses · PNJ
+   — col 3 (Récompenses) doit wraper proprement
+   — col 4 (PNJ) reste en nowrap compact */
+#panel-liste .qt td:nth-child(3) {
+  color: var(--mut);
+  font-size: .75rem;
+  white-space: normal;
+  word-break: break-word;
+  line-height: 1.55;
+}
+#panel-liste .qt td:last-child {
+  white-space: nowrap;
+  color: var(--mut);
+  font-size: .72rem;
+  font-style: italic;
+  min-width: 70px;
+}
+/* Détail dépliant liste : même fix deux-colonnes que les autres */
+#panel-liste .q-detail-inner.q-two-col {
+  grid-template-columns: minmax(200px, 260px) 1fr;
+  align-items: start;
 }
