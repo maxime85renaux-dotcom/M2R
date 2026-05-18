@@ -414,6 +414,7 @@
 .qt tbody tr:nth-child(even) td { background: rgba(16,5,0,.62); }
 .qt tbody tr:hover           td { background: rgba(70,30,5,.48); }
 .qt td:first-child { font-family: var(--font-label); font-size: .68rem; font-weight: 700; color: var(--copper-l); white-space: nowrap; width: 42px; }
+.qt tr.q-detail-row td { width: auto !important; white-space: normal !important; font-family: inherit !important; font-size: inherit !important; font-weight: inherit !important; color: inherit !important; }
 .qt td:nth-child(2) { font-weight: 600; color: var(--gold-l); }
 .qt td:nth-child(3) { color: var(--parch-l); font-size: .75rem; }
 .qt td:last-child   { color: var(--mut); font-size: .75rem; }
@@ -679,11 +680,7 @@
   box-sizing: border-box;
   width: 100%;
 }
-/* 2 colonnes uniquement pour les panneaux qui ont assez de place */
-.q-detail-inner.q-two-col {
-  grid-template-columns: minmax(200px, 260px) 1fr;
-  align-items: start;
-}
+/* 2 colonnes : voir règle complète en bas du fichier */
 .q-detail-col {
   min-width: 0;
   overflow-wrap: break-word;
@@ -1539,49 +1536,63 @@
   line-height: 1.7;
   font-style: italic;
 }
-/* ══ CORRECTIONS ÉQUITATION — normalise les tables 2-col ══ */
+
+/* ══════════════════════════════════════════════════════
+   CORRECTIONS PANNEAUX QUÊTES
+   ══════════════════════════════════════════════════════ */
+
+/* ── Détail dépliant : 2 colonnes Récompenses | Processus ── */
+.q-detail-inner.q-two-col {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 1.4rem;
+  overflow: hidden;
+}
+.q-detail-inner.q-two-col > .q-detail-col:first-child {
+  flex: 0 0 auto;
+  width: clamp(180px, 30%, 280px);
+  min-width: 0;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+.q-detail-inner.q-two-col > .q-detail-col:last-child {
+  flex: 1 1 0;
+  min-width: 0;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+/* ── ÉQUITATION : tables 2 colonnes (Niv. + Mission) ── */
 #panel-equit .qt td:nth-child(2) {
   font-weight: 400;
   color: var(--tx);
+  white-space: normal;
+  word-break: break-word;
 }
 #panel-equit .qt td:last-child {
   color: var(--tx);
   font-size: .8rem;
   white-space: normal;
 }
-#panel-equit .qt th:first-child,
-#panel-equit .qt td:first-child { width: 42px; }
 
-/* ══ CORRECTIONS LIVRES — normalise colonne récompenses ══ */
+/* ── LIVRES : 3 colonnes (Nom · Mission · Récompenses) ── */
+#panel-livres .qt td:nth-child(2) {
+  font-weight: 400;
+  color: var(--parch-l);
+  white-space: normal;
+  word-break: break-word;
+}
+#panel-livres .qt td:nth-child(3),
 #panel-livres .qt td:last-child {
-  font-size: .75rem;
+  font-size: .73rem;
   color: var(--mut);
   white-space: normal;
   word-break: break-word;
   line-height: 1.6;
 }
-#panel-livres .qt td:nth-child(2) {
-  font-weight: 400;
-  color: var(--parch-l);
-}
-#panel-livres .qt td:nth-child(3) {
-  font-size: .73rem;
-  color: var(--mut);
-}
 
-/* ══ FIX CHEVAUCHEMENT RÉCOMPENSES / PROCESSUS ══
-   Force la colonne gauche à ne pas déborder sur le processus */
-.q-detail-col:first-child {
-  overflow: visible;
-}
-.q-detail-inner.q-two-col {
-  overflow: hidden;
-}
-
-/* ══ CORRECTIONS LISTE DE QUÊTES ══ */
-/* La table liste a 4 cols : Niv · Nom · Récompenses · PNJ
-   — col 3 (Récompenses) doit wraper proprement
-   — col 4 (PNJ) reste en nowrap compact */
+/* ── LISTE : 4 colonnes (Niv · Nom · Récompenses · PNJ) ── */
 #panel-liste .qt td:nth-child(3) {
   color: var(--mut);
   font-size: .75rem;
@@ -1595,9 +1606,4 @@
   font-size: .72rem;
   font-style: italic;
   min-width: 70px;
-}
-/* Détail dépliant liste : même fix deux-colonnes que les autres */
-#panel-liste .q-detail-inner.q-two-col {
-  grid-template-columns: minmax(200px, 260px) 1fr;
-  align-items: start;
 }
