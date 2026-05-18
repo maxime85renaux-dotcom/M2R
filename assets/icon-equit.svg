@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a0800"/>
+      <stop offset="100%" stop-color="#0a0300"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e8c060"/>
+      <stop offset="100%" stop-color="#a06820"/>
+    </linearGradient>
+    <linearGradient id="glow-y" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#b08c10" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#b08c10" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="120" height="140" fill="url(#bg)"/>
+  <rect width="120" height="140" fill="url(#glow-y)"/>
+  <!-- Horse body silhouette -->
+  <path d="M25 88 Q22 75 28 65 Q34 55 44 52 Q50 46 54 36 Q58 26 66 24 Q74 22 76 28 Q80 24 86 26 Q90 30 86 36 Q92 38 92 46 Q94 54 88 60 Q92 66 90 76 Q88 84 82 88 L82 110 Q82 116 76 116 L72 116 Q66 116 66 110 L66 90 L58 90 L58 110 Q58 116 52 116 L48 116 Q42 116 42 110 L42 88 z" fill="rgba(180,110,20,0.10)" stroke="url(#gold)" stroke-width="1.4"/>
+  <!-- Mane -->
+  <path d="M60 26 Q62 32 58 38 Q62 34 64 40 Q66 34 70 30" stroke="url(#gold)" stroke-width="1.2" stroke-linecap="round" fill="none" opacity="0.6"/>
+  <!-- Eye -->
+  <circle cx="80" cy="32" r="2" fill="url(#gold)" opacity="0.7"/>
+  <!-- Nostril -->
+  <path d="M86 40 Q90 38 90 42" stroke="url(#gold)" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+  <!-- Tail -->
+  <path d="M25 88 Q16 82 14 70 Q18 78 22 74 Q18 66 20 58" stroke="url(#gold)" stroke-width="1.2" stroke-linecap="round" fill="none" opacity="0.55"/>
+  <!-- Hooves -->
+  <rect x="40" y="110" width="10" height="5" rx="2" fill="url(#gold)" opacity="0.5"/>
+  <rect x="64" y="110" width="10" height="5" rx="2" fill="url(#gold)" opacity="0.5"/>
+</svg>

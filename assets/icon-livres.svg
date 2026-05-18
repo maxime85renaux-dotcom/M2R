@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a0800"/>
+      <stop offset="100%" stop-color="#0a0300"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e8c060"/>
+      <stop offset="100%" stop-color="#a06820"/>
+    </linearGradient>
+    <linearGradient id="glow-b" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3050b0" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#3050b0" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="120" height="140" fill="url(#bg)"/>
+  <rect width="120" height="140" fill="url(#glow-b)"/>
+  <!-- Left page -->
+  <path d="M16 30 Q18 28 60 30 L60 112 Q18 114 16 112 z" fill="rgba(180,110,20,0.08)" stroke="url(#gold)" stroke-width="1.2"/>
+  <!-- Right page -->
+  <path d="M60 30 Q102 28 104 30 L104 112 Q102 114 60 112 z" fill="rgba(180,110,20,0.08)" stroke="url(#gold)" stroke-width="1.2"/>
+  <!-- Spine -->
+  <line x1="60" y1="28" x2="60" y2="114" stroke="url(#gold)" stroke-width="2" opacity="0.8"/>
+  <!-- Left page lines -->
+  <line x1="24" y1="46" x2="54" y2="47" stroke="url(#gold)" stroke-width="1" opacity="0.5"/>
+  <line x1="24" y1="55" x2="54" y2="56" stroke="url(#gold)" stroke-width="1" opacity="0.4"/>
+  <line x1="24" y1="64" x2="48" y2="65" stroke="url(#gold)" stroke-width="1" opacity="0.4"/>
+  <line x1="24" y1="73" x2="54" y2="74" stroke="url(#gold)" stroke-width="1" opacity="0.35"/>
+  <line x1="24" y1="82" x2="44" y2="83" stroke="url(#gold)" stroke-width="1" opacity="0.3"/>
+  <line x1="24" y1="91" x2="54" y2="92" stroke="url(#gold)" stroke-width="1" opacity="0.3"/>
+  <!-- Right page lines -->
+  <line x1="66" y1="46" x2="96" y2="47" stroke="url(#gold)" stroke-width="1" opacity="0.5"/>
+  <line x1="66" y1="55" x2="96" y2="56" stroke="url(#gold)" stroke-width="1" opacity="0.4"/>
+  <line x1="66" y1="64" x2="90" y2="65" stroke="url(#gold)" stroke-width="1" opacity="0.4"/>
+  <line x1="66" y1="73" x2="96" y2="74" stroke="url(#gold)" stroke-width="1" opacity="0.35"/>
+  <line x1="66" y1="82" x2="86" y2="83" stroke="url(#gold)" stroke-width="1" opacity="0.3"/>
+  <line x1="66" y1="91" x2="96" y2="92" stroke="url(#gold)" stroke-width="1" opacity="0.3"/>
+  <!-- Cover curve top -->
+  <path d="M16 30 Q38 22 60 30" stroke="url(#gold)" stroke-width="1" fill="none" opacity="0.4"/>
+  <path d="M60 30 Q82 22 104 30" stroke="url(#gold)" stroke-width="1" fill="none" opacity="0.4"/>
+  <!-- Cover curve bottom -->
+  <path d="M16 112 Q38 120 60 112" stroke="url(#gold)" stroke-width="1" fill="none" opacity="0.4"/>
+  <path d="M60 112 Q82 120 104 112" stroke="url(#gold)" stroke-width="1" fill="none" opacity="0.4"/>
+</svg>

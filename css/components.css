@@ -245,6 +245,11 @@
   object-position: center;
   transition: transform .3s;
 }
+.qc-img-wrap img[src$=".svg"] {
+  object-fit: contain;
+  padding: 1.2rem 1.6rem;
+  background: transparent;
+}
 .qc-img-wrap img[src*="Livredecompetence"],
 .qc-img-wrap img[src*="Sacdetoile"],
 .qc-img-wrap img[src*="livre-maudit"],
