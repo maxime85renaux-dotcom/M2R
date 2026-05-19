@@ -274,23 +274,135 @@ function initParallax() {
 /* ── SAVIEZ-VOUS ── */
 /* ── CHRONOLOGIE ── */
 function initTimeline() {
-  const fill = document.getElementById('tl-fill');
-  if (!fill) return;
+  const fill  = document.getElementById('tl-fill');
+  const fresco = document.querySelector('.tl-fresco');
+  if (!fill || !fresco) return;
 
-  const first = new Date(2004, 0, 1).getTime();
-  const last  = new Date(2026, 0, 1).getTime();
-  const pct   = Math.min(100, Math.max(0, (Date.now() - first) / (last - first) * 100));
+  const nodes = Array.from(document.querySelectorAll('.tl-node[data-date]'));
+  if (!nodes.length) return;
 
-  const observer = new IntersectionObserver(entries => {
-    if (entries[0].isIntersecting) {
-      setTimeout(() => { fill.style.width = pct + '%'; }, 200);
-      observer.disconnect();
-    }
-  }, { threshold: .2 });
+  /* ── 1. Dates min/max depuis les data-date ── */
+  function parseDate(str) {
+    const [y, m] = str.split('-').map(Number);
+    return new Date(y, (m || 1) - 1, 1).getTime();
+  }
 
+  const dates  = nodes.map(n => parseDate(n.dataset.date));
+  const first  = dates[0];
+  const last   = dates[dates.length - 1];
+  const range  = last - first;
+
+  /* % de progression temps réel */
+  const nowPct = Math.min(100, Math.max(0, (Date.now() - first) / range * 100));
+
+  /* ── 2. Positionner les nœuds sur la barre ── */
+  function positionNodes() {
+    const railW = fresco.offsetWidth;
+    const PAD   = 48; /* px — correspond au padding left/right du fresco */
+    const usable = railW - PAD * 2;
+
+    nodes.forEach((node, i) => {
+      const pct = (dates[i] - first) / range * 100;
+      node.style.setProperty('--pos', pct + '%');
+    });
+  }
+
+  /* ── 3. Anti-chevauchement des labels ── */
+  function resolveOverlaps() {
+    const MIN_GAP = 8; /* px entre deux labels */
+
+    /* Récupérer les rects des labels après positionnement */
+    const items = nodes.map(node => {
+      const label = node.querySelector('.tl-label');
+      const pin   = node.querySelector('.tl-pin-wrap');
+      return { node, label, pin, rect: null };
+    });
+
+    /* Mesurer */
+    items.forEach(it => {
+      it.rect = it.label.getBoundingClientRect();
+    });
+
+    /* Alterner top/bot par défaut */
+    items.forEach((it, i) => {
+      const side = i % 2 === 0 ? 'top' : 'bot';
+      it.label.className = 'tl-label tl-label--' + side;
+      const stem = it.node.querySelector('.tl-stem');
+      if (stem) {
+        stem.className = 'tl-stem tl-stem--' + side;
+      }
+    });
+
+    /* Passe de collision sur les labels du même côté */
+    ['top', 'bot'].forEach(side => {
+      const group = items.filter(it => it.label.classList.contains('tl-label--' + side));
+      group.sort((a, b) => a.rect.left - b.rect.left);
+
+      for (let i = 1; i < group.length; i++) {
+        const prev = group[i - 1].rect;
+        const curr = group[i].rect;
+        const overlap = prev.right + MIN_GAP - curr.left;
+        if (overlap > 0) {
+          /* Flip ce label de l'autre côté */
+          const other = side === 'top' ? 'bot' : 'top';
+          group[i].label.className = 'tl-label tl-label--' + other;
+          const stem = group[i].node.querySelector('.tl-stem');
+          if (stem) stem.className = 'tl-stem tl-stem--' + other;
+          /* Re-mesurer */
+          group[i].rect = group[i].label.getBoundingClientRect();
+        }
+      }
+    });
+  }
+
+  /* ── 4. Animation au scroll ── */
+  function runTimeline() {
+    positionNodes();
+
+    /* Petit délai pour laisser le layout se stabiliser avant anti-overlap */
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        resolveOverlaps();
+
+        /* Remplir la barre */
+        setTimeout(() => {
+          fill.style.width = nowPct + '%';
+          setTimeout(() => fill.classList.add('tl-fill--active'), 2500);
+        }, 150);
+
+        /* Apparition en cascade des nœuds */
+        nodes.forEach((node, i) => {
+          setTimeout(() => node.classList.add('tl-node--visible'), 300 + i * 220);
+        });
+      });
+    });
+  }
+
+  /* Relancer si fenêtre redimensionnée */
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      nodes.forEach(n => n.classList.remove('tl-node--visible'));
+      fill.classList.remove('tl-fill--active');
+      fill.style.width = '0%';
+      setTimeout(runTimeline, 100);
+    }, 250);
+  });
+
+  /* Déclencher à l'intersection */
   const section = document.getElementById('chronologie');
-  if (section) observer.observe(section);
-  else fill.style.width = pct + '%';
+  if (section) {
+    const observer = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) {
+        runTimeline();
+        observer.disconnect();
+      }
+    }, { threshold: .1 });
+    observer.observe(section);
+  } else {
+    runTimeline();
+  }
 }
 
 function initSaviez() {

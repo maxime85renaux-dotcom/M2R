@@ -281,7 +281,7 @@ canvas#ptc {
 }
 .sep-r {
   font-family: var(--font-label);
-  font-size: .52rem;
+  font-size: .62rem;
   letter-spacing: 4px;
   color: var(--gold-d);
   text-transform: uppercase;
@@ -290,8 +290,28 @@ canvas#ptc {
   display: flex;
   align-items: center;
   gap: .5rem;
+  text-decoration: none;
+  transition: color .2s, gap .2s;
 }
-.sep-r svg { color: var(--copper); }
+.sep-r svg { color: var(--copper); transition: color .2s; }
+a.sep-r { cursor: pointer; }
+a.sep-r:hover {
+  color: var(--gold);
+  gap: .65rem;
+}
+a.sep-r:hover svg { color: var(--gold); }
+a.sep-r:hover .sep-arrow {
+  transform: translateY(2px);
+}
+.sep-arrow {
+  opacity: .6;
+  transition: transform .2s, opacity .2s;
+  flex-shrink: 0;
+}
+a.sep-r:hover .sep-arrow {
+  opacity: 1;
+  transform: translateY(2px);
+}
 
 /* ── PANNEAUX MMO ── */
 .panel {

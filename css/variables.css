@@ -45,3 +45,37 @@
   --font-label:  'Alegreya SC', serif;
   --font-body:   'Crimson Pro', Georgia, serif;
 }
+
+/* ══ BOUTON LANGUE i18n ══ */
+.lang-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--copper-l);
+  font-family: var(--font-label);
+  font-size: .58rem;
+  letter-spacing: 2px;
+  padding: .28rem .65rem;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: border-color .2s, color .2s, background .2s;
+  text-transform: uppercase;
+  margin-left: .5rem;
+  vertical-align: middle;
+}
+.lang-btn:hover {
+  border-color: var(--border-h);
+  color: var(--gold);
+  background: rgba(200, 150, 50, .08);
+}
+.lang-btn:active {
+  transform: scale(.96);
+}
+
+/* Flash lors du switch */
+@keyframes langFlash {
+  0%   { opacity: .7; }
+  100% { opacity: 1; }
+}
+.lang-switch {
+  animation: langFlash .3s ease;
+}
