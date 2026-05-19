@@ -264,4 +264,57 @@ const LANG_FR = {
 
   /* ── FOOTER ── */
   "footer.copyright": "— © M2Return. Projet communautaire. Tous droits réservés. —",
+
+  /* ── LABELS DYNAMIQUES (app-standalone.js) ── */
+  "lbl.pnj": "PNJ",
+  "lbl.recompenses": "Récompenses",
+  "lbl.recompenses.possibles": "Récompenses possibles",
+  "lbl.recompense": "Récompense",
+  "lbl.type": "Type",
+  "lbl.processus": "Processus",
+  "lbl.processus.complet": "Processus complet",
+  "lbl.niveau": "Niveau",
+  "lbl.obtention": "Obtention",
+  "lbl.detail.mission": "Détail de la mission",
+  "lbl.phase": "Phase",
+  "lbl.regle": "Règle",
+  "lbl.mission": "Mission",
+  "lbl.accomplir": "Accomplir",
+  "lbl.results": "résultat",
+  "lbl.recomp.speciale": "Récompense spéciale",
+  "lbl.chronometree": "Mission chronométrée",
+
+  /* Bio labels */
+  "bio.lbl.objets": "Objets requis",
+  "bio.lbl.attente": "Délai & taux",
+  "bio.lbl.bonus": "Bonus permanent obtenu",
+
+  /* Chasse labels */
+  "chasse.lbl.garanti": "Récompense garantie : 15% EXP du niveau",
+  "chasse.lbl.special": "Récompenses spéciales",
+  "chasse.lbl.obtention.a": "Automatique au début du niveau",
+  "chasse.lbl.obtention.b": ", si la mission du niveau",
+  "chasse.lbl.obtention.c": " est terminée.",
+
+  /* Livres labels */
+  "livres.lbl.type": "Type de livre",
+  "livres.lbl.obtention": "Obtenir le livre : drops sur monstres, récompenses de quêtes ou boutique. Utilisable une seule fois.",
+  "livres.lbl.voirpool": "Voir le pool affiché en haut du panneau.",
+
+  /* Équitation phases et règles */
+  "equit.phase.poney": "Poney (niv. 10 requis)",
+  "equit.phase.debutant": "Cheval débutant (niv. 25 requis)",
+  "equit.phase.combat": "Cheval de Combat (niv. 35 requis)",
+  "equit.phase.militaire": "Cheval Militaire (niv. 50 requis)",
+  "equit.lbl.chronometree": "Mission chronométrée",
+  "equit.lbl.chrono.warn": "Si vous ratez le temps imparti : perte de la médaille équestre. Pas de 2ème chance.",
+  "equit.lbl.regle.echec": "Règle en cas d\'échec",
+  "equit.lbl.medaille.ok": "La médaille équestre n\'est pas perdue en cas d\'échec.",
+  "equit.lbl.rate": "Raté = perte de la médaille équestre. Pas de 2ème chance immédiate.",
+
+  /* Placeholders recherche */
+  "search.bio": "Rechercher un biologiste…",
+  "search.chasse": "Rechercher un monstre ou une récompense…",
+  "search.livres": "Rechercher une quête ou un monstre…",
+  "search.equit": "Rechercher un niveau ou une mission…",
 };

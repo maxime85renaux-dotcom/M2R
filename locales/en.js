@@ -264,4 +264,57 @@ const LANG_EN = {
 
   /* ── FOOTER ── */
   "footer.copyright": "— © M2Return. Community project. All rights reserved. —",
+
+  /* ── DYNAMIC LABELS (app-standalone.js) ── */
+  "lbl.pnj": "NPC",
+  "lbl.recompenses": "Rewards",
+  "lbl.recompenses.possibles": "Possible rewards",
+  "lbl.recompense": "Reward",
+  "lbl.type": "Type",
+  "lbl.processus": "Process",
+  "lbl.processus.complet": "Full walkthrough",
+  "lbl.niveau": "Level",
+  "lbl.obtention": "How to get",
+  "lbl.detail.mission": "Mission detail",
+  "lbl.phase": "Phase",
+  "lbl.regle": "Rule",
+  "lbl.mission": "Mission",
+  "lbl.accomplir": "Complete",
+  "lbl.results": "result",
+  "lbl.recomp.speciale": "Special reward",
+  "lbl.chronometree": "Timed mission",
+
+  /* Bio labels */
+  "bio.lbl.objets": "Required items",
+  "bio.lbl.attente": "Delay & rate",
+  "bio.lbl.bonus": "Permanent bonus obtained",
+
+  /* Hunt labels */
+  "chasse.lbl.garanti": "Guaranteed reward: 15% EXP of level",
+  "chasse.lbl.special": "Special rewards",
+  "chasse.lbl.obtention.a": "Automatic at the start of level",
+  "chasse.lbl.obtention.b": ", if the level",
+  "chasse.lbl.obtention.c": " mission is completed.",
+
+  /* Quest book labels */
+  "livres.lbl.type": "Book type",
+  "livres.lbl.obtention": "Get the book: drops from monsters, quest rewards or shop. Single use.",
+  "livres.lbl.voirpool": "See the pool displayed at the top of the panel.",
+
+  /* Riding phases and rules */
+  "equit.phase.poney": "Pony (lvl. 10 required)",
+  "equit.phase.debutant": "Beginner Horse (lvl. 25 required)",
+  "equit.phase.combat": "Combat Horse (lvl. 35 required)",
+  "equit.phase.militaire": "Military Horse (lvl. 50 required)",
+  "equit.lbl.chronometree": "Timed mission",
+  "equit.lbl.chrono.warn": "If you fail the time limit: riding medal lost. No second chance.",
+  "equit.lbl.regle.echec": "Rule on failure",
+  "equit.lbl.medaille.ok": "The riding medal is not lost on failure.",
+  "equit.lbl.rate": "Failed = riding medal lost. No immediate second chance.",
+
+  /* Search placeholders */
+  "search.bio": "Search for a biologist mission…",
+  "search.chasse": "Search for a monster or reward…",
+  "search.livres": "Search for a quest or monster…",
+  "search.equit": "Search for a level or mission…",
 };

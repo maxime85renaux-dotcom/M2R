@@ -4,24 +4,59 @@
    Compatible file:// et serveur local
    ══════════════════════════════════════════════ */
 
+/* ══════════════════════════════════════════════
+   CONFIG CENTRALE — modifier ici, effet partout
+   ══════════════════════════════════════════════ */
+const CONFIG = {
+  particles: {
+    max:       60,    /* nb max de braises simultanées  */
+    spawnRate: 0.2,   /* probabilité de spawn par frame */
+    seed:      45,    /* particules initiales           */
+  },
+  resize:  { debounce: 200 }, /* ms entre deux recalculs resize */
+  scroll:  { debounce:  80 }, /* ms entre deux recalculs scroll */
+};
+
+/* ── Raccourci i18n global — dispo dès que i18n.js est chargé ── */
+function t(k) { return window.i18n ? window.i18n.t(k) : k; }
+
+/* ── Debounce générique ── */
+function debounce(fn, delay) {
+  let timer;
+  return (...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => fn(...args), delay);
+  };
+}
+
+/* ── Lazy init : n'appelle fn() que si le sélecteur existe dans le DOM ── */
+function safeInit(selector, fn) {
+  if (document.querySelector(selector)) fn();
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    initParticles();
-    initLogoParticles();
+  /* Animations désactivées si prefers-reduced-motion */
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    safeInit('#ptc',            initParticles);
+    safeInit('#logo-particles', initLogoParticles);
   }
-  initClasses();
-  initEmpireMap();
-  initQuests();
-  initTabs();
-  initNavbar();
-  initParallax();
-  initSaviez();
-  initTimeline();
-  initQuestRows();
-  initBioCards();
-  initChasseRows();
-  initLivresRows();
-  initEquitRows();
+
+  /* Sections — initialisées seulement si présentes dans la page */
+  safeInit('#class-grid',  initClasses);
+  safeInit('.em-zone',     initEmpireMap);
+  safeInit('#quest-grid',  initQuests);
+  safeInit('[data-panel]', initTabs);
+  safeInit('.nav-links',   initNavbar);
+  safeInit('#hero',        initParallax);
+  safeInit('#svtext',      initSaviez);
+  safeInit('.tl-fresco',   initTimeline);
+
+  /* Panneaux quêtes — chacun conditionnel à son conteneur */
+  safeInit('#panel-liste',  initQuestRows);
+  safeInit('#panel-bio',    initBioCards);
+  safeInit('#panel-chasse', initChasseRows);
+  safeInit('#panel-livres', initLivresRows);
+  safeInit('#panel-equit',  initEquitRows);
 });
 
 /* ── PARTICULES BRAISES ── */
@@ -29,7 +64,7 @@ function initParticles() {
   const c = document.getElementById('ptc');
   if (!c) return;
   const ctx = c.getContext('2d');
-  let W, H, pts = [];
+  let W, H, pts = [], rafId, visible = true;
 
   function resize() { W = c.width = window.innerWidth; H = c.height = window.innerHeight; }
   function mk() {
@@ -37,22 +72,36 @@ function initParticles() {
       vy: -(Math.random()*.48+.2), r: Math.random()*1.5+.28,
       life: 1, decay: Math.random()*.0025+.0015, hue: Math.random()*25+8 };
   }
-  resize();
-  window.addEventListener('resize', resize);
-  for (let i=0; i<45; i++) { const p=mk(); p.y=Math.random()*H; pts.push(p); }
 
-  (function frame() {
+  resize();
+  window.addEventListener('resize', debounce(resize, CONFIG.resize.debounce), { passive: true });
+
+  for (let i=0; i<CONFIG.particles.seed; i++) { const p=mk(); p.y=Math.random()*H; pts.push(p); }
+
+  /* IntersectionObserver — stoppe les particules hors viewport */
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; }).observe(c);
+
+  function frame() {
+    if (document.hidden || !visible) { rafId = requestAnimationFrame(frame); return; }
     ctx.clearRect(0,0,W,H);
-    if (Math.random()<.32) pts.push(mk());
-    pts = pts.filter(p => p.life>0);
+    if (pts.length < CONFIG.particles.max && Math.random() < CONFIG.particles.spawnRate) pts.push(mk());
+    pts = pts.filter(p => p.life > 0);
     pts.forEach(p => {
       p.x+=p.vx; p.y+=p.vy; p.life-=p.decay; p.vx+=(Math.random()-.5)*.035;
       ctx.save(); ctx.globalAlpha=p.life*.45;
       ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
       ctx.fillStyle=`hsl(${p.hue},86%,62%)`; ctx.fill(); ctx.restore();
     });
-    requestAnimationFrame(frame);
-  })();
+    rafId = requestAnimationFrame(frame);
+  }
+
+  rafId = requestAnimationFrame(frame);
+
+  /* Pause quand l'onglet est masqué */
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) cancelAnimationFrame(rafId);
+    else rafId = requestAnimationFrame(frame);
+  });
 }
 
 /* ── PARTICULES LOGO ── */
@@ -60,41 +109,51 @@ function initLogoParticles() {
   const canvas = document.getElementById('logo-particles');
   if (!canvas) return;
 
-  const ctx = canvas.getContext('2d');
+  const ctx  = canvas.getContext('2d');
   const wrap = canvas.closest('.logo-particle-wrap');
-  let W, H, pts = [];
+  let W, H, pts = [], rafId, visible = true;
 
   function resize() {
     const rect = wrap.getBoundingClientRect();
     W = canvas.width  = rect.width  + 160;
     H = canvas.height = rect.height + 160;
   }
-
   function mk() {
     return { x: Math.random()*W, y: H+8, vx: (Math.random()-.5)*.3,
       vy: -(Math.random()*.48+.2), r: Math.random()*1.5+.28,
       life: 1, decay: Math.random()*.0025+.0015, hue: Math.random()*25+8 };
   }
 
-  window.addEventListener('resize', resize);
+  window.addEventListener('resize', debounce(resize, CONFIG.resize.debounce), { passive: true });
 
-  // Différé au premier rAF : le layout CSS (inset:-80px) est appliqué,
-  // getBoundingClientRect() retourne les bonnes dimensions — pas de flash
+  /* IntersectionObserver — stoppe le canvas logo hors viewport */
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; }).observe(canvas);
+
+  function frame() {
+    if (document.hidden || !visible) { rafId = requestAnimationFrame(frame); return; }
+    ctx.clearRect(0,0,W,H);
+    if (pts.length < CONFIG.particles.max && Math.random() < CONFIG.particles.spawnRate) pts.push(mk());
+    pts = pts.filter(p => p.life > 0);
+    pts.forEach(p => {
+      p.x+=p.vx; p.y+=p.vy; p.life-=p.decay; p.vx+=(Math.random()-.5)*.035;
+      ctx.save(); ctx.globalAlpha=p.life*.45;
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=`hsl(${p.hue},86%,62%)`; ctx.fill(); ctx.restore();
+    });
+    rafId = requestAnimationFrame(frame);
+  }
+
+  /* Différé au premier rAF : getBoundingClientRect() retourne les bonnes dims */
   requestAnimationFrame(() => {
     resize();
-    for (let i=0; i<45; i++) { const p=mk(); p.y=Math.random()*H; pts.push(p); }
-    (function frame() {
-      ctx.clearRect(0,0,W,H);
-      if (Math.random()<.32) pts.push(mk());
-      pts = pts.filter(p => p.life>0);
-      pts.forEach(p => {
-        p.x+=p.vx; p.y+=p.vy; p.life-=p.decay; p.vx+=(Math.random()-.5)*.035;
-        ctx.save(); ctx.globalAlpha=p.life*.45;
-        ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-        ctx.fillStyle=`hsl(${p.hue},86%,62%)`; ctx.fill(); ctx.restore();
-      });
-      requestAnimationFrame(frame);
-    })();
+    for (let i=0; i<CONFIG.particles.seed; i++) { const p=mk(); p.y=Math.random()*H; pts.push(p); }
+    rafId = requestAnimationFrame(frame);
+  });
+
+  /* Pause onglet caché */
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) cancelAnimationFrame(rafId);
+    else rafId = requestAnimationFrame(frame);
   });
 }
 
@@ -251,11 +310,15 @@ function initNavbar() {
   const btt      = document.getElementById('btt');
   const navLinks = document.querySelectorAll('.nav-links a');
   const sections = document.querySelectorAll('section[id]');
-  window.addEventListener('scroll', () => {
-    if (btt) btt.classList.toggle('show', window.scrollY > 400);
+  const onScroll = debounce(() => {
     let cur = '';
     sections.forEach(s => { if (window.scrollY >= s.offsetTop - 88) cur = s.id; });
     navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === `#${cur}`));
+  }, CONFIG.scroll.debounce);
+
+  window.addEventListener('scroll', () => {
+    if (btt) btt.classList.toggle('show', window.scrollY > 400);
+    onScroll();
   }, { passive: true });
 }
 
@@ -264,7 +327,12 @@ function initParallax() {
   const vid  = document.getElementById('bgvid');
   const hero = document.getElementById('hero');
   if (!vid || !hero) return;
+
+  let heroVisible = true;
+  new IntersectionObserver(([e]) => { heroVisible = e.isIntersecting; }).observe(hero);
+
   hero.addEventListener('mousemove', e => {
+    if (!heroVisible) return;
     const x = (e.clientX/window.innerWidth -.5)*6;
     const y = (e.clientY/window.innerHeight-.5)*3;
     vid.style.transform = `scale(1.05) translate(${x}px,${y}px)`;
@@ -379,16 +447,12 @@ function initTimeline() {
   }
 
   /* Relancer si fenêtre redimensionnée */
-  let resizeTimer;
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => {
-      nodes.forEach(n => n.classList.remove('tl-node--visible'));
-      fill.classList.remove('tl-fill--active');
-      fill.style.width = '0%';
-      setTimeout(runTimeline, 100);
-    }, 250);
-  });
+  window.addEventListener('resize', debounce(() => {
+    nodes.forEach(n => n.classList.remove('tl-node--visible'));
+    fill.classList.remove('tl-fill--active');
+    fill.style.width = '0%';
+    setTimeout(runTimeline, 100);
+  }, 250));
 
   /* Déclencher à l'intersection */
   const section = document.getElementById('chronologie');
@@ -651,14 +715,14 @@ function initQuestRows() {
     const bdgs = autoBadges(data.recompenses + ' ' + data.processus.join(' '));
     td.innerHTML = `<div class="q-detail-inner q-two-col">
       <div class="q-detail-col">
-        <div class="q-detail-label">PNJ</div>
+        <div class="q-detail-label">${t('lbl.pnj')}</div>
         <div class="q-pnj">${escHtml(data.pnj)}</div>
-        <div class="q-detail-label">Récompenses</div>
+        <div class="q-detail-label">${t('lbl.recompenses')}</div>
         <div class="q-recompenses">${escHtml(data.recompenses)}</div>
-        ${bdgs ? `<div class="q-detail-label">Type</div><div>${bdgs}</div>` : ''}
+        ${bdgs ? `<div class="q-detail-label">${t('lbl.type')}</div><div>${bdgs}</div>` : ''}
       </div>
       <div class="q-detail-col">
-        <div class="q-col-title"><div class="q-detail-label">Processus</div></div>
+        <div class="q-col-title"><div class="q-detail-label">${t('lbl.processus')}</div></div>
         <ol class="q-processus">${proc}</ol>
       </div>
     </div>`;
@@ -742,7 +806,7 @@ function initQuestRows() {
 
     /* Compteur */
     if (q) {
-      qsCount.textContent = visible + ' résultat' + (visible !== 1 ? 's' : '');
+      qsCount.textContent = visible + ' ' + t('lbl.results') + (visible !== 1 ? 's' : '');
     } else {
       qsCount.textContent = '';
     }
@@ -788,7 +852,7 @@ function initBioCards() {
   if (bioGrid && !panel.querySelector('.qs-wrap-bio')) {
     const wrap = document.createElement('div');
     wrap.className = 'qs-wrap qs-wrap-bio';
-    wrap.innerHTML = `<svg class="qs-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="search" class="qs-input" id="qs-bio" placeholder="Rechercher un biologiste…" aria-label="Rechercher dans les missions biologiques"><span class="qs-count" id="qs-bio-count" aria-live="polite"></span>`;
+    wrap.innerHTML = `<svg class="qs-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="search" class="qs-input" id="qs-bio" placeholder="${t('search.bio')}" aria-label="${t('search.bio')}"><span class="qs-count" id="qs-bio-count" aria-live="polite"></span>`;
     bioGrid.before(wrap);
     wrap.querySelector('#qs-bio').addEventListener('input', e => {
       const q = normalize(e.target.value);
@@ -799,7 +863,7 @@ function initBioCards() {
         if (!match) { card.classList.remove('open'); const n = card.nextElementSibling; if (n?.classList.contains('bio-detail-panel')) n.style.display='none'; }
         if (match) vis++;
       });
-      document.getElementById('qs-bio-count').textContent = q ? vis+' résultat'+(vis!==1?'s':'') : '';
+      document.getElementById('qs-bio-count').textContent = q ? vis+' '+t('lbl.results')+(vis!==1?'s':'') : '';
     });
   }
 
@@ -832,17 +896,17 @@ function initBioCards() {
     div.innerHTML = `
       <div class="q-detail-inner bio-detail-grid">
         <div class="q-detail-col">
-          <div class="q-detail-label">PNJ</div>
+          <div class="q-detail-label">${t('lbl.pnj')}</div>
           <div class="q-pnj">${escHtml(data.pnj)}</div>
-          <div class="q-detail-label" style="margin-top:.6rem">Objets requis</div>
+          <div class="q-detail-label" style="margin-top:.6rem">${t('bio.lbl.objets')}</div>
           <div class="q-recompenses">${escHtml(data.objets)}</div>
-          <div class="q-detail-label" style="margin-top:.6rem">Délai &amp; taux</div>
+          <div class="q-detail-label" style="margin-top:.6rem">${t('bio.lbl.attente')}</div>
           <div class="q-recompenses">${escHtml(data.attente)}</div>
-          <div class="q-detail-label" style="margin-top:.6rem">Bonus permanent obtenu</div>
+          <div class="q-detail-label" style="margin-top:.6rem">${t('bio.lbl.bonus')}</div>
           <div class="q-pnj bio-bonus">${escHtml(data.bonus)} ${autoBadges(data.bonus)}</div>
         </div>
         <div class="q-detail-col">
-          <div class="q-detail-label">Processus complet</div>
+          <div class="q-detail-label">${t('lbl.processus.complet')}</div>
           <ol class="q-processus">${proc}</ol>
         </div>
       </div>`;
@@ -921,29 +985,29 @@ function initChasseRows() {
     const data = CHASSE_DATA[niv];
     if (!data) return;
 
-    const csteps = [`Mission : ${data.m}`, `Récompense garantie : 15% EXP du niveau ${niv}.`, `Récompenses spéciales : ${data.r}`];
+    const csteps = [`${t('lbl.mission')} : ${data.m}`, `${t('chasse.lbl.garanti')} ${niv}.`, `${t('chasse.lbl.special')} : ${data.r}`];
     const cproc = csteps.map((e,i)=>`<li><span class="q-step-n">${i+1}</span>${escHtml(e)}</li>`).join('');
     const hasSpecial = !/objet aléatoire/i.test(data.r) && !/^15%/.test(data.r.trim());
     makeExpandRow(tr, panel, `
       <div class="q-detail-inner">
         <div class="q-detail-col">
-          <div class="q-detail-label">Niveau</div>
+          <div class="q-detail-label">${t('lbl.niveau')}</div>
           <div class="q-pnj">${niv}</div>
-          <div class="q-detail-label">Récompenses</div>
+          <div class="q-detail-label">${t('lbl.recompenses')}</div>
           <div class="q-recompenses">${escHtml(data.r)}</div>
-          <div class="q-detail-label">Obtention</div>
-          <div class="q-recompenses">Automatique au début du niveau ${niv}, si la mission du niveau ${niv-1} est terminée.</div>
-          ${hasSpecial ? `<div class="q-detail-label">Type</div><div>${badge('perm','Récompense spéciale')}</div>` : ''}
+          <div class="q-detail-label">${t('lbl.obtention')}</div>
+          <div class="q-recompenses">${t('chasse.lbl.obtention.a')} ${niv}${t('chasse.lbl.obtention.b')} ${niv-1}${t('chasse.lbl.obtention.c')}</div>
+          ${hasSpecial ? `<div class="q-detail-label">${t('lbl.type')}</div><div>${badge('perm',t('lbl.recomp.speciale'))}</div>` : ''}
         </div>
         <div class="q-detail-col">
-          <div class="q-col-title"><div class="q-detail-label">Détail de la mission</div></div>
+          <div class="q-col-title"><div class="q-detail-label">${t('lbl.detail.mission')}</div></div>
           <ol class="q-processus">${cproc}</ol>
         </div>
       </div>`
     );
   });
 
-  injectSearch(panel, 'chasse', 'Rechercher un monstre ou une récompense…', (q, p) => {
+  injectSearch(panel, 'chasse', t('search.chasse'), (q, p) => {
     let vis = 0;
     p.querySelectorAll('.qt tbody tr.q-row').forEach(tr => {
       const match = !q || normalize(tr.textContent).includes(q);
@@ -988,27 +1052,27 @@ function initLivresRows() {
       return m[qp.id] || '';
     })();
 
-    const lsteps = [`Accomplir : ${mission}`, `Obtenir le livre : drops sur monstres, récompenses de quêtes ou boutique. Utilisable une seule fois.`];
+    const lsteps = [`${t('lbl.accomplir')} : ${mission}`, t('livres.lbl.obtention')];
     const lproc = lsteps.map((e,i)=>`<li><span class="q-step-n">${i+1}</span>${escHtml(e)}</li>`).join('');
     const lbdgs = autoBadges(recomp + ' ' + mission);
     makeExpandRow(tr, panel, `
       <div class="q-detail-inner">
         <div class="q-detail-col">
-          <div class="q-detail-label">Type de livre</div>
+          <div class="q-detail-label">${t('livres.lbl.type')}</div>
           <div class="q-pnj">${escHtml(livreType)}</div>
-          <div class="q-detail-label">Récompenses possibles</div>
-          <div class="q-recompenses">${escHtml(recomp) || 'Voir le pool affiché en haut du panneau.'}</div>
-          ${lbdgs ? `<div class="q-detail-label">Type</div><div>${lbdgs}</div>` : ''}
+          <div class="q-detail-label">${t('lbl.recompenses.possibles')}</div>
+          <div class="q-recompenses">${escHtml(recomp) || t('livres.lbl.voirpool')}</div>
+          ${lbdgs ? `<div class="q-detail-label">${t('lbl.type')}</div><div>${lbdgs}</div>` : ''}
         </div>
         <div class="q-detail-col">
-          <div class="q-col-title"><div class="q-detail-label">Processus</div></div>
+          <div class="q-col-title"><div class="q-detail-label">${t('lbl.processus')}</div></div>
           <ol class="q-processus">${lproc}</ol>
         </div>
       </div>`
     );
   });
 
-  injectSearch(panel, 'livres', 'Rechercher une quête ou un monstre…', (q, p) => {
+  injectSearch(panel, 'livres', t('search.livres'), (q, p) => {
     let vis = 0;
     p.querySelectorAll('.qt tbody tr.q-row').forEach(tr => {
       const match = !q || normalize(tr.textContent).includes(q);
@@ -1044,17 +1108,17 @@ function initEquitRows() {
     if (isNaN(niv) || !data) return;
 
     /* Déterminer la phase */
-    const phase = niv === 0 ? 'Poney (niv. 10 requis)' :
-                  niv <= 10 ? 'Cheval débutant (niv. 25 requis)' :
-                  niv <= 20 ? 'Cheval de Combat (niv. 35 requis)' :
-                  'Cheval Militaire (niv. 50 requis)';
+    const phase = niv === 0 ? t('equit.phase.poney') :
+                  niv <= 10 ? t('equit.phase.debutant') :
+                  niv <= 20 ? t('equit.phase.combat') :
+                  t('equit.phase.militaire');
 
     const isChronometree = (niv === 1 || niv === 11 || niv === 21);
-    const chrono = isChronometree ? `<div class="q-detail-label" style="margin-top:.6rem">⏱ Mission chronométrée</div><div class="q-recompenses equit-warn">Si vous ratez le temps imparti : perte de la médaille équestre. Pas de 2ème chance.</div>` : `<div class="q-detail-label" style="margin-top:.6rem">Règle en cas d'échec</div><div class="q-recompenses">La médaille équestre n'est pas perdue en cas d'échec.</div>`;
+    const chrono = isChronometree ? `<div class="q-detail-label" style="margin-top:.6rem">⏱ ${t('equit.lbl.chronometree')}</div><div class="q-recompenses equit-warn">${t('equit.lbl.chrono.warn')}</div>` : `<div class="q-detail-label" style="margin-top:.6rem">${t('equit.lbl.regle.echec')}</div><div class="q-recompenses">${t('equit.lbl.medaille.ok')}</div>`;
 
     const esteps = [data.m, data.d, `Récompense : ${data.r}`];
     const eproc = esteps.map((e,i)=>`<li><span class="q-step-n">${i+1}</span>${escHtml(e)}</li>`).join('');
-    const ebdgs = isChronometree ? badge('timer','Chronométrée') : '';
+    const ebdgs = isChronometree ? badge('timer', t('lbl.chronometree')) : '';
     makeExpandRow(tr, panel, `
       <div class="q-detail-inner">
         <div class="q-detail-col">
@@ -1067,14 +1131,14 @@ function initEquitRows() {
           ${ebdgs ? `<div class="q-detail-label">Type</div><div>${ebdgs}</div>` : ''}
         </div>
         <div class="q-detail-col">
-          <div class="q-col-title"><div class="q-detail-label">Processus</div></div>
+          <div class="q-col-title"><div class="q-detail-label">${t('lbl.processus')}</div></div>
           <ol class="q-processus">${eproc}</ol>
         </div>
       </div>`
     );
   });
 
-  injectSearch(panel, 'equit', 'Rechercher un niveau ou une mission…', (q, p) => {
+  injectSearch(panel, 'equit', t('search.equit'), (q, p) => {
     let vis = 0;
     p.querySelectorAll('.qt tbody tr.q-row').forEach(tr => {
       const match = !q || normalize(tr.textContent).includes(q);
