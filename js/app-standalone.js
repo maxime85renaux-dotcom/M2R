@@ -9,25 +9,33 @@
    ══════════════════════════════════════════════ */
 const CONFIG = {
   particles: {
-    max:       60,    /* nb max de braises simultanées  */
-    spawnRate: 0.2,   /* probabilité de spawn par frame */
-    seed:      45,    /* particules initiales           */
+    max:       (typeof window !== 'undefined' && window.innerWidth < 768) ? 28 : 60,
+    /* nb max de braises simultanées — réduit sur mobile */
+    spawnRate: 0.2,  /* probabilité de spawn par frame */
+    seed:      45,   /* particules initiales           */
   },
   resize:  { debounce: 200 }, /* ms entre deux recalculs resize */
   scroll:  { debounce:  80 }, /* ms entre deux recalculs scroll */
 };
 
 /* ── Raccourci i18n global — dispo dès que i18n.js est chargé ── */
-function t(k) { return window.i18n ? window.i18n.t(k) : k; }
+function t(k) {
+  return window.i18n ? window.i18n.t(k) : k;
+}
 
 /* ── Debounce générique ── */
 function debounce(fn, delay) {
   let timer;
+
   return (...args) => {
     clearTimeout(timer);
     timer = setTimeout(() => fn(...args), delay);
   };
 }
+
+/* ── Flag global pause RAF (onglet caché) ── */
+let _rafPaused = false;
+document.addEventListener('visibilitychange', () => { _rafPaused = document.hidden; });
 
 /* ── Lazy init : n'appelle fn() que si le sélecteur existe dans le DOM ── */
 function safeInit(selector, fn) {
@@ -35,125 +43,301 @@ function safeInit(selector, fn) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+
   /* Animations désactivées si prefers-reduced-motion */
   if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    safeInit('#ptc',            initParticles);
+    safeInit('#ptc', initParticles);
     safeInit('#logo-particles', initLogoParticles);
   }
 
   /* Sections — initialisées seulement si présentes dans la page */
-  safeInit('#class-grid',  initClasses);
-  safeInit('.em-zone',     initEmpireMap);
-  safeInit('#quest-grid',  initQuests);
+  safeInit('#class-grid', initClasses);
+  safeInit('.em-zone', initEmpireMap);
+  safeInit('#quest-grid', initQuests);
   safeInit('[data-panel]', initTabs);
-  safeInit('.nav-links',   initNavbar);
-  safeInit('#hero',        initParallax);
-  safeInit('#svtext',      initSaviez);
-  safeInit('.tl-fresco',   initTimeline);
+  safeInit('.nav-links', initNavbar);
+  safeInit('#hero', initParallax);
+  safeInit('#svtext', initSaviez);
+  safeInit('.tl-fresco', initTimeline);
 
   /* Panneaux quêtes — chacun conditionnel à son conteneur */
-  safeInit('#panel-liste',  initQuestRows);
-  safeInit('#panel-bio',    initBioCards);
+  safeInit('#panel-liste', initQuestRows);
+  safeInit('#panel-bio', initBioCards);
   safeInit('#panel-chasse', initChasseRows);
   safeInit('#panel-livres', initLivresRows);
-  safeInit('#panel-equit',  initEquitRows);
+  safeInit('#panel-equit', initEquitRows);
 });
 
-/* ── PARTICULES BRAISES ── */
+/* ─────────────────────────────────────────────
+   PARTICULES BRAISES
+   ───────────────────────────────────────────── */
 function initParticles() {
+
   const c = document.getElementById('ptc');
   if (!c) return;
-  const ctx = c.getContext('2d');
-  let W, H, pts = [], rafId, visible = true;
 
-  function resize() { W = c.width = window.innerWidth; H = c.height = window.innerHeight; }
+  const ctx = c.getContext('2d');
+
+  let W;
+  let H;
+  let pts = [];
+  let rafId;
+  let visible = true;
+
+  function resize() {
+    W = c.width = window.innerWidth;
+    H = c.height = window.innerHeight;
+
+    /* Nettoyage anti flash */
+    ctx.clearRect(0, 0, W, H);
+  }
+
   function mk() {
-    return { x: Math.random()*W, y: H+8, vx: (Math.random()-.5)*.3,
-      vy: -(Math.random()*.48+.2), r: Math.random()*1.5+.28,
-      life: 1, decay: Math.random()*.0025+.0015, hue: Math.random()*25+8 };
+    return {
+      x: Math.random() * W,
+      y: H + 8,
+
+      vx: (Math.random() - .5) * .3,
+      vy: -(Math.random() * .48 + .2),
+
+      r: Math.random() * 1.5 + .28,
+
+      life: 1,
+      decay: Math.random() * .0025 + .0015,
+
+      hue: Math.random() * 25 + 8
+    };
   }
 
   resize();
-  window.addEventListener('resize', debounce(resize, CONFIG.resize.debounce), { passive: true });
 
-  for (let i=0; i<CONFIG.particles.seed; i++) { const p=mk(); p.y=Math.random()*H; pts.push(p); }
+  window.addEventListener(
+    'resize',
+    debounce(resize, CONFIG.resize.debounce),
+    { passive: true }
+  );
 
-  /* IntersectionObserver — stoppe les particules hors viewport */
-  new IntersectionObserver(([e]) => { visible = e.isIntersecting; }).observe(c);
+  /* Seed initial */
+  for (let i = 0; i < CONFIG.particles.seed; i++) {
+    const p = mk();
+    p.y = Math.random() * H;
+    pts.push(p);
+  }
+
+  /* IntersectionObserver — stoppe hors viewport */
+  new IntersectionObserver(([e]) => {
+    visible = e.isIntersecting;
+  }).observe(c);
 
   function frame() {
-    if (document.hidden || !visible) { rafId = requestAnimationFrame(frame); return; }
-    ctx.clearRect(0,0,W,H);
-    if (pts.length < CONFIG.particles.max && Math.random() < CONFIG.particles.spawnRate) pts.push(mk());
-    pts = pts.filter(p => p.life > 0);
+
+    if (document.hidden || !visible) {
+      rafId = requestAnimationFrame(frame);
+      return;
+    }
+
+    ctx.clearRect(0, 0, W, H);
+
+    /* Spawn progressif */
+    if (
+      pts.length < CONFIG.particles.max &&
+      Math.random() < CONFIG.particles.spawnRate
+    ) {
+      pts.push(mk());
+    }
+
+    /* Nettoyage */
+    pts = pts.filter(p =>
+      p.life > 0 &&
+      Number.isFinite(p.x) &&
+      Number.isFinite(p.y)
+    );
+
     pts.forEach(p => {
-      p.x+=p.vx; p.y+=p.vy; p.life-=p.decay; p.vx+=(Math.random()-.5)*.035;
-      ctx.save(); ctx.globalAlpha=p.life*.45;
-      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-      ctx.fillStyle=`hsl(${p.hue},86%,62%)`; ctx.fill(); ctx.restore();
+
+      p.x += p.vx;
+      p.y += p.vy;
+
+      p.life -= p.decay;
+
+      /* Sécurité anti flash */
+      if (
+        p.life <= 0 ||
+        !Number.isFinite(p.x) ||
+        !Number.isFinite(p.y)
+      ) {
+        return;
+      }
+
+      p.vx += (Math.random() - .5) * .035;
+
+      ctx.save();
+
+      /* Alpha sécurisé */
+      ctx.globalAlpha = Math.max(0, p.life * .45);
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+
+      ctx.fillStyle = `hsl(${p.hue},86%,62%)`;
+      ctx.fill();
+
+      ctx.restore();
     });
+
     rafId = requestAnimationFrame(frame);
   }
 
   rafId = requestAnimationFrame(frame);
 
-  /* Pause quand l'onglet est masqué */
+  /* Pause quand onglet caché */
   document.addEventListener('visibilitychange', () => {
-    if (document.hidden) cancelAnimationFrame(rafId);
-    else rafId = requestAnimationFrame(frame);
+
+    if (document.hidden) {
+      cancelAnimationFrame(rafId);
+    } else {
+      rafId = requestAnimationFrame(frame);
+    }
   });
 }
 
-/* ── PARTICULES LOGO ── */
+/* ─────────────────────────────────────────────
+   PARTICULES LOGO
+   ───────────────────────────────────────────── */
 function initLogoParticles() {
+
   const canvas = document.getElementById('logo-particles');
   if (!canvas) return;
 
   const ctx  = canvas.getContext('2d');
   const wrap = canvas.closest('.logo-particle-wrap');
-  let W, H, pts = [], rafId, visible = true;
+
+  let W;
+  let H;
+  let pts = [];
+  let rafId;
+  let visible = true;
 
   function resize() {
+
     const rect = wrap.getBoundingClientRect();
-    W = canvas.width  = rect.width  + 160;
+
+    W = canvas.width  = rect.width + 160;
     H = canvas.height = rect.height + 160;
+
+    /* Nettoyage anti flash */
+    ctx.clearRect(0, 0, W, H);
   }
+
   function mk() {
-    return { x: Math.random()*W, y: H+8, vx: (Math.random()-.5)*.3,
-      vy: -(Math.random()*.48+.2), r: Math.random()*1.5+.28,
-      life: 1, decay: Math.random()*.0025+.0015, hue: Math.random()*25+8 };
+    return {
+      x: Math.random() * W,
+      y: H + 8,
+
+      vx: (Math.random() - .5) * .3,
+      vy: -(Math.random() * .48 + .2),
+
+      r: Math.random() * 1.5 + .28,
+
+      life: 1,
+      decay: Math.random() * .0025 + .0015,
+
+      hue: Math.random() * 25 + 8
+    };
   }
 
-  window.addEventListener('resize', debounce(resize, CONFIG.resize.debounce), { passive: true });
+  window.addEventListener(
+    'resize',
+    debounce(resize, CONFIG.resize.debounce),
+    { passive: true }
+  );
 
-  /* IntersectionObserver — stoppe le canvas logo hors viewport */
-  new IntersectionObserver(([e]) => { visible = e.isIntersecting; }).observe(canvas);
+  /* IntersectionObserver */
+  new IntersectionObserver(([e]) => {
+    visible = e.isIntersecting;
+  }).observe(canvas);
 
   function frame() {
-    if (document.hidden || !visible) { rafId = requestAnimationFrame(frame); return; }
-    ctx.clearRect(0,0,W,H);
-    if (pts.length < CONFIG.particles.max && Math.random() < CONFIG.particles.spawnRate) pts.push(mk());
-    pts = pts.filter(p => p.life > 0);
+
+    if (document.hidden || !visible) {
+      rafId = requestAnimationFrame(frame);
+      return;
+    }
+
+    ctx.clearRect(0, 0, W, H);
+
+    /* Spawn progressif */
+    if (
+      pts.length < CONFIG.particles.max &&
+      Math.random() < CONFIG.particles.spawnRate
+    ) {
+      pts.push(mk());
+    }
+
+    /* Nettoyage */
+    pts = pts.filter(p =>
+      p.life > 0 &&
+      Number.isFinite(p.x) &&
+      Number.isFinite(p.y)
+    );
+
     pts.forEach(p => {
-      p.x+=p.vx; p.y+=p.vy; p.life-=p.decay; p.vx+=(Math.random()-.5)*.035;
-      ctx.save(); ctx.globalAlpha=p.life*.45;
-      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-      ctx.fillStyle=`hsl(${p.hue},86%,62%)`; ctx.fill(); ctx.restore();
+
+      p.x += p.vx;
+      p.y += p.vy;
+
+      p.life -= p.decay;
+
+      /* Sécurité anti flash */
+      if (
+        p.life <= 0 ||
+        !Number.isFinite(p.x) ||
+        !Number.isFinite(p.y)
+      ) {
+        return;
+      }
+
+      p.vx += (Math.random() - .5) * .035;
+
+      ctx.save();
+
+      /* Alpha sécurisé */
+      ctx.globalAlpha = Math.max(0, p.life * .45);
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+
+      ctx.fillStyle = `hsl(${p.hue},86%,62%)`;
+      ctx.fill();
+
+      ctx.restore();
     });
+
     rafId = requestAnimationFrame(frame);
   }
 
-  /* Différé au premier rAF : getBoundingClientRect() retourne les bonnes dims */
+  /* Différé au premier rAF */
   requestAnimationFrame(() => {
+
     resize();
-    for (let i=0; i<CONFIG.particles.seed; i++) { const p=mk(); p.y=Math.random()*H; pts.push(p); }
+
+    for (let i = 0; i < CONFIG.particles.seed; i++) {
+      const p = mk();
+      p.y = Math.random() * H;
+      pts.push(p);
+    }
+
     rafId = requestAnimationFrame(frame);
   });
 
   /* Pause onglet caché */
   document.addEventListener('visibilitychange', () => {
-    if (document.hidden) cancelAnimationFrame(rafId);
-    else rafId = requestAnimationFrame(frame);
+
+    if (document.hidden) {
+      cancelAnimationFrame(rafId);
+    } else {
+      rafId = requestAnimationFrame(frame);
+    }
   });
 }
 
@@ -322,6 +506,22 @@ function initNavbar() {
   }, { passive: true });
 }
 
+
+/* ── SCROLL REVEAL ── */
+function initScrollReveal() {
+  const els = document.querySelectorAll('.mmo-hd, .mmo-bd > .cgrid, .mmo-bd > .qgrid, .mmo-bd > .em-wrap, .mmo-bd > .sg, .svw, .yt-wrap');
+  if (!els.length) return;
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('reveal-visible');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  els.forEach(el => { el.classList.add('reveal-hidden'); obs.observe(el); });
+}
+
 /* ── PARALLAX VIDÉO HERO ── */
 function initParallax() {
   const vid  = document.getElementById('bgvid');
@@ -342,130 +542,94 @@ function initParallax() {
 /* ── SAVIEZ-VOUS ── */
 /* ── CHRONOLOGIE ── */
 function initTimeline() {
-  const fill  = document.getElementById('tl-fill');
+  const fill   = document.getElementById('tl-fill');
   const fresco = document.querySelector('.tl-fresco');
   if (!fill || !fresco) return;
 
   const nodes = Array.from(document.querySelectorAll('.tl-node[data-date]'));
   if (!nodes.length) return;
 
-  /* ── 1. Dates min/max depuis les data-date ── */
   function parseDate(str) {
     const [y, m] = str.split('-').map(Number);
     return new Date(y, (m || 1) - 1, 1).getTime();
   }
 
-  const dates  = nodes.map(n => parseDate(n.dataset.date));
-  const first  = dates[0];
-  const last   = dates[dates.length - 1];
-  const range  = last - first;
-
-  /* % de progression temps réel */
+  const dates = nodes.map(n => parseDate(n.dataset.date));
+  const first = dates[0];
+  const last  = dates[dates.length - 1];
+  const range = last - first;
   const nowPct = Math.min(100, Math.max(0, (Date.now() - first) / range * 100));
 
-  /* ── 2. Positionner les nœuds sur la barre ── */
+  /* ── Positionner les nœuds ── */
   function positionNodes() {
-    const railW = fresco.offsetWidth;
-    const PAD   = 48; /* px — correspond au padding left/right du fresco */
-    const usable = railW - PAD * 2;
-
     nodes.forEach((node, i) => {
       const pct = (dates[i] - first) / range * 100;
       node.style.setProperty('--pos', pct + '%');
     });
   }
 
-  /* ── 3. Anti-chevauchement des labels ── */
-  function resolveOverlaps() {
-    const MIN_GAP = 8; /* px entre deux labels */
-
-    /* Récupérer les rects des labels après positionnement */
-    const items = nodes.map(node => {
-      const label = node.querySelector('.tl-label');
-      const pin   = node.querySelector('.tl-pin-wrap');
-      return { node, label, pin, rect: null };
-    });
-
-    /* Mesurer */
-    items.forEach(it => {
-      it.rect = it.label.getBoundingClientRect();
-    });
-
-    /* Alterner top/bot par défaut */
-    items.forEach((it, i) => {
-      const side = i % 2 === 0 ? 'top' : 'bot';
-      it.label.className = 'tl-label tl-label--' + side;
-      const stem = it.node.querySelector('.tl-stem');
-      if (stem) {
-        stem.className = 'tl-stem tl-stem--' + side;
-      }
-    });
-
-    /* Passe de collision sur les labels du même côté */
-    ['top', 'bot'].forEach(side => {
-      const group = items.filter(it => it.label.classList.contains('tl-label--' + side));
-      group.sort((a, b) => a.rect.left - b.rect.left);
-
-      for (let i = 1; i < group.length; i++) {
-        const prev = group[i - 1].rect;
-        const curr = group[i].rect;
-        const overlap = prev.right + MIN_GAP - curr.left;
-        if (overlap > 0) {
-          /* Flip ce label de l'autre côté */
-          const other = side === 'top' ? 'bot' : 'top';
-          group[i].label.className = 'tl-label tl-label--' + other;
-          const stem = group[i].node.querySelector('.tl-stem');
-          if (stem) stem.className = 'tl-stem tl-stem--' + other;
-          /* Re-mesurer */
-          group[i].rect = group[i].label.getBoundingClientRect();
-        }
+  /* ── Alterner dates haut/bas selon index ── */
+  function alternateNodes() {
+    nodes.forEach((node, i) => {
+      if (i % 2 === 0) {
+        node.classList.remove('tl-node--date-top');
+      } else {
+        node.classList.add('tl-node--date-top');
       }
     });
   }
 
-  /* ── 4. Animation au scroll ── */
+  /* ── Badge "Maintenant" ── */
+  function injectNowBadge() {
+    const nowNode = document.querySelector('.tl-node--now');
+    if (!nowNode) return;
+    const tooltip = nowNode.querySelector('.tl-tooltip');
+    if (!tooltip || tooltip.querySelector('.tl-now-badge')) return;
+    const badge = document.createElement('span');
+    badge.className = 'tl-now-badge';
+    badge.textContent = 'Maintenant';
+    tooltip.appendChild(badge);
+  }
+
+  /* ── Lancer ── */
   function runTimeline() {
     positionNodes();
+    alternateNodes();
+    injectNowBadge();
 
-    /* Petit délai pour laisser le layout se stabiliser avant anti-overlap */
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        resolveOverlaps();
+    /* Remplir la barre */
+    setTimeout(() => { fill.style.width = nowPct + '%'; }, 150);
 
-        /* Remplir la barre */
-        setTimeout(() => {
-          fill.style.width = nowPct + '%';
-          setTimeout(() => fill.classList.add('tl-fill--active'), 2500);
-        }, 150);
-
-        /* Apparition en cascade des nœuds */
-        nodes.forEach((node, i) => {
-          setTimeout(() => node.classList.add('tl-node--visible'), 300 + i * 220);
-        });
-      });
+    /* Apparition en cascade des nœuds */
+    nodes.forEach((node, i) => {
+      setTimeout(() => node.classList.add('tl-node--visible'), 260 + i * 180);
     });
   }
 
-  /* Relancer si fenêtre redimensionnée */
+  /* Relancer au resize */
   window.addEventListener('resize', debounce(() => {
     nodes.forEach(n => n.classList.remove('tl-node--visible'));
-    fill.classList.remove('tl-fill--active');
     fill.style.width = '0%';
-    setTimeout(runTimeline, 100);
+    setTimeout(runTimeline, 80);
   }, 250));
 
-  /* Déclencher à l'intersection */
+  /* Lancement */
   const section = document.getElementById('chronologie');
-  if (section) {
-    const observer = new IntersectionObserver(entries => {
-      if (entries[0].isIntersecting) {
-        runTimeline();
-        observer.disconnect();
-      }
-    }, { threshold: .1 });
-    observer.observe(section);
-  } else {
+  let _tlRan = false;
+  function _runOnce() {
+    if (_tlRan) return;
+    _tlRan = true;
     runTimeline();
+  }
+
+  if (section) {
+    const obs = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) { _runOnce(); obs.disconnect(); }
+    }, { threshold: 0 });
+    obs.observe(section);
+    setTimeout(_runOnce, 100);
+  } else {
+    _runOnce();
   }
 }
 
@@ -473,25 +637,50 @@ function initSaviez() {
   const textEl = document.getElementById('svtext');
   const btn    = document.getElementById('svbtn');
   if (!textEl) return;
-  const facts = [
-    "Le mari de Ah-Yu est mort à la guerre.",
-    "Le PNJ Esprit d'un Sura s'appelle Akuma.",
-    "L'Amiral Angmur est le chef militaire de l'empire Chunjo.",
-    "Les missions biologiques donnent des bonus permanents cumulatifs.",
-    "Un cheval au niveau 21 peut attaquer en se déplaçant.",
-    "Il faut 55 réussites pour passer du stade Maître au Grand Maître.",
-    "L'Embuscade d'un Ninja inflige des dégâts massifs dans le dos.",
-    "Corps puissant au niveau G1 empêche le Guerrier Mental de tomber.",
-    "La compétence Soin peut retirer des effets négatifs.",
-    "Berserk augmente la vitesse d'attaque mais aussi les dégâts reçus.",
-    "Un Accélérateur réduit le temps d'étude de Chaegirab.",
-    "La Tour de Gumsan est nécessaire pour le Cheval Militaire.",
-    "Les quêtes Yohara donnent des Gemmes ou des Reliques d'âme.",
-    "Pour la 8ème compétence, la 7ème doit être au niveau Parfait.",
-    "Il faut 21 médailles équestres pour toutes les missions d'équitation.",
-    "Le taux biologique est ~50% — comptez ~20 jours pour la première.",
-    "Waryong, Imha et Jungrang sont les trois zones de guilde.",
+
+  const isEN = document.documentElement.lang === 'en';
+
+  const factsFR = [
+  "Le biologiste a besoin de 2 heures pour étudier un objet.",
+  "Il n'y a pas de restriction de niveau pour changer de sexe ou de royaume.",
+  "Le mariage homosexuel est autorisé.",
+  "Les missions biologiques donnent des bonus permanents cumulatifs.",
+  "Un cheval au niveau 21 peut attaquer en se déplaçant.",
+  "Il faut 55 réussites pour passer du stade Maître au Grand Maître.",
+  "Les objets de l'Item-Shop sont échangeables et vendables en jeu.",
+  "Corps puissant au niveau G1 empêche le Guerrier Mental de tomber.",
+  "La compétence Soin peut retirer des effets négatifs.",
+  "Les compétences de buff sont actives sur tous les membres de votre groupe.",
+  "Il n'y a pas de restriction de niveau pour parler dans le chat général.",
+  "Vous pouvez enchaîner les quêtes d'équitation sans que votre cheval ait besoin de repos.",
+  "Une boutique hors ligne dure 30 jours.",
+  "Sur M2Return, tous les royaumes parlent la même langue.",
+  "Le forgeron a plus d'expérience sur les armes et armures de niveau 20 et moins.",
+  "Le taux biologique est ~50% — comptez ~20 jours pour la première.",
+  "Thaloria est le premier serveur de M2Return.",
+];
+
+  const factsEN = [
+    "Ah-Yu's husband died in the war.",
+    "The Spirit of a Sura NPC is named Akuma.",
+    "Admiral Angmur is the military leader of the Chunjo empire.",
+    "Biologist missions grant permanent cumulative stat bonuses.",
+    "A horse at level 21 can attack while moving.",
+    "55 successes are needed to advance from Master to Grand Master.",
+    "A Ninja's Ambush deals massive damage when attacking from behind.",
+    "Robust Body at level G1 prevents the Mental Warrior from being knocked down.",
+    "The Heal skill can remove negative status effects.",
+    "Berserk increases attack speed but also increases damage received.",
+    "An Accelerator reduces Chaegirab's study time.",
+    "The Gumsan Tower is required to obtain the Military Horse.",
+    "Yohara quests reward Gems or Soul Relics.",
+    "To unlock the 8th skill, the 7th must be at Perfect level.",
+    "21 equestrian medals are needed to complete all riding missions.",
+    "The biologist success rate is ~50% — expect ~20 days for the first one.",
+    "Waryong, Imha, and Jungrang are the three guild war zones.",
   ];
+
+  const facts = isEN ? factsEN : factsFR;
   let idx = Math.floor(Math.random() * facts.length);
   textEl.textContent = facts[idx];  // textContent = anti-XSS
   if (btn) btn.addEventListener('click', () => {
@@ -1114,27 +1303,33 @@ function initEquitRows() {
                   t('equit.phase.militaire');
 
     const isChronometree = (niv === 1 || niv === 11 || niv === 21);
-    const chrono = isChronometree ? `<div class="q-detail-label" style="margin-top:.6rem">⏱ ${t('equit.lbl.chronometree')}</div><div class="q-recompenses equit-warn">${t('equit.lbl.chrono.warn')}</div>` : `<div class="q-detail-label" style="margin-top:.6rem">${t('equit.lbl.regle.echec')}</div><div class="q-recompenses">${t('equit.lbl.medaille.ok')}</div>`;
 
-    const esteps = [data.m, data.d, `Récompense : ${data.r}`];
-    const eproc = esteps.map((e,i)=>`<li><span class="q-step-n">${i+1}</span>${escHtml(e)}</li>`).join('');
+    const regleLabel = isChronometree ? '⚠ Règle' : 'Règle';
+    const regleClass = isChronometree ? 'equit-warn' : '';
+    const regleTexte = isChronometree
+      ? 'Raté = perte de la médaille équestre. Pas de 2ème chance immédiate.'
+      : "La médaille n'est pas perdue, vous pouvez recommencer.";
+
+    const esteps = [data.m, data.d, 'Récompense : ' + data.r];
+    const eproc = esteps.map((e,i) => '<li><span class="q-step-n">'+(i+1)+'</span>'+escHtml(e)+'</li>').join('');
     const ebdgs = isChronometree ? badge('timer', t('lbl.chronometree')) : '';
-    makeExpandRow(tr, panel, `
-      <div class="q-detail-inner">
-        <div class="q-detail-col">
-          <div class="q-detail-label">Phase</div>
-          <div class="q-pnj">${escHtml(phase)}</div>
-          <div class="q-detail-label">Récompense</div>
-          <div class="q-pnj equit-reward">${escHtml(data.r)}</div>
-          <div class="q-detail-label">${isChronometree ? '⚠ Règle' : 'Règle'}</div>
-          <div class="q-recompenses ${isChronometree ? 'equit-warn' : ''}">${isChronometree ? 'Raté = perte de la médaille équestre. Pas de 2ème chance immédiate.' : 'La médaille n’est pas perdue, vous pouvez recommencer.'}</div>
-          ${ebdgs ? `<div class="q-detail-label">Type</div><div>${ebdgs}</div>` : ''}
-        </div>
-        <div class="q-detail-col">
-          <div class="q-col-title"><div class="q-detail-label">${t('lbl.processus')}</div></div>
-          <ol class="q-processus">${eproc}</ol>
-        </div>
-      </div>`
+    const ebdgsHtml = ebdgs ? '<div class="q-detail-label">Type</div><div>'+ebdgs+'</div>' : '';
+    makeExpandRow(tr, panel,
+      '<div class="q-detail-inner">' +
+        '<div class="q-detail-col">' +
+          '<div class="q-detail-label">Phase</div>' +
+          '<div class="q-pnj">' + escHtml(phase) + '</div>' +
+          '<div class="q-detail-label">Récompense</div>' +
+          '<div class="q-pnj equit-reward">' + escHtml(data.r) + '</div>' +
+          '<div class="q-detail-label">' + regleLabel + '</div>' +
+          '<div class="q-recompenses ' + regleClass + '">' + escHtml(regleTexte) + '</div>' +
+          ebdgsHtml +
+        '</div>' +
+        '<div class="q-detail-col">' +
+          '<div class="q-col-title"><div class="q-detail-label">' + t('lbl.processus') + '</div></div>' +
+          '<ol class="q-processus">' + eproc + '</ol>' +
+        '</div>' +
+      '</div>'
     );
   });
 
@@ -1288,4 +1483,133 @@ function upgradeRewards(container) {
     new MutationObserver(() => { const pp = document.getElementById(id); if (pp) observe(pp); })
       .observe(document.body, { childList: true, subtree: true });
   });
+})();
+
+/* ── SONS UI ── */
+function initUISounds() {
+  let ctx = null;
+  function getCtx() {
+    if (!ctx) ctx = new (window.AudioContext || window.webkitAudioContext)();
+    return ctx;
+  }
+  function playTone(freq, dur, vol, type) {
+    try {
+      const ac = getCtx();
+      if (ac.state === 'suspended') ac.resume();
+      const osc = ac.createOscillator();
+      const gain = ac.createGain();
+      osc.connect(gain); gain.connect(ac.destination);
+      osc.type = type || 'sine';
+      osc.frequency.setValueAtTime(freq, ac.currentTime);
+      gain.gain.setValueAtTime(vol, ac.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.0001, ac.currentTime + dur);
+      osc.start(ac.currentTime);
+      osc.stop(ac.currentTime + dur);
+    } catch(e) {}
+  }
+
+  /* Hover subtle sur boutons de navigation et onglets */
+  document.querySelectorAll('.nav-links a, .qtab, [data-quest], [data-class]').forEach(el => {
+    el.addEventListener('mouseenter', () => playTone(880, 0.06, 0.04, 'sine'));
+  });
+
+  /* Click sur onglets */
+  document.querySelectorAll('.qtab').forEach(el => {
+    el.addEventListener('click', () => playTone(660, 0.12, 0.06, 'triangle'));
+  });
+
+  /* Open/close quête ou classe */
+  document.querySelectorAll('[data-quest], [data-class]').forEach(el => {
+    el.addEventListener('click', () => playTone(440, 0.18, 0.07, 'triangle'));
+  });
+}
+
+/* ══════════════════════════════════════════════
+   HAMBURGER MOBILE — menu navbar
+   ══════════════════════════════════════════════ */
+(function initHamburger() {
+  const btn   = document.getElementById('nav-hamburger');
+  const links = document.getElementById('nav-mobile');
+  if (!btn || !links) return;
+
+  function close() {
+    btn.classList.remove('open');
+    btn.setAttribute('aria-expanded', 'false');
+    links.classList.remove('open');
+  }
+
+  btn.addEventListener('click', () => {
+    const isOpen = links.classList.contains('open');
+    if (isOpen) { close(); }
+    else {
+      btn.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+      links.classList.add('open');
+    }
+  });
+
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+  document.addEventListener('click', e => {
+    if (!btn.contains(e.target) && !links.contains(e.target)) close();
+  });
+})();
+
+/* ══════════════════════════════════════════════
+   RGPD — Bandeau consentement Google Fonts
+   ══════════════════════════════════════════════ */
+(function initRGPD() {
+  const STORAGE_KEY = 'm2r_consent';
+  const banner = document.getElementById('rgpd-banner');
+  const btnOk  = document.getElementById('rgpd-ok');
+  const btnNo  = document.getElementById('rgpd-no');
+  if (!banner) return;
+
+  const consent = localStorage.getItem(STORAGE_KEY);
+  if (consent === 'accepted') return;
+  if (consent === 'refused') { disableGoogleFonts(); return; }
+
+  banner.style.display = 'flex';
+
+  btnOk.addEventListener('click', () => {
+    localStorage.setItem(STORAGE_KEY, 'accepted');
+    banner.style.display = 'none';
+  });
+  btnNo.addEventListener('click', () => {
+    localStorage.setItem(STORAGE_KEY, 'refused');
+    banner.style.display = 'none';
+    disableGoogleFonts();
+  });
+
+  function disableGoogleFonts() {
+    document.querySelectorAll('link[href*="fonts.googleapis.com"]').forEach(l => l.remove());
+  }
+})();
+
+/* ══════════════════════════════════════════════
+   Redirection automatique par langue navigateur
+   ══════════════════════════════════════════════ */
+(function autoLangRedirect() {
+  const STORAGE_KEY = 'm2r_lang_redirected';
+  if (sessionStorage.getItem(STORAGE_KEY)) return;
+  sessionStorage.setItem(STORAGE_KEY, '1');
+
+  const currentIsEN = document.documentElement.lang === 'en';
+  const browserLang = (navigator.language || '').toLowerCase();
+  const preferEN = !browserLang.startsWith('fr');
+
+  if (preferEN && !currentIsEN) {
+    const bar = document.createElement('div');
+    bar.id = 'lang-suggest';
+    bar.innerHTML = '<span>Your browser language is <strong>' + navigator.language + 
+      '</strong> — would you prefer the English version?</span>' +
+      '<div class="lang-suggest-btns">' +
+      '<a href="index.en.html" class="rgpd-accept">Switch to EN</a>' +
+      '<button class="rgpd-refuse" id="lang-suggest-close">Stay in FR</button>' +
+      '</div>';
+    bar.querySelector('#lang-suggest-close').addEventListener('click', function() {
+      document.getElementById('lang-suggest').remove();
+    });
+    document.body.insertBefore(bar, document.body.firstChild);
+  }
 })();

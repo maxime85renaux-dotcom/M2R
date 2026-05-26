@@ -1,0 +1,28 @@
+{
+  "name": "M2Return — Wiki Metin2",
+  "short_name": "M2Return",
+  "description": "Guide complet Metin2 : classes, quêtes, cartes, biologiste, équitation.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#060200",
+  "theme_color": "#dea028",
+  "lang": "fr",
+  "icons": [
+    {
+      "src": "assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "assets/metin2return_pas_coller_png_.webp",
+      "sizes": "1280x720",
+      "type": "image/webp",
+      "label": "Page d'accueil M2Return"
+    }
+  ],
+  "categories": ["games", "reference"],
+  "orientation": "portrait-primary"
+}

@@ -1,114 +1,98 @@
 /* ══════════════════════════════════════════════
-   M2Return WIKI FR — animations.css
-   Keyframes · Hero effects · Transitions
+   UPGRADES VISUELS — scroll reveal, glow, tilt
    ══════════════════════════════════════════════ */
 
-/* ── KEYFRAMES ── */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(15px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes bounce {
-  0%, 100% { transform: translateX(-50%) translateY(0); }
-  50%       { transform: translateX(-50%) translateY(7px); }
-}
-
-@keyframes panelIn {
-  from { opacity: 0; transform: translateY(-8px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fogDrift {
-  from { transform: translateX(-3%); }
-  to   { transform: translateX(3%); }
-}
-
-@keyframes rayPulse {
-  from { opacity: .5; }
-  to   { opacity: .06; }
-}
-
-/* ── HERO ANIMATIONS ── */
-.hero-logo {
+/* ── Scroll Reveal ── */
+.reveal-hidden {
   opacity: 0;
-  animation: fadeUp .9s .1s forwards;
+  transform: translateY(24px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
 }
-.h-eyebrow {
-  opacity: 0;
-  animation: fadeUp .9s .3s forwards;
+/* Exception : la timeline gère sa propre animation */
+.tl-fresco.reveal-hidden {
+  opacity: 1 !important;
+  transform: none !important;
 }
-.h-title {
-  opacity: 0;
-  animation: fadeUp .9s .5s forwards;
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
-.h-divider {
-  opacity: 0;
-  animation: fadeUp .9s .8s forwards;
-}
-.h-sub {
-  opacity: 0;
-  animation: fadeUp .9s 1s forwards;
-}
-.blocks {
-  opacity: 0;
-  animation: fadeUp .9s 1.2s forwards;
-}
-
-.h-arrow {
-  animation: bounce 2s infinite;
-}
-
-/* ── FOG & RAYONS ── */
-.fog {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-  overflow: hidden;
-}
-.fog span {
-  position: absolute;
-  bottom: 0;
-  width: 120%; height: 30%;
-  left: -10%;
-  background: radial-gradient(ellipse at 50% 100%, rgba(18,5,0,.46) 0%, transparent 70%);
-  animation: fogDrift 18s ease-in-out infinite alternate;
-}
-.fog span:nth-child(2) {
-  animation-duration: 24s;
-  animation-delay: -8s;
-  opacity: .52;
-  width: 130%;
-  left: -15%;
-}
-
-.rays {
-  position: absolute;
-  top: 0; left: 50%;
-  transform: translateX(-50%);
-  z-index: 2;
-  width: 700px; height: 52%;
-  pointer-events: none;
-  overflow: hidden;
-}
-.rays::before, .rays::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  height: 100%;
-  background: linear-gradient(180deg, rgba(210,155,35,.09), transparent);
-  transform-origin: top center;
-  animation: rayPulse 6s ease-in-out infinite alternate;
-}
-.rays::before { width: 200px; left: 28%; transform: rotate(-15deg); }
-.rays::after  { width: 200px; left: 18%; animation-delay: -3s; transform: rotate(15deg); }
-
-/* ── REDUCED MOTION ── */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation: none !important;
-    transition: none !important;
+  .reveal-hidden { opacity: 1; transform: none; transition: none; }
+}
+
+/* ── Fond "respiration" ultra subtile ── */
+@media (prefers-reduced-motion: no-preference) {
+  body::before {
+    animation: floatBg 22s ease-in-out infinite;
   }
-  html { scroll-behavior: auto !important; }
+  @keyframes floatBg {
+    0%,100% { transform: scale(1); }
+    50%      { transform: scale(1.015); }
+  }
+}
+
+/* ── Tilt premium cartes classes et quêtes ── */
+.cc, .qc {
+  transform-style: preserve-3d;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+.cc:hover {
+  transform: perspective(900px) rotateX(2deg) rotateY(-2deg) scale(1.025);
+  box-shadow: 0 12px 40px rgba(0,0,0,.55), 0 0 20px rgba(222,160,40,.15);
+}
+.qc:hover {
+  transform: perspective(900px) rotateX(1.5deg) rotateY(-1.5deg) scale(1.03);
+  box-shadow: 0 10px 36px rgba(0,0,0,.5), 0 0 16px rgba(222,160,40,.12);
+}
+
+/* ── Particules glow — shadowBlur JS déjà actif,
+      mais on optimise le canvas pour éviter blur aliasing ── */
+#ptc, #logo-particles {
+  image-rendering: pixelated;
+}
+
+/* ── Hover premium navbar links ── */
+.nav-links a {
+  transition: color 0.18s ease, text-shadow 0.18s ease;
+}
+.nav-links a:hover {
+  text-shadow: 0 0 12px rgba(222,160,40,.6);
+}
+
+/* ── Glow doré sur les boutons .qtab actifs ── */
+.qtab.active {
+  text-shadow: 0 0 10px rgba(222,160,40,.5);
+  box-shadow: inset 0 -2px 0 rgba(222,160,40,.7), 0 0 8px rgba(222,160,40,.15);
+  transition: all 0.2s ease;
+}
+
+/* ── Micro pulse sur le bouton "Saviez-vous" ── */
+@media (prefers-reduced-motion: no-preference) {
+  .svb {
+    animation: svbPulse 3.5s ease-in-out infinite;
+  }
+  @keyframes svbPulse {
+    0%,100% { box-shadow: 0 0 0 0 rgba(222,160,40,0); }
+    50%      { box-shadow: 0 0 0 6px rgba(222,160,40,.18); }
+  }
+}
+
+/* ── Transitions douces sur panels dépliants ── */
+.cc-panel, .qc-panel {
+  transition: opacity 0.3s ease;
+}
+.cc-panel:not(.open), .qc-panel:not(.open) {
+  opacity: 0;
+  pointer-events: none;
+}
+.cc-panel.open, .qc-panel.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ── Glow sur séparateurs au scroll ── */
+.sep-r:hover {
+  text-shadow: 0 0 14px rgba(222,160,40,.55);
+  transition: text-shadow 0.2s ease;
 }

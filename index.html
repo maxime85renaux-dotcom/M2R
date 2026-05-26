@@ -4,7 +4,27 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>M2Return — Guide Metin2 FR</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#dea028">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="M2Return">
   <meta name="description" content="Guide complet Metin2 FR : classes, quêtes niv.1-84, biologiste, missions de chasse, équitation, livres de quêtes, cartes et empires.">
+  <!-- SEO / Open Graph / Twitter Card -->
+  <link rel="canonical" href="https://m2return.fr/">
+  <link rel="alternate" hreflang="en" href="https://m2return.fr/index.en.html">
+  <meta property="og:type"        content="website">
+  <meta property="og:url"         content="https://m2return.fr/">
+  <meta property="og:title"       content="M2Return — Wiki Metin2 FR">
+  <meta property="og:description" content="Guide complet Metin2 FR : classes, quêtes niv.1-95, biologiste, missions de chasse, équitation, livres de quêtes, cartes et empires.">
+  <meta property="og:image"       content="https://m2return.fr/assets/metin2return_pas_coller_png_.webp">
+  <meta property="og:locale"      content="fr_FR">
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:title"       content="M2Return — Wiki Metin2 FR">
+  <meta name="twitter:description" content="Guide complet Metin2 FR : classes, quêtes niv.1-95, biologiste, missions de chasse, équitation, livres de quêtes, cartes et empires.">
+  <meta name="twitter:image"       content="https://m2return.fr/assets/metin2return_pas_coller_png_.webp">
 
   <!-- Google Fonts -->
   <!-- Polices locales (hors ligne) — lancer assets/fonts/TELECHARGER_POLICES.ps1 une fois -->
@@ -22,12 +42,21 @@
   <link rel="stylesheet" href="css/animations.css">
   <link rel="stylesheet" href="css/responsive.css">
   <!-- i18n -->
-  <script src="locales/fr.js"></script>
-  <script src="locales/en.js"></script>
-  <script src="js/i18n.js"></script>
 </head>
 <body>
 <canvas id="ptc"></canvas>
+<!-- ══ BANDEAU RGPD ══ -->
+<div id="rgpd-banner" role="dialog" aria-label="Consentement cookies" aria-live="polite" style="display:none">
+  <p>
+    Ce site utilise <strong>Google Fonts</strong> pour les polices (si les polices locales sont absentes), ce qui peut transmettre votre adresse IP à Google.
+    Aucune donnée de navigation n'est collectée par ce site.
+    <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Politique de confidentialité Google</a>.
+  </p>
+  <div class="rgpd-btns">
+    <button class="rgpd-accept" id="rgpd-ok">Accepter</button>
+    <button class="rgpd-refuse" id="rgpd-no">Refuser</button>
+  </div>
+</div>
 
 <!-- NAVBAR -->
 <nav id="nav">
@@ -37,11 +66,13 @@
      style="height:140px; width:auto;"
      onerror="this.style.display='none'">
     </a>
-  <nav class="nav-links" aria-label="Navigation">
-    <a href="#classes"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.25C17.25 22.15 21 17.25 21 12V7L12 2z"/></svg><span data-i18n="nav.classes" data-i18n="sep.classes">Classes</span></a>
-    <a href="#quetes"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg><span data-i18n="nav.quetes" data-i18n="sep.quetes">Quêtes</span></a>
-    <a href="#cartes"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg><span data-i18n="nav.cartes">Cartes</span></a>
-    <a href="#saviez-vous"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01"/></svg><span data-i18n="nav.saviez" data-i18n="sep.saviez">Saviez-vous</span></a>
+  <a href="index.en.html" id="lang-btn" class="lang-switch-btn" title="Switch language">🇬🇧 EN</a>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu" aria-expanded="false" aria-controls="nav-mobile"><span></span><span></span><span></span></button>
+  <nav class="nav-links" id="nav-mobile" aria-label="Navigation">
+    <a href="#classes"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.25C17.25 22.15 21 17.25 21 12V7L12 2z"/></svg><span>Classes</span></a>
+    <a href="#quetes"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg><span>Quêtes</span></a>
+    <a href="#cartes"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg><span>Cartes</span></a>
+    <a href="#saviez-vous"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01"/></svg><span>Saviez-vous</span></a>
   </nav>
 </nav>
 
@@ -53,35 +84,35 @@
   <div class="fog" aria-hidden="true"><span></span><span></span></div>
   <div class="rays" aria-hidden="true"></div>
   <div class="h-content">
-    <div class="h-eyebrow" data-i18n="hero.eyebrow">Le retour au source</div>
+    <div class="h-eyebrow">Le retour au source</div>
     <div class="logo-particle-wrap">
       <canvas id="logo-particles" aria-hidden="true"></canvas>
       <img class="hero-logo"
        src="assets/metin2return_pas_coller_png_.webp"
        style="width:300px; height:300px;">
     </div>
-    <h1 class="h-title"><span class="h-sub-word" data-i18n="hero.title">WIKI</span></h1>
+    <h1 class="h-title"><span class="h-sub-word">WIKI</span></h1>
     <div class="h-divider" aria-hidden="true">
       <span></span><em><svg width="12" height="12" viewBox="0 0 24 24" fill="var(--gold)"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg></em><span></span>
     </div>
     <div class="blocks">
-      <a href="#classes" class="block"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.25C17.25 22.15 21 17.25 21 12V7L12 2z"/></svg><span class="btitle" data-i18n="hero.btn.classes">Classes</span></a>
-      <a href="#quetes" class="block"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg><span class="btitle" data-i18n="hero.btn.quetes">Quêtes</span></a>
-      <a href="#cartes" class="block"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg><span class="btitle" data-i18n="hero.btn.cartes">Cartes</span></a>
-      <a href="#saviez-vous" class="block"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01"/></svg><span class="btitle" data-i18n="hero.btn.saviez">Saviez-vous</span></a>
+      <a href="#classes" class="block"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.25C17.25 22.15 21 17.25 21 12V7L12 2z"/></svg><span class="btitle">Classes</span></a>
+      <a href="#quetes" class="block"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg><span class="btitle">Quêtes</span></a>
+      <a href="#cartes" class="block"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg><span class="btitle">Cartes</span></a>
+      <a href="#saviez-vous" class="block"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01"/></svg><span class="btitle">Saviez-vous</span></a>
     </div>
   </div>
   <a href="#classes" class="h-arrow" aria-label="Défiler">&#8595;</a>
 </section>
 
 <!-- ══ CLASSES ══ -->
-<div class="sep"><span class="sep-l"></span><a href="#classes" class="sep-r" aria-label="Aller à Classes"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.25C17.25 22.15 21 17.25 21 12V7L12 2z"/></svg><span data-i18n="sep.classes">Classes</span><svg class="sep-arrow" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></a><span class="sep-l"></span></div>
+<div class="sep"><span class="sep-l"></span><a href="#classes" class="sep-r" aria-label="Aller à Classes"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.25C17.25 22.15 21 17.25 21 12V7L12 2z"/></svg><span>Classes</span><svg class="sep-arrow" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></a><span class="sep-l"></span></div>
 <section class="panel" id="classes">
   <div class="mmo">
     <div class="mmo-hd">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.25C17.25 22.15 21 17.25 21 12V7L12 2z"/></svg>
-      <span class="mmo-ht" data-i18n="classes.title">Les Classes</span>
-      <span class="mmo-hs" data-i18n="classes.subtitle">Cliquez pour découvrir</span>
+      <span class="mmo-ht">Les Classes</span>
+      <span class="mmo-hs">Cliquez pour découvrir</span>
     </div>
     <div class="mmo-bd">
 
@@ -92,11 +123,11 @@
   <div class="cc-img">
     <img src="assets/Warriors.png" alt="Guerrier" loading="lazy" onerror="this.style.display='none'" style="width:100%;height:100%;object-fit:cover;object-position:top">
     <div class="cc-label">
-      <div class="ccn" data-i18n="class.guerrier">Guerrier</div>
-      <div class="cc-roles"><span class="role tank" data-i18n="role.tank">Tank</span><span class="role dps" data-i18n="role.dps">DPS</span><span class="role farm" data-i18n="role.farm">Farm</span></div>
+      <div class="ccn">Guerrier</div>
+      <div class="cc-roles"><span class="role tank">Tank</span><span class="role dps">DPS</span><span class="role farm">Farm</span></div>
     </div>
   </div>
-  <div class="cc-foot" data-i18n="classes.more">EN SAVOIR PLUS ›</div>
+  <div class="cc-foot">EN SAVOIR PLUS ›</div>
 </div>
 
 <!-- SURA -->
@@ -104,11 +135,11 @@
   <div class="cc-img">
     <img src="assets/Suras.png" alt="Sura" loading="lazy" onerror="this.style.display='none'" style="width:100%;height:100%;object-fit:cover;object-position:top">
     <div class="cc-label">
-      <div class="ccn" data-i18n="class.sura">Sura</div>
-      <div class="cc-roles"><span class="role dps" data-i18n="role.dps">DPS</span><span class="role farm" data-i18n="role.farm">Farm</span></div>
+      <div class="ccn">Sura</div>
+      <div class="cc-roles"><span class="role dps">DPS</span><span class="role farm">Farm</span></div>
     </div>
   </div>
-  <div class="cc-foot" data-i18n="classes.more">EN SAVOIR PLUS ›</div>
+  <div class="cc-foot">EN SAVOIR PLUS ›</div>
 </div>
 
 <!-- NINJA -->
@@ -116,11 +147,11 @@
   <div class="cc-img">
     <img src="assets/Ninjas.png" alt="Ninja" loading="lazy" onerror="this.style.display='none'" style="width:100%;height:100%;object-fit:cover;object-position:top">
     <div class="cc-label">
-      <div class="ccn" data-i18n="class.ninja">Ninja</div>
-      <div class="cc-roles"><span class="role dps" data-i18n="role.dps">DPS</span></div>
+      <div class="ccn">Ninja</div>
+      <div class="cc-roles"><span class="role dps">DPS</span></div>
     </div>
   </div>
-  <div class="cc-foot" data-i18n="classes.more">EN SAVOIR PLUS ›</div>
+  <div class="cc-foot">EN SAVOIR PLUS ›</div>
 </div>
 
 <!-- CHAMANE -->
@@ -128,36 +159,36 @@
   <div class="cc-img">
     <img src="assets/Shamans.png" alt="Chamane" loading="lazy" onerror="this.style.display='none'" style="width:100%;height:100%;object-fit:cover;object-position:top">
     <div class="cc-label">
-      <div class="ccn" data-i18n="class.chamane">Chamane</div>
-      <div class="cc-roles"><span class="role support" data-i18n="role.support">Support</span><span class="role dps" data-i18n="role.dps">DPS</span></div>
+      <div class="ccn">Chamane</div>
+      <div class="cc-roles"><span class="role support">Support</span><span class="role dps">DPS</span></div>
     </div>
   </div>
-  <div class="cc-foot" data-i18n="classes.more">EN SAVOIR PLUS ›</div>
+  <div class="cc-foot">EN SAVOIR PLUS ›</div>
 </div>
 
         <!-- PANELS DÉPLIANTS (grid-column:1/-1) -->
         <div class="cc-panel" id="panel-guerrier">
-          <button class="cp-close" data-close-class="guerrier" data-i18n="panel.close">Fermer ✕</button>
+          <button class="cp-close" data-close-class="guerrier">Fermer ✕</button>
           <div class="cp-head">
-            <span class="cp-name" data-i18n="class.guerrier">Guerrier</span>
-            <div class="cp-specs"><span class="cp-spec" data-i18n="guerrier.spec1">Corps-à-corps</span><span class="cp-spec" data-i18n="guerrier.spec2">Mental</span></div>
+            <span class="cp-name">Guerrier</span>
+            <div class="cp-specs"><span class="cp-spec">Corps-à-corps</span><span class="cp-spec">Mental</span></div>
           </div>
 
           <!-- GÉNÉRALITÉS -->
-          <p class="cp-desc" style="margin-bottom:1.4rem" data-i18n="guerrier.desc">Grâce à leur habileté ainsi qu'à leur lourde armure, les Guerriers jouent un rôle important dans les combats au corps-à-corps. Ils aspirent à toujours plus de force physique et de sérénité. Selon leur spécialité, ils peuvent semer la terreur grâce à leurs armes à deux mains ou repousser toutes les attaques en utilisant habilement épée et bouclier.</p>
+          <p class="cp-desc" style="margin-bottom:1.4rem">Grâce à leur habileté ainsi qu'à leur lourde armure, les Guerriers jouent un rôle important dans les combats au corps-à-corps. Ils aspirent à toujours plus de force physique et de sérénité. Selon leur spécialité, ils peuvent semer la terreur grâce à leurs armes à deux mains ou repousser toutes les attaques en utilisant habilement épée et bouclier.</p>
 
           <!-- STATS -->
-          <div class="ptitle" style="margin-top:0"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg><span data-i18n="panel.stats">Statistiques</span></div>
+          <div class="ptitle" style="margin-top:0"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg><span>Statistiques</span></div>
           <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.6rem;margin-bottom:1.6rem">
             <div style="background:rgba(30,11,2,.75);border:1px solid rgba(140,85,16,.35);border-radius:3px;padding:.6rem .9rem">
-              <div style="font-family:'Alegreya SC',serif;font-size:.58rem;letter-spacing:2px;color:var(--copper-l);text-transform:uppercase;margin-bottom:.5rem" data-i18n="panel.stats.start">Statistiques de départ</div>
+              <div style="font-family:'Alegreya SC',serif;font-size:.58rem;letter-spacing:2px;color:var(--copper-l);text-transform:uppercase;margin-bottom:.5rem">Statistiques de départ</div>
               <div class="cp-stat">Force (STR) <strong>6</strong></div>
               <div class="cp-stat">Vitalité (VIT) <strong>4</strong></div>
               <div class="cp-stat">Intelligence (INT) <strong>3</strong></div>
               <div class="cp-stat">Dextérité (DEX) <strong>3</strong></div>
             </div>
             <div style="background:rgba(30,11,2,.75);border:1px solid rgba(140,85,16,.35);border-radius:3px;padding:.6rem .9rem">
-              <div style="font-family:'Alegreya SC',serif;font-size:.58rem;letter-spacing:2px;color:var(--copper-l);text-transform:uppercase;margin-bottom:.5rem" data-i18n="panel.stats.high">Statistiques à haut niveau</div>
+              <div style="font-family:'Alegreya SC',serif;font-size:.58rem;letter-spacing:2px;color:var(--copper-l);text-transform:uppercase;margin-bottom:.5rem">Statistiques à haut niveau</div>
               <div class="cp-stat">Force (STR) <strong>90</strong></div>
               <div class="cp-stat">Vitalité (VIT) <strong>90</strong></div>
               <div class="cp-stat">Intelligence (INT) <strong>16</strong></div>
@@ -166,81 +197,81 @@
           </div>
 
           <!-- GUERRIER CAC -->
-          <div class="ptitle" style="margin-top:0"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/><path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg><span data-i18n="guerrier.cac.title">Guerrier Corps à Corps</span></div>
-          <p class="cp-desc" style="margin-bottom:1.1rem" data-i18n="guerrier.cac.desc">Particulièrement prisé en PvE surtout en bas level, mais peut être également redoutable en PvP.</p>
+          <div class="ptitle" style="margin-top:0"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/><path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg><span>Guerrier Corps à Corps</span></div>
+          <p class="cp-desc" style="margin-bottom:1.1rem">Particulièrement prisé en PvE surtout en bas level, mais peut être également redoutable en PvP.</p>
           <div class="cp-body" style="margin-bottom:1.5rem">
             <div class="cp-col">
-              <h4 data-i18n="panel.pve">PvE — Ordre recommandé</h4>
+              <h4>PvE — Ordre recommandé</h4>
               <div class="cp-skills">
-                <div class="cp-skill"><img src="assets/Auradelepee.jpg" alt="">Aura de l'épée <span>STR</span></div>
-                <div class="cp-skill"><img src="assets/Moulinet.jpg" alt="">Moulinet à l'épée <span>STR · DEX · VIT</span></div>
-                <div class="cp-skill"><img src="assets/Berserk.jpg" alt="">Berserk <span>Aucun bonus</span></div>
-                <div class="cp-skill"><img src="assets/Acceleration.jpg" alt="">Accélération <span>STR · DEX · VIT</span></div>
-                <div class="cp-skill"><img src="assets/Triplelaceration.jpg" alt="">Triple lacération <span>STR</span></div>
+                <div class="cp-skill"><img src="assets/Auradelepee.jpg" alt="Aura de l'épée" loading="lazy">Aura de l'épée<span>STR</span></div>
+                <div class="cp-skill"><img src="assets/Moulinet.jpg" alt="Moulinet à l'épée" loading="lazy">Moulinet à l'épée<span>STR · DEX · VIT</span></div>
+                <div class="cp-skill"><img src="assets/Berserk.jpg" alt="Berserk" loading="lazy">Berserk<span>Aucun bonus</span></div>
+                <div class="cp-skill"><img src="assets/Acceleration.jpg" alt="Accélération" loading="lazy">Accélération<span>STR · DEX · VIT</span></div>
+                <div class="cp-skill"><img src="assets/Triplelaceration.jpg" alt="Triple lacération" loading="lazy">Triple lacération<span>STR</span></div>
               </div>
             </div>
             <div class="cp-col">
-              <h4 data-i18n="panel.pvp">PvP — Ordre recommandé</h4>
+              <h4>PvP — Ordre recommandé</h4>
               <div class="cp-skills">
-                <div class="cp-skill"><img src="assets/Auradelepee.jpg" alt="">Aura de l'épée <span>STR</span></div>
-                <div class="cp-skill"><img src="assets/Acceleration.jpg" alt="">Accélération <span>STR · DEX · VIT</span></div>
-                <div class="cp-skill"><img src="assets/Berserk.jpg" alt="">Berserk <span>Aucun bonus</span></div>
-                <div class="cp-skill"><img src="assets/Moulinet.jpg" alt="">Moulinet à l'épée <span>STR · DEX · VIT</span></div>
-                <div class="cp-skill"><img src="assets/Triplelaceration.jpg" alt="">Triple lacération <span>STR</span></div>
+                <div class="cp-skill"><img src="assets/Auradelepee.jpg" alt="Aura de l'épée" loading="lazy">Aura de l'épée<span>STR</span></div>
+                <div class="cp-skill"><img src="assets/Acceleration.jpg" alt="Accélération" loading="lazy">Accélération<span>STR · DEX · VIT</span></div>
+                <div class="cp-skill"><img src="assets/Berserk.jpg" alt="Berserk" loading="lazy">Berserk<span>Aucun bonus</span></div>
+                <div class="cp-skill"><img src="assets/Moulinet.jpg" alt="Moulinet à l'épée" loading="lazy">Moulinet à l'épée<span>STR · DEX · VIT</span></div>
+                <div class="cp-skill"><img src="assets/Triplelaceration.jpg" alt="Triple lacération" loading="lazy">Triple lacération<span>STR</span></div>
               </div>
             </div>
           </div>
 
           <!-- GUERRIER MENTAL -->
-          <div class="ptitle" style="margin-top:0"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.25C17.25 22.15 21 17.25 21 12V7L12 2z"/></svg><span data-i18n="guerrier.mental.title">Guerrier Mental</span></div>
-          <p class="cp-desc" style="margin-bottom:1.1rem" data-i18n="guerrier.mental.desc">Principalement utilisé en PvP, mais peut être également utile en PvE. Corps puissant niveau G1 empêche de "tomber" en combat.</p>
+          <div class="ptitle" style="margin-top:0"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.25C17.25 22.15 21 17.25 21 12V7L12 2z"/></svg><span>Guerrier Mental</span></div>
+          <p class="cp-desc" style="margin-bottom:1.1rem">Principalement utilisé en PvP, mais peut être également utile en PvE. Corps puissant niveau G1 empêche de "tomber" en combat.</p>
           <div class="cp-body">
             <div class="cp-col">
-              <h4 data-i18n="panel.pve">PvE — Ordre recommandé</h4>
+              <h4>PvE — Ordre recommandé</h4>
               <div class="cp-skills">
-                <div class="cp-skill"><img src="assets/Attaquedelapaume.jpg" alt="">Corps puissant <span>VIT · STR — Déf. ↑</span></div>
-                <div class="cp-skill"><img src="assets/Charge.jpg" alt="" onerror="this.style.display='none'">Charge <span>STR · DEX · VIT — Zone + assomme</span></div>
-                <div class="cp-skill"><img src="assets/Attaquedelapaume.jpg" alt="">Attaque de la paume <span>STR · VIT</span></div>
-                <div class="cp-skill"><img src="assets/Frappedelesprit.jpg" alt="">Attaque de l'esprit <span>STR · VIT — éjecte</span></div>
-                <div class="cp-skill"><img src="assets/Coupdepee.jpg" alt="" onerror="this.style.display='none'">Coup d'épée <span>STR · DEX · VIT — assomme</span></div>
+                <div class="cp-skill"><img src="assets/Attaquedelapaume.jpg" alt="Corps puissant" loading="lazy">Corps puissant<span>VIT · STR — Déf. ↑</span></div>
+                <div class="cp-skill"><img src="assets/Charge.jpg" alt="Charge" loading="lazy" onerror="this.style.display='none'">Charge<span>STR · DEX · VIT — Zone + assomme</span></div>
+                <div class="cp-skill"><img src="assets/Attaquedelapaume.jpg" alt="Attaque de la paume" loading="lazy">Attaque de la paume<span>STR · VIT</span></div>
+                <div class="cp-skill"><img src="assets/Frappedelesprit.jpg" alt="Attaque de l'esprit" loading="lazy">Attaque de l'esprit<span>STR · VIT — éjecte</span></div>
+                <div class="cp-skill"><img src="assets/Coupdepee.jpg" alt="Coup d'épée" loading="lazy" onerror="this.style.display='none'">Coup d'épée<span>STR · DEX · VIT — assomme</span></div>
               </div>
             </div>
             <div class="cp-col">
-              <h4 data-i18n="panel.pvp">PvP — Ordre recommandé</h4>
+              <h4>PvP — Ordre recommandé</h4>
               <div class="cp-skills">
-                <div class="cp-skill"><img src="assets/Attaquedelapaume.jpg" alt="">Corps puissant <span>VIT · STR — Déf. ↑</span></div>
-                <div class="cp-skill"><img src="assets/Frappedelesprit.jpg" alt="">Attaque de l'esprit <span>STR · VIT — éjecte</span></div>
-                <div class="cp-skill"><img src="assets/Attaquedelapaume.jpg" alt="">Attaque de la paume <span>STR · VIT</span></div>
-                <div class="cp-skill"><img src="assets/Charge.jpg" alt="" onerror="this.style.display='none'">Charge <span>STR · DEX · VIT — Zone + assomme</span></div>
-                <div class="cp-skill"><img src="assets/Coupdepee.jpg" alt="" onerror="this.style.display='none'">Coup d'épée <span>STR · DEX · VIT — assomme</span></div>
+                <div class="cp-skill"><img src="assets/Attaquedelapaume.jpg" alt="Corps puissant" loading="lazy">Corps puissant<span>VIT · STR — Déf. ↑</span></div>
+                <div class="cp-skill"><img src="assets/Frappedelesprit.jpg" alt="Attaque de l'esprit" loading="lazy">Attaque de l'esprit<span>STR · VIT — éjecte</span></div>
+                <div class="cp-skill"><img src="assets/Attaquedelapaume.jpg" alt="Attaque de la paume" loading="lazy">Attaque de la paume<span>STR · VIT</span></div>
+                <div class="cp-skill"><img src="assets/Charge.jpg" alt="Charge" loading="lazy" onerror="this.style.display='none'">Charge<span>STR · DEX · VIT — Zone + assomme</span></div>
+                <div class="cp-skill"><img src="assets/Coupdepee.jpg" alt="Coup d'épée" loading="lazy" onerror="this.style.display='none'">Coup d'épée<span>STR · DEX · VIT — assomme</span></div>
               </div>
             </div>
           </div>
-          <div class="ibox" style="margin-top:1.2rem" data-i18n-html="panel.note"><strong>Note :</strong> Ces ordres sont indicatifs — de nombreux choix s'offrent à vous selon la spécificité souhaitée pour votre personnage.</div>
+          <div class="ibox" style="margin-top:1.2rem"><strong>Note :</strong> Ces ordres sont indicatifs — de nombreux choix s'offrent à vous selon la spécificité souhaitée pour votre personnage.</div>
         </div>
 
         <div class="cc-panel" id="panel-sura">
-          <button class="cp-close" data-close-class="sura" data-i18n="panel.close">Fermer ✕</button>
+          <button class="cp-close" data-close-class="sura">Fermer ✕</button>
           <div class="cp-head">
-            <span class="cp-name" data-i18n="class.sura">Sura</span>
-            <div class="cp-specs"><span class="cp-spec" data-i18n="sura.spec1">Armes Magiques</span><span class="cp-spec" data-i18n="sura.spec2">Magie Noire</span></div>
+            <span class="cp-name">Sura</span>
+            <div class="cp-specs"><span class="cp-spec">Armes Magiques</span><span class="cp-spec">Magie Noire</span></div>
           </div>
 
           <!-- GÉNÉRALITÉS -->
-          <p class="cp-desc" style="margin-bottom:1.4rem" data-i18n="sura.desc">Les Suras sont des combattants ayant reçu des pouvoirs magiques lorsqu'ils acceptèrent de laisser la graine du Mal pousser dans leur bras. Capables de manier leur épée au combat rapproché ou de provoquer des dommages à distance grâce à la magie. En se spécialisant, ils peuvent améliorer leurs sorts offensifs ou recevoir des sorts d'amélioration. Chaque spécialisation excelle dans sa spécialité PvP ou PvE.</p>
+          <p class="cp-desc" style="margin-bottom:1.4rem">Les Suras sont des combattants ayant reçu des pouvoirs magiques lorsqu'ils acceptèrent de laisser la graine du Mal pousser dans leur bras. Capables de manier leur épée au combat rapproché ou de provoquer des dommages à distance grâce à la magie. En se spécialisant, ils peuvent améliorer leurs sorts offensifs ou recevoir des sorts d'amélioration. Chaque spécialisation excelle dans sa spécialité PvP ou PvE.</p>
 
           <!-- STATS -->
-          <div class="ptitle" style="margin-top:0"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg><span data-i18n="panel.stats">Statistiques</span></div>
+          <div class="ptitle" style="margin-top:0"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg><span>Statistiques</span></div>
           <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.6rem;margin-bottom:1.6rem">
             <div style="background:rgba(30,11,2,.75);border:1px solid rgba(140,85,16,.35);border-radius:3px;padding:.6rem .9rem">
-              <div style="font-family:'Alegreya SC',serif;font-size:.58rem;letter-spacing:2px;color:var(--copper-l);text-transform:uppercase;margin-bottom:.5rem" data-i18n="panel.stats.start">Statistiques de départ</div>
+              <div style="font-family:'Alegreya SC',serif;font-size:.58rem;letter-spacing:2px;color:var(--copper-l);text-transform:uppercase;margin-bottom:.5rem">Statistiques de départ</div>
               <div class="cp-stat">Force (STR) <strong>5</strong></div>
               <div class="cp-stat">Vitalité (VIT) <strong>3</strong></div>
               <div class="cp-stat">Intelligence (INT) <strong>5</strong></div>
               <div class="cp-stat">Dextérité (DEX) <strong>3</strong></div>
             </div>
             <div style="background:rgba(30,11,2,.75);border:1px solid rgba(140,85,16,.35);border-radius:3px;padding:.6rem .9rem">
-              <div style="font-family:'Alegreya SC',serif;font-size:.58rem;letter-spacing:2px;color:var(--copper-l);text-transform:uppercase;margin-bottom:.5rem" data-i18n="panel.stats.high">Statistiques à haut niveau</div>
+              <div style="font-family:'Alegreya SC',serif;font-size:.58rem;letter-spacing:2px;color:var(--copper-l);text-transform:uppercase;margin-bottom:.5rem">Statistiques à haut niveau</div>
               <div class="cp-stat">Force (STR) <strong>16</strong></div>
               <div class="cp-stat">Vitalité (VIT) <strong>90</strong></div>
               <div class="cp-stat">Intelligence (INT) <strong>90</strong></div>
@@ -250,82 +281,82 @@
 
           <!-- SURA ARME MAGIQUE -->
           <div class="ptitle" style="margin-top:0"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/><path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>Sura Arme Magique (AM)</div>
-          <p class="cp-desc" style="margin-bottom:1.1rem" data-i18n="sura.am.desc">Principalement PvE, mais redoutable en PvP à haut niveau. La Lame Enchantée augmente l'attaque et vole de la vie. Le Tourbillon du Dragon ignore la défense.</p>
+          <p class="cp-desc" style="margin-bottom:1.1rem">Principalement PvE, mais redoutable en PvP à haut niveau. La Lame Enchantée augmente l'attaque et vole de la vie. Le Tourbillon du Dragon ignore la défense.</p>
           <div class="cp-body" style="margin-bottom:1.5rem">
             <div class="cp-col">
-              <h4 data-i18n="panel.pve">PvE — Ordre recommandé</h4>
+              <h4>PvE — Ordre recommandé</h4>
               <div class="cp-skills">
-                <div class="cp-skill"><img src="assets/Lameenchantee.jpg" alt="" onerror="this.style.display='none'">Lame Enchantée <span>INT — Att. ↑ + vol de vie</span></div>
-                <div class="cp-skill"><img src="assets/Armureenchantee.jpg" alt="" onerror="this.style.display='none'">Armure Enchantée <span>INT — Déf. ↑ + renvoi dégâts</span></div>
-                <div class="cp-skill"><img src="assets/Peur.jpg" alt="" onerror="this.style.display='none'">Peur <span>Aucun — Réduit dégâts physiques</span></div>
-                <div class="cp-skill"><img src="assets/Tourbillondudragon.jpg" alt="" onerror="this.style.display='none'">Tourbillon du Dragon <span>INT · DEX · STR — Zone + ignore déf.</span></div>
-                <div class="cp-skill"><img src="assets/Toucherbrulant.jpg" alt="" onerror="this.style.display='none'">Toucher brûlant <span>INT · DEX · STR — Frontal + ignore déf.</span></div>
-                <div class="cp-skill"><img src="assets/Contresort.jpg" alt="" onerror="this.style.display='none'">Contre-sort <span>INT · DEX — Distance + supprime buffs</span></div>
+                <div class="cp-skill"><img src="assets/Lameenchantee.jpg" alt="Lame Enchantée" loading="lazy" onerror="this.style.display='none'">Lame Enchantée<span>INT — Att. ↑ + vol de vie</span></div>
+                <div class="cp-skill"><img src="assets/Armureenchantee.jpg" alt="Armure Enchantée" loading="lazy" onerror="this.style.display='none'">Armure Enchantée<span>INT — Déf. ↑ + renvoi dégâts</span></div>
+                <div class="cp-skill"><img src="assets/Peur.jpg" alt="Peur" loading="lazy" onerror="this.style.display='none'">Peur<span>Aucun — Réduit dégâts physiques</span></div>
+                <div class="cp-skill"><img src="assets/Tourbillondudragon.jpg" alt="Tourbillon du Dragon" loading="lazy" onerror="this.style.display='none'">Tourbillon du Dragon<span>INT · DEX · STR — Zone + ignore déf.</span></div>
+                <div class="cp-skill"><img src="assets/Toucherbrulant.jpg" alt="Toucher brûlant" loading="lazy" onerror="this.style.display='none'">Toucher brûlant<span>INT · DEX · STR — Frontal + ignore déf.</span></div>
+                <div class="cp-skill"><img src="assets/Contresort.jpg" alt="Contre-sort" loading="lazy" onerror="this.style.display='none'">Contre-sort<span>INT · DEX — Distance + supprime buffs</span></div>
               </div>
             </div>
             <div class="cp-col">
-              <h4 data-i18n="panel.pvp">PvP — Ordre recommandé</h4>
+              <h4>PvP — Ordre recommandé</h4>
               <div class="cp-skills">
-                <div class="cp-skill"><img src="assets/Lameenchantee.jpg" alt="" onerror="this.style.display='none'">Lame Enchantée <span>INT — Att. ↑ + vol de vie</span></div>
-                <div class="cp-skill"><img src="assets/Peur.jpg" alt="" onerror="this.style.display='none'">Peur <span>Aucun — Réduit dégâts + annule aggro</span></div>
-                <div class="cp-skill"><img src="assets/Contresort.jpg" alt="" onerror="this.style.display='none'">Contre-sort <span>INT · DEX — Supprime buffs ennemis</span></div>
-                <div class="cp-skill"><img src="assets/Tourbillondudragon.jpg" alt="" onerror="this.style.display='none'">Tourbillon du Dragon <span>INT · DEX · STR — Zone + éjecte</span></div>
-                <div class="cp-skill"><img src="assets/Toucherbrulant.jpg" alt="" onerror="this.style.display='none'">Toucher brûlant <span>INT · DEX · STR — Ignore déf.</span></div>
-                <div class="cp-skill"><img src="assets/Armureenchantee.jpg" alt="" onerror="this.style.display='none'">Armure Enchantée <span>INT — Renvoie dégâts physiques</span></div>
+                <div class="cp-skill"><img src="assets/Lameenchantee.jpg" alt="Lame Enchantée" loading="lazy" onerror="this.style.display='none'">Lame Enchantée<span>INT — Att. ↑ + vol de vie</span></div>
+                <div class="cp-skill"><img src="assets/Peur.jpg" alt="Peur" loading="lazy" onerror="this.style.display='none'">Peur<span>Aucun — Réduit dégâts + annule aggro</span></div>
+                <div class="cp-skill"><img src="assets/Contresort.jpg" alt="Contre-sort" loading="lazy" onerror="this.style.display='none'">Contre-sort<span>INT · DEX — Supprime buffs ennemis</span></div>
+                <div class="cp-skill"><img src="assets/Tourbillondudragon.jpg" alt="Tourbillon du Dragon" loading="lazy" onerror="this.style.display='none'">Tourbillon du Dragon<span>INT · DEX · STR — Zone + éjecte</span></div>
+                <div class="cp-skill"><img src="assets/Toucherbrulant.jpg" alt="Toucher brûlant" loading="lazy" onerror="this.style.display='none'">Toucher brûlant<span>INT · DEX · STR — Ignore déf.</span></div>
+                <div class="cp-skill"><img src="assets/Armureenchantee.jpg" alt="Armure Enchantée" loading="lazy" onerror="this.style.display='none'">Armure Enchantée<span>INT — Renvoie dégâts physiques</span></div>
               </div>
             </div>
           </div>
 
           <!-- SURA MAGIE NOIRE -->
           <div class="ptitle" style="margin-top:0"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01"/></svg>Sura Magie Noire (MN)</div>
-          <p class="cp-desc" style="margin-bottom:1.1rem" data-i18n="sura.mn.desc">Principalement PvP, mais utile en PvE. Attaques magiques à distance en rafale. Protection des Ténèbres réduit les dégâts magiques et physiques.</p>
+          <p class="cp-desc" style="margin-bottom:1.1rem">Principalement PvP, mais utile en PvE. Attaques magiques à distance en rafale. Protection des Ténèbres réduit les dégâts magiques et physiques.</p>
           <div class="cp-body">
             <div class="cp-col">
-              <h4 data-i18n="panel.pve">PvE — Ordre recommandé</h4>
+              <h4>PvE — Ordre recommandé</h4>
               <div class="cp-skills">
-                <div class="cp-skill"><img src="assets/Frappedelesprit.jpg" alt="">Attaque de flammes <span>INT · STR · VIT — Zone + met à terre</span></div>
-                <div class="cp-skill"><img src="assets/Protectiondestenebres.jpg" alt="" onerror="this.style.display='none'">Protection des Ténèbres <span>INT — Déf. ↑ + réduit dégâts mag.</span></div>
-                <div class="cp-skill"><img src="assets/Attaquedestenebres.jpg" alt="" onerror="this.style.display='none'">Attaque des Ténèbres <span>INT · DEX — Distance multi-cibles</span></div>
-                <div class="cp-skill"><img src="assets/Orbedestenebres.jpg" alt="" onerror="this.style.display='none'">Orbe des Ténèbres <span>INT · DEX · VIT — Distance multi-cibles</span></div>
-                <div class="cp-skill"><img src="assets/Frappedelesprit.jpg" alt="">Frappe de l'Esprit <span>INT · DEX · VIT — Ralentit les cibles</span></div>
-                <div class="cp-skill"><img src="assets/Espritdeflamme.jpg" alt="" onerror="this.style.display='none'">Esprit de flammes <span>INT · VIT · STR — Attaque répétée</span></div>
+                <div class="cp-skill"><img src="assets/Frappedelesprit.jpg" alt="Attaque de flammes" loading="lazy">Attaque de flammes<span>INT · STR · VIT — Zone + met à terre</span></div>
+                <div class="cp-skill"><img src="assets/Protectiondestenebres.jpg" alt="Protection des Ténèbres" loading="lazy" onerror="this.style.display='none'">Protection des Ténèbres<span>INT — Déf. ↑ + réduit dégâts mag.</span></div>
+                <div class="cp-skill"><img src="assets/Attaquedestenebres.jpg" alt="Attaque des Ténèbres" loading="lazy" onerror="this.style.display='none'">Attaque des Ténèbres<span>INT · DEX — Distance multi-cibles</span></div>
+                <div class="cp-skill"><img src="assets/Orbedestenebres.jpg" alt="Orbe des Ténèbres" loading="lazy" onerror="this.style.display='none'">Orbe des Ténèbres<span>INT · DEX · VIT — Distance multi-cibles</span></div>
+                <div class="cp-skill"><img src="assets/Frappedelesprit.jpg" alt="Frappe de l'Esprit" loading="lazy">Frappe de l'Esprit<span>INT · DEX · VIT — Ralentit les cibles</span></div>
+                <div class="cp-skill"><img src="assets/Espritdeflamme.jpg" alt="Esprit de flammes" loading="lazy" onerror="this.style.display='none'">Esprit de flammes<span>INT · VIT · STR — Attaque répétée</span></div>
               </div>
             </div>
             <div class="cp-col">
-              <h4 data-i18n="panel.pvp">PvP — Ordre recommandé</h4>
+              <h4>PvP — Ordre recommandé</h4>
               <div class="cp-skills">
-                <div class="cp-skill"><img src="assets/Espritdeflamme.jpg" alt="" onerror="this.style.display='none'">Esprit de flammes <span>INT · VIT · STR — Attaque répétée</span></div>
-                <div class="cp-skill"><img src="assets/Protectiondestenebres.jpg" alt="" onerror="this.style.display='none'">Protection des Ténèbres <span>INT — Déf. ↑ + réduit dégâts</span></div>
-                <div class="cp-skill"><img src="assets/Orbedestenebres.jpg" alt="" onerror="this.style.display='none'">Orbe des Ténèbres <span>INT · DEX · VIT — Distance multi-cibles</span></div>
-                <div class="cp-skill"><img src="assets/Attaquedestenebres.jpg" alt="" onerror="this.style.display='none'">Attaque des Ténèbres <span>INT · DEX — Distance multi-cibles</span></div>
-                <div class="cp-skill"><img src="assets/Frappedelesprit.jpg" alt="">Frappe de l'Esprit <span>INT · DEX · VIT — Ralentit les cibles</span></div>
-                <div class="cp-skill"><img src="assets/Attaquedeflamme.jpg" alt="" onerror="this.style.display='none'">Attaque de flammes <span>INT · STR · VIT — Zone + met à terre</span></div>
+                <div class="cp-skill"><img src="assets/Espritdeflamme.jpg" alt="Esprit de flammes" loading="lazy" onerror="this.style.display='none'">Esprit de flammes<span>INT · VIT · STR — Attaque répétée</span></div>
+                <div class="cp-skill"><img src="assets/Protectiondestenebres.jpg" alt="Protection des Ténèbres" loading="lazy" onerror="this.style.display='none'">Protection des Ténèbres<span>INT — Déf. ↑ + réduit dégâts</span></div>
+                <div class="cp-skill"><img src="assets/Orbedestenebres.jpg" alt="Orbe des Ténèbres" loading="lazy" onerror="this.style.display='none'">Orbe des Ténèbres<span>INT · DEX · VIT — Distance multi-cibles</span></div>
+                <div class="cp-skill"><img src="assets/Attaquedestenebres.jpg" alt="Attaque des Ténèbres" loading="lazy" onerror="this.style.display='none'">Attaque des Ténèbres<span>INT · DEX — Distance multi-cibles</span></div>
+                <div class="cp-skill"><img src="assets/Frappedelesprit.jpg" alt="Frappe de l'Esprit" loading="lazy">Frappe de l'Esprit<span>INT · DEX · VIT — Ralentit les cibles</span></div>
+                <div class="cp-skill"><img src="assets/Attaquedeflamme.jpg" alt="Attaque de flammes" loading="lazy" onerror="this.style.display='none'">Attaque de flammes<span>INT · STR · VIT — Zone + met à terre</span></div>
               </div>
             </div>
           </div>
-          <div class="ibox" style="margin-top:1.2rem" data-i18n-html="panel.note"><strong>Note :</strong> Ces ordres sont indicatifs — de nombreux choix s'offrent à vous selon la spécificité souhaitée pour votre personnage.</div>
+          <div class="ibox" style="margin-top:1.2rem"><strong>Note :</strong> Ces ordres sont indicatifs — de nombreux choix s'offrent à vous selon la spécificité souhaitée pour votre personnage.</div>
         </div>
 
         <div class="cc-panel" id="panel-ninja">
-          <button class="cp-close" data-close-class="ninja" data-i18n="panel.close">Fermer ✕</button>
+          <button class="cp-close" data-close-class="ninja">Fermer ✕</button>
           <div class="cp-head">
-            <span class="cp-name" data-i18n="class.ninja">Ninja</span>
-            <div class="cp-specs"><span class="cp-spec" data-i18n="ninja.spec1">Assassin</span><span class="cp-spec" data-i18n="ninja.spec2">Archer</span></div>
+            <span class="cp-name">Ninja</span>
+            <div class="cp-specs"><span class="cp-spec">Assassin</span><span class="cp-spec">Archer</span></div>
           </div>
 
-          <p class="cp-desc" style="margin-bottom:1.4rem" data-i18n="ninja.desc">Les Ninjas sont de puissants assassins professionnels qui excellent dans les embuscades. Ils portent une armure légère pour privilégier la mobilité et la rapidité. Maîtres du combat à la dague et à l'arc selon leur spécialisation.</p>
+          <p class="cp-desc" style="margin-bottom:1.4rem">Les Ninjas sont de puissants assassins professionnels qui excellent dans les embuscades. Ils portent une armure légère pour privilégier la mobilité et la rapidité. Maîtres du combat à la dague et à l'arc selon leur spécialisation.</p>
 
-          <div class="ptitle" style="margin-top:0"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg><span data-i18n="panel.stats">Statistiques</span></div>
+          <div class="ptitle" style="margin-top:0"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg><span>Statistiques</span></div>
           <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.6rem;margin-bottom:1.6rem">
             <div style="background:rgba(30,11,2,.75);border:1px solid rgba(140,85,16,.35);border-radius:3px;padding:.6rem .9rem">
-              <div style="font-family:'Alegreya SC',serif;font-size:.58rem;letter-spacing:2px;color:var(--copper-l);text-transform:uppercase;margin-bottom:.5rem" data-i18n="panel.stats.start">Statistiques de départ</div>
+              <div style="font-family:'Alegreya SC',serif;font-size:.58rem;letter-spacing:2px;color:var(--copper-l);text-transform:uppercase;margin-bottom:.5rem">Statistiques de départ</div>
               <div class="cp-stat">Force (STR) <strong>4</strong></div>
               <div class="cp-stat">Vitalité (VIT) <strong>3</strong></div>
               <div class="cp-stat">Intelligence (INT) <strong>3</strong></div>
               <div class="cp-stat">Dextérité (DEX) <strong>6</strong></div>
             </div>
             <div style="background:rgba(30,11,2,.75);border:1px solid rgba(140,85,16,.35);border-radius:3px;padding:.6rem .9rem">
-              <div style="font-family:'Alegreya SC',serif;font-size:.58rem;letter-spacing:2px;color:var(--copper-l);text-transform:uppercase;margin-bottom:.5rem" data-i18n="panel.stats.high">Statistiques à haut niveau</div>
+              <div style="font-family:'Alegreya SC',serif;font-size:.58rem;letter-spacing:2px;color:var(--copper-l);text-transform:uppercase;margin-bottom:.5rem">Statistiques à haut niveau</div>
               <div class="cp-stat">Force (STR) <strong>90</strong></div>
               <div class="cp-stat">Vitalité (VIT) <strong>90</strong></div>
               <div class="cp-stat">Intelligence (INT) <strong>16</strong></div>
@@ -334,79 +365,79 @@
           </div>
 
           <!-- ASSASSIN -->
-          <div class="ptitle" style="margin-top:0"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/><path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg><span data-i18n="ninja.assassin.title">Ninja Assassin</span></div>
-          <p class="cp-desc" style="margin-bottom:1.1rem" data-i18n="ninja.assassin.desc">Très polyvalent — excellent en PvE et redoutable en PvP. L'Embuscade inflige des dégâts massifs dans le dos depuis l'état furtif.</p>
+          <div class="ptitle" style="margin-top:0"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/><path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg><span>Ninja Assassin</span></div>
+          <p class="cp-desc" style="margin-bottom:1.1rem">Très polyvalent — excellent en PvE et redoutable en PvP. L'Embuscade inflige des dégâts massifs dans le dos depuis l'état furtif.</p>
           <div class="cp-body" style="margin-bottom:1.5rem">
             <div class="cp-col">
-              <h4 data-i18n="panel.pve">PvE — Ordre recommandé</h4>
+              <h4>PvE — Ordre recommandé</h4>
               <div class="cp-skills">
-                <div class="cp-skill"><img src="assets/Embuscade.jpg" alt="" onerror="this.style.display='none'">Embuscade <span>DEX · STR — Dégâts ↑ de dos en furtif</span></div>
-                <div class="cp-skill"><img src="assets/Daguefilante.jpg" alt="" onerror="this.style.display='none'">Dague filante <span>DEX · STR — Tourbillon + empoisonne</span></div>
-                <div class="cp-skill"><img src="assets/Attaquerapide.jpg" alt="" onerror="this.style.display='none'">Attaque rapide <span>DEX · STR — Téléportée + furtif ↑</span></div>
-                <div class="cp-skill"><img src="assets/Brumeempoisonnee.jpg" alt="" onerror="this.style.display='none'">Brume empoisonnée <span>DEX · STR — Distance + empoisonne</span></div>
-                <div class="cp-skill"><img src="assets/Furtif.jpg" alt="" onerror="this.style.display='none'">Furtif <span>Aucun — Invisibilité + dégâts ↑</span></div>
+                <div class="cp-skill"><img src="assets/Embuscade.jpg" alt="Embuscade" loading="lazy" onerror="this.style.display='none'">Embuscade<span>DEX · STR — Dégâts ↑ de dos en furtif</span></div>
+                <div class="cp-skill"><img src="assets/Daguefilante.jpg" alt="Dague filante" loading="lazy" onerror="this.style.display='none'">Dague filante<span>DEX · STR — Tourbillon + empoisonne</span></div>
+                <div class="cp-skill"><img src="assets/Attaquerapide.jpg" alt="Attaque rapide" loading="lazy" onerror="this.style.display='none'">Attaque rapide<span>DEX · STR — Téléportée + furtif ↑</span></div>
+                <div class="cp-skill"><img src="assets/Brumeempoisonnee.jpg" alt="Brume empoisonnée" loading="lazy" onerror="this.style.display='none'">Brume empoisonnée<span>DEX · STR — Distance + empoisonne</span></div>
+                <div class="cp-skill"><img src="assets/Furtif.jpg" alt="Furtif" loading="lazy" onerror="this.style.display='none'">Furtif<span>Aucun — Invisibilité + dégâts ↑</span></div>
               </div>
             </div>
             <div class="cp-col">
-              <h4 data-i18n="panel.pvp">PvP — Ordre recommandé</h4>
+              <h4>PvP — Ordre recommandé</h4>
               <div class="cp-skills">
-                <div class="cp-skill"><img src="assets/Embuscade.jpg" alt="" onerror="this.style.display='none'">Embuscade <span>DEX · STR — Dégâts ↑ de dos en furtif</span></div>
-                <div class="cp-skill"><img src="assets/Furtif.jpg" alt="" onerror="this.style.display='none'">Furtif <span>Aucun — Invisibilité + dégâts ↑</span></div>
-                <div class="cp-skill"><img src="assets/Daguefilante.jpg" alt="" onerror="this.style.display='none'">Dague filante <span>DEX · STR — Tourbillon + empoisonne</span></div>
-                <div class="cp-skill"><img src="assets/Brumeempoisonnee.jpg" alt="" onerror="this.style.display='none'">Brume empoisonnée <span>DEX · STR — Distance + empoisonne</span></div>
-                <div class="cp-skill"><img src="assets/Attaquerapide.jpg" alt="" onerror="this.style.display='none'">Attaque rapide <span>DEX · STR — Téléportée + furtif ↑</span></div>
+                <div class="cp-skill"><img src="assets/Embuscade.jpg" alt="Embuscade" loading="lazy" onerror="this.style.display='none'">Embuscade<span>DEX · STR — Dégâts ↑ de dos en furtif</span></div>
+                <div class="cp-skill"><img src="assets/Furtif.jpg" alt="Furtif" loading="lazy" onerror="this.style.display='none'">Furtif<span>Aucun — Invisibilité + dégâts ↑</span></div>
+                <div class="cp-skill"><img src="assets/Daguefilante.jpg" alt="Dague filante" loading="lazy" onerror="this.style.display='none'">Dague filante<span>DEX · STR — Tourbillon + empoisonne</span></div>
+                <div class="cp-skill"><img src="assets/Brumeempoisonnee.jpg" alt="Brume empoisonnée" loading="lazy" onerror="this.style.display='none'">Brume empoisonnée<span>DEX · STR — Distance + empoisonne</span></div>
+                <div class="cp-skill"><img src="assets/Attaquerapide.jpg" alt="Attaque rapide" loading="lazy" onerror="this.style.display='none'">Attaque rapide<span>DEX · STR — Téléportée + furtif ↑</span></div>
               </div>
             </div>
           </div>
 
           <!-- ARCHER -->
-          <div class="ptitle" style="margin-top:0"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01"/></svg><span data-i18n="ninja.archer.title">Ninja Archer</span></div>
-          <p class="cp-desc" style="margin-bottom:1.1rem" data-i18n="ninja.archer.desc">Redoutable en PvP, peut rencontrer quelques difficultés en PvE. Attaques à distance sur plusieurs cibles. Foulée de plume augmente la mobilité.</p>
+          <div class="ptitle" style="margin-top:0"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01"/></svg><span>Ninja Archer</span></div>
+          <p class="cp-desc" style="margin-bottom:1.1rem">Redoutable en PvP, peut rencontrer quelques difficultés en PvE. Attaques à distance sur plusieurs cibles. Foulée de plume augmente la mobilité.</p>
           <div class="cp-body">
             <div class="cp-col">
-              <h4 data-i18n="panel.pve">PvE — Ordre recommandé</h4>
+              <h4>PvE — Ordre recommandé</h4>
               <div class="cp-skills">
-                <div class="cp-skill"><img src="assets/Fouleedeplume.jpg" alt="" onerror="this.style.display='none'">Foulée de plume <span>Aucun — Vitesse déplacement ↑</span></div>
-                <div class="cp-skill"><img src="assets/Flecheempoisonnee.jpg" alt="" onerror="this.style.display='none'">Flèche empoisonnée <span>DEX · STR — Distance + empoisonne</span></div>
-                <div class="cp-skill"><img src="assets/Flechedefeu.jpg" alt="" onerror="this.style.display='none'">Flèche de feu <span>DEX · STR — Distance multi-cibles</span></div>
-                <div class="cp-skill"><img src="assets/Tirarepetition.jpg" alt="" onerror="this.style.display='none'">Tir à répétition <span>DEX · STR — Distance rafale</span></div>
-                <div class="cp-skill"><img src="assets/Pluiedefleches.jpg" alt="" onerror="this.style.display='none'">Pluie de flèches <span>DEX · STR — Zone à distance</span></div>
+                <div class="cp-skill"><img src="assets/Fouleedeplume.jpg" alt="Foulée de plume" loading="lazy" onerror="this.style.display='none'">Foulée de plume<span>Aucun — Vitesse déplacement ↑</span></div>
+                <div class="cp-skill"><img src="assets/Flecheempoisonnee.jpg" alt="Flèche empoisonnée" loading="lazy" onerror="this.style.display='none'">Flèche empoisonnée<span>DEX · STR — Distance + empoisonne</span></div>
+                <div class="cp-skill"><img src="assets/Flechedefeu.jpg" alt="Flèche de feu" loading="lazy" onerror="this.style.display='none'">Flèche de feu<span>DEX · STR — Distance multi-cibles</span></div>
+                <div class="cp-skill"><img src="assets/Tirarepetition.jpg" alt="Tir à répétition" loading="lazy" onerror="this.style.display='none'">Tir à répétition<span>DEX · STR — Distance rafale</span></div>
+                <div class="cp-skill"><img src="assets/Pluiedefleches.jpg" alt="Pluie de flèches" loading="lazy" onerror="this.style.display='none'">Pluie de flèches<span>DEX · STR — Zone à distance</span></div>
               </div>
             </div>
             <div class="cp-col">
-              <h4 data-i18n="panel.pvp">PvP — Ordre recommandé</h4>
+              <h4>PvP — Ordre recommandé</h4>
               <div class="cp-skills">
-                <div class="cp-skill"><img src="assets/Flechedefeu.jpg" alt="" onerror="this.style.display='none'">Flèche de feu <span>DEX · STR — Distance multi-cibles</span></div>
-                <div class="cp-skill"><img src="assets/Flecheempoisonnee.jpg" alt="" onerror="this.style.display='none'">Flèche empoisonnée <span>DEX · STR — Distance + empoisonne</span></div>
-                <div class="cp-skill"><img src="assets/Tirarepetition.jpg" alt="" onerror="this.style.display='none'">Tir à répétition <span>DEX · STR — Distance rafale</span></div>
-                <div class="cp-skill"><img src="assets/Pluiedefleches.jpg" alt="" onerror="this.style.display='none'">Pluie de flèches <span>DEX · STR — Zone à distance</span></div>
-                <div class="cp-skill"><img src="assets/Fouleedeplume.jpg" alt="" onerror="this.style.display='none'">Foulée de plume <span>Aucun — Vitesse déplacement ↑</span></div>
+                <div class="cp-skill"><img src="assets/Flechedefeu.jpg" alt="Flèche de feu" loading="lazy" onerror="this.style.display='none'">Flèche de feu<span>DEX · STR — Distance multi-cibles</span></div>
+                <div class="cp-skill"><img src="assets/Flecheempoisonnee.jpg" alt="Flèche empoisonnée" loading="lazy" onerror="this.style.display='none'">Flèche empoisonnée<span>DEX · STR — Distance + empoisonne</span></div>
+                <div class="cp-skill"><img src="assets/Tirarepetition.jpg" alt="Tir à répétition" loading="lazy" onerror="this.style.display='none'">Tir à répétition<span>DEX · STR — Distance rafale</span></div>
+                <div class="cp-skill"><img src="assets/Pluiedefleches.jpg" alt="Pluie de flèches" loading="lazy" onerror="this.style.display='none'">Pluie de flèches<span>DEX · STR — Zone à distance</span></div>
+                <div class="cp-skill"><img src="assets/Fouleedeplume.jpg" alt="Foulée de plume" loading="lazy" onerror="this.style.display='none'">Foulée de plume<span>Aucun — Vitesse déplacement ↑</span></div>
               </div>
             </div>
           </div>
-          <div class="ibox" style="margin-top:1.2rem" data-i18n-html="panel.note"><strong>Note :</strong> Ces ordres sont indicatifs — de nombreux choix s'offrent à vous selon la spécificité souhaitée pour votre personnage.</div>
+          <div class="ibox" style="margin-top:1.2rem"><strong>Note :</strong> Ces ordres sont indicatifs — de nombreux choix s'offrent à vous selon la spécificité souhaitée pour votre personnage.</div>
         </div>
 
         <div class="cc-panel" id="panel-chamane">
-          <button class="cp-close" data-close-class="chamane" data-i18n="panel.close">Fermer ✕</button>
+          <button class="cp-close" data-close-class="chamane">Fermer ✕</button>
           <div class="cp-head">
-            <span class="cp-name" data-i18n="class.chamane">Chamane</span>
-            <div class="cp-specs"><span class="cp-spec" data-i18n="chamane.spec1">Dragon</span><span class="cp-spec" data-i18n="chamane.spec2">Soin</span></div>
+            <span class="cp-name">Chamane</span>
+            <div class="cp-specs"><span class="cp-spec">Dragon</span><span class="cp-spec">Soin</span></div>
           </div>
 
-          <p class="cp-desc" style="margin-bottom:1.4rem" data-i18n="chamane.desc">Les Chamanes sont des sages qui utilisent la magie et les sorts. Leurs pouvoirs mystiques sont d'une efficacité redoutable tant au combat que dans le soutien. En fonction de leur spécialisation, elles peuvent augmenter leurs attaques ou se consacrer aux sorts de soins.</p>
+          <p class="cp-desc" style="margin-bottom:1.4rem">Les Chamanes sont des sages qui utilisent la magie et les sorts. Leurs pouvoirs mystiques sont d'une efficacité redoutable tant au combat que dans le soutien. En fonction de leur spécialisation, elles peuvent augmenter leurs attaques ou se consacrer aux sorts de soins.</p>
 
-          <div class="ptitle" style="margin-top:0"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg><span data-i18n="panel.stats">Statistiques</span></div>
+          <div class="ptitle" style="margin-top:0"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg><span>Statistiques</span></div>
           <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.6rem;margin-bottom:.6rem">
             <div style="background:rgba(30,11,2,.75);border:1px solid rgba(140,85,16,.35);border-radius:3px;padding:.6rem .9rem">
-              <div style="font-family:'Alegreya SC',serif;font-size:.58rem;letter-spacing:2px;color:var(--copper-l);text-transform:uppercase;margin-bottom:.5rem" data-i18n="panel.stats.start">Statistiques de départ</div>
+              <div style="font-family:'Alegreya SC',serif;font-size:.58rem;letter-spacing:2px;color:var(--copper-l);text-transform:uppercase;margin-bottom:.5rem">Statistiques de départ</div>
               <div class="cp-stat">Force (STR) <strong>3</strong></div>
               <div class="cp-stat">Vitalité (VIT) <strong>4</strong></div>
               <div class="cp-stat">Intelligence (INT) <strong>6</strong></div>
               <div class="cp-stat">Dextérité (DEX) <strong>3</strong></div>
             </div>
             <div style="background:rgba(30,11,2,.75);border:1px solid rgba(140,85,16,.35);border-radius:3px;padding:.6rem .9rem">
-              <div style="font-family:'Alegreya SC',serif;font-size:.58rem;letter-spacing:2px;color:var(--copper-l);text-transform:uppercase;margin-bottom:.5rem" data-i18n="panel.stats.high">Statistiques à haut niveau</div>
+              <div style="font-family:'Alegreya SC',serif;font-size:.58rem;letter-spacing:2px;color:var(--copper-l);text-transform:uppercase;margin-bottom:.5rem">Statistiques à haut niveau</div>
               <div class="cp-stat">Force (STR) <strong>16</strong></div>
               <div class="cp-stat">Vitalité (VIT) <strong>90</strong></div>
               <div class="cp-stat">Intelligence (INT) <strong>90</strong></div>
@@ -416,29 +447,29 @@
           <div class="ibox" style="margin-bottom:1.4rem"><strong>Conseil :</strong> Montez les statistiques par niveau ainsi : <strong>2 INT + 1 VIT</strong> — à titre indicatif selon votre spécificité.</div>
 
           <!-- CHAMANE DRAGON -->
-          <div class="ptitle" style="margin-top:0"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/><path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg><span data-i18n="chamane.dragon.title">Chamane Dragon</span></div>
-          <p class="cp-desc" style="margin-bottom:1.1rem" data-i18n-html="chamane.dragon.desc">Très polyvalent — excellent en PvE et redoutable en PvP. Dégâts offensifs augmentés si le personnage porte un <strong>gong</strong>. Possède aussi une spécialisation <strong>Buff</strong> orientée soutien d'équipe.</p>
+          <div class="ptitle" style="margin-top:0"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/><path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg><span>Chamane Dragon</span></div>
+          <p class="cp-desc" style="margin-bottom:1.1rem">Très polyvalent — excellent en PvE et redoutable en PvP. Dégâts offensifs augmentés si le personnage porte un <strong>gong</strong>. Possède aussi une spécialisation <strong>Buff</strong> orientée soutien d'équipe.</p>
           <div class="cp-body" style="margin-bottom:1.5rem">
             <div class="cp-col">
-              <h4 data-i18n="panel.pve">PvE — Ordre recommandé</h4>
+              <h4>PvE — Ordre recommandé</h4>
               <div class="cp-skills">
-                <div class="cp-skill"><img src="assets/Rugissementdudragon.jpg" alt="" onerror="this.style.display='none'">Rugissement du Dragon <span>INT · STR — Zone + feu + met à terre</span></div>
-                <div class="cp-skill"><img src="assets/Aidedudragon.jpg" alt="" onerror="this.style.display='none'">Aide du Dragon <span>INT — Attaque critique ↑</span></div>
-                <div class="cp-skill"><img src="assets/Dragonchassant.jpg" alt="" onerror="this.style.display='none'">Dragon chassant <span>INT · DEX — Frontal + feu durable</span></div>
-                <div class="cp-skill"><img src="assets/Benediction.jpg" alt="" onerror="this.style.display='none'">Bénédiction <span>INT · DEX — Réduit dégâts physiques reçus</span></div>
-                <div class="cp-skill"><img src="assets/Talismanvolant.jpg" alt="" onerror="this.style.display='none'">Talisman volant <span>INT · STR — Distance multi-cibles</span></div>
-                <div class="cp-skill"><img src="assets/Reflet.jpg" alt="" onerror="this.style.display='none'">Reflet <span>INT · STR — Renvoie dégâts physiques</span></div>
+                <div class="cp-skill"><img src="assets/Rugissementdudragon.jpg" alt="Rugissement du Dragon" loading="lazy" onerror="this.style.display='none'">Rugissement du Dragon<span>INT · STR — Zone + feu + met à terre</span></div>
+                <div class="cp-skill"><img src="assets/Aidedudragon.jpg" alt="Aide du Dragon" loading="lazy" onerror="this.style.display='none'">Aide du Dragon<span>INT — Attaque critique ↑</span></div>
+                <div class="cp-skill"><img src="assets/Dragonchassant.jpg" alt="Dragon chassant" loading="lazy" onerror="this.style.display='none'">Dragon chassant<span>INT · DEX — Frontal + feu durable</span></div>
+                <div class="cp-skill"><img src="assets/Benediction.jpg" alt="Bénédiction" loading="lazy" onerror="this.style.display='none'">Bénédiction<span>INT · DEX — Réduit dégâts physiques reçus</span></div>
+                <div class="cp-skill"><img src="assets/Talismanvolant.jpg" alt="Talisman volant" loading="lazy" onerror="this.style.display='none'">Talisman volant<span>INT · STR — Distance multi-cibles</span></div>
+                <div class="cp-skill"><img src="assets/Reflet.jpg" alt="Reflet" loading="lazy" onerror="this.style.display='none'">Reflet<span>INT · STR — Renvoie dégâts physiques</span></div>
               </div>
             </div>
             <div class="cp-col">
-              <h4 data-i18n="panel.pvp">PvP — Ordre recommandé</h4>
+              <h4>PvP — Ordre recommandé</h4>
               <div class="cp-skills">
-                <div class="cp-skill"><img src="assets/Rugissementdudragon.jpg" alt="" onerror="this.style.display='none'">Rugissement du Dragon <span>INT · STR — Zone + feu + met à terre</span></div>
-                <div class="cp-skill"><img src="assets/Dragonchassant.jpg" alt="" onerror="this.style.display='none'">Dragon chassant <span>INT · DEX — Frontal + feu durable</span></div>
-                <div class="cp-skill"><img src="assets/Aidedudragon.jpg" alt="" onerror="this.style.display='none'">Aide du Dragon <span>INT — Attaque critique ↑</span></div>
-                <div class="cp-skill"><img src="assets/Talismanvolant.jpg" alt="" onerror="this.style.display='none'">Talisman volant <span>INT · STR — Distance multi-cibles</span></div>
-                <div class="cp-skill"><img src="assets/Benediction.jpg" alt="" onerror="this.style.display='none'">Bénédiction <span>INT · DEX — Réduit dégâts physiques reçus</span></div>
-                <div class="cp-skill"><img src="assets/Reflet.jpg" alt="" onerror="this.style.display='none'">Reflet <span>INT · STR — Renvoie dégâts physiques</span></div>
+                <div class="cp-skill"><img src="assets/Rugissementdudragon.jpg" alt="Rugissement du Dragon" loading="lazy" onerror="this.style.display='none'">Rugissement du Dragon<span>INT · STR — Zone + feu + met à terre</span></div>
+                <div class="cp-skill"><img src="assets/Dragonchassant.jpg" alt="Dragon chassant" loading="lazy" onerror="this.style.display='none'">Dragon chassant<span>INT · DEX — Frontal + feu durable</span></div>
+                <div class="cp-skill"><img src="assets/Aidedudragon.jpg" alt="Aide du Dragon" loading="lazy" onerror="this.style.display='none'">Aide du Dragon<span>INT — Attaque critique ↑</span></div>
+                <div class="cp-skill"><img src="assets/Talismanvolant.jpg" alt="Talisman volant" loading="lazy" onerror="this.style.display='none'">Talisman volant<span>INT · STR — Distance multi-cibles</span></div>
+                <div class="cp-skill"><img src="assets/Benediction.jpg" alt="Bénédiction" loading="lazy" onerror="this.style.display='none'">Bénédiction<span>INT · DEX — Réduit dégâts physiques reçus</span></div>
+                <div class="cp-skill"><img src="assets/Reflet.jpg" alt="Reflet" loading="lazy" onerror="this.style.display='none'">Reflet<span>INT · STR — Renvoie dégâts physiques</span></div>
               </div>
             </div>
           </div>
@@ -446,60 +477,60 @@
           <div style="background:rgba(30,11,2,.75);border:1px solid rgba(140,85,16,.35);border-radius:3px;padding:.75rem 1rem;margin-bottom:1.5rem">
             <div style="font-family:'Alegreya SC',serif;font-size:.62rem;font-weight:700;letter-spacing:1.5px;color:var(--copper-l);text-transform:uppercase;margin-bottom:.6rem">Dragon Buff — Ordre recommandé</div>
             <div class="cp-skills">
-              <div class="cp-skill"><img src="assets/Aidedudragon.jpg" alt="" onerror="this.style.display='none'">Aide du Dragon <span>INT — Critique ↑</span></div>
-              <div class="cp-skill"><img src="assets/Benediction.jpg" alt="" onerror="this.style.display='none'">Bénédiction <span>INT · DEX — Réduit dégâts physiques</span></div>
-              <div class="cp-skill"><img src="assets/Reflet.jpg" alt="" onerror="this.style.display='none'">Reflet <span>INT · STR — Renvoie dégâts</span></div>
-              <div class="cp-skill"><img src="assets/Rugissementdudragon.jpg" alt="" onerror="this.style.display='none'">Rugissement du Dragon <span>INT · STR — Zone + feu</span></div>
-              <div class="cp-skill"><img src="assets/Dragonchassant.jpg" alt="" onerror="this.style.display='none'">Dragon chassant <span>INT · DEX — Frontal + feu</span></div>
-              <div class="cp-skill"><img src="assets/Talismanvolant.jpg" alt="" onerror="this.style.display='none'">Talisman volant <span>INT · STR — Distance multi-cibles</span></div>
+              <div class="cp-skill"><img src="assets/Aidedudragon.jpg" alt="Aide du Dragon" loading="lazy" onerror="this.style.display='none'">Aide du Dragon<span>INT — Critique ↑</span></div>
+              <div class="cp-skill"><img src="assets/Benediction.jpg" alt="Bénédiction" loading="lazy" onerror="this.style.display='none'">Bénédiction<span>INT · DEX — Réduit dégâts physiques</span></div>
+              <div class="cp-skill"><img src="assets/Reflet.jpg" alt="Reflet" loading="lazy" onerror="this.style.display='none'">Reflet<span>INT · STR — Renvoie dégâts</span></div>
+              <div class="cp-skill"><img src="assets/Rugissementdudragon.jpg" alt="Rugissement du Dragon" loading="lazy" onerror="this.style.display='none'">Rugissement du Dragon<span>INT · STR — Zone + feu</span></div>
+              <div class="cp-skill"><img src="assets/Dragonchassant.jpg" alt="Dragon chassant" loading="lazy" onerror="this.style.display='none'">Dragon chassant<span>INT · DEX — Frontal + feu</span></div>
+              <div class="cp-skill"><img src="assets/Talismanvolant.jpg" alt="Talisman volant" loading="lazy" onerror="this.style.display='none'">Talisman volant<span>INT · STR — Distance multi-cibles</span></div>
             </div>
           </div>
 
           <!-- CHAMANE SOIN -->
-          <div class="ptitle" style="margin-top:0"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01"/></svg><span data-i18n="chamane.soin.title">Chamane Soin</span></div>
-          <p class="cp-desc" style="margin-bottom:1.1rem" data-i18n-html="chamane.soin.desc">Redoutable en PvP, peut rencontrer des difficultés en PvE. Dégâts offensifs augmentés si le personnage porte un <strong>éventail</strong>. Le Soin restaure les PV et soigne les effets négatifs.</p>
+          <div class="ptitle" style="margin-top:0"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01"/></svg><span>Chamane Soin</span></div>
+          <p class="cp-desc" style="margin-bottom:1.1rem">Redoutable en PvP, peut rencontrer des difficultés en PvE. Dégâts offensifs augmentés si le personnage porte un <strong>éventail</strong>. Le Soin restaure les PV et soigne les effets négatifs.</p>
           <div class="cp-body">
             <div class="cp-col">
-              <h4 data-i18n="panel.pve">PvE — Ordre recommandé</h4>
+              <h4>PvE — Ordre recommandé</h4>
               <div class="cp-skills">
-                <div class="cp-skill"><img src="assets/Invocationdefoudre.jpg" alt="" onerror="this.style.display='none'">Invocation de Foudre <span>INT · STR — Distance + assomme</span></div>
-                <div class="cp-skill"><img src="assets/Soin.jpg" alt="" onerror="this.style.display='none'">Soin <span>INT — Restaure PV + soigne effets négatifs</span></div>
-                <div class="cp-skill"><img src="assets/Promptitude.jpg" alt="" onerror="this.style.display='none'">Promptitude <span>DEX — Vitesse déplacement + sort ↑</span></div>
-                <div class="cp-skill"><img src="assets/Jetdefoudre.jpg" alt="" onerror="this.style.display='none'">Jet de Foudre <span>INT · DEX — Distance multi-cibles</span></div>
-                <div class="cp-skill"><img src="assets/Attaquerenforcee.jpg" alt="" onerror="this.style.display='none'">Attaque renforcée <span>INT · STR — Puissance d'attaque ↑</span></div>
-                <div class="cp-skill"><img src="assets/Griffedefoudre.jpg" alt="" onerror="this.style.display='none'">Griffe de Foudre <span>INT · STR — Réaction en chaîne</span></div>
+                <div class="cp-skill"><img src="assets/Invocationdefoudre.jpg" alt="Invocation de Foudre" loading="lazy" onerror="this.style.display='none'">Invocation de Foudre<span>INT · STR — Distance + assomme</span></div>
+                <div class="cp-skill"><img src="assets/Soin.jpg" alt="Soin" loading="lazy" onerror="this.style.display='none'">Soin<span>INT — Restaure PV + soigne effets négatifs</span></div>
+                <div class="cp-skill"><img src="assets/Promptitude.jpg" alt="Promptitude" loading="lazy" onerror="this.style.display='none'">Promptitude<span>DEX — Vitesse déplacement + sort ↑</span></div>
+                <div class="cp-skill"><img src="assets/Jetdefoudre.jpg" alt="Jet de Foudre" loading="lazy" onerror="this.style.display='none'">Jet de Foudre<span>INT · DEX — Distance multi-cibles</span></div>
+                <div class="cp-skill"><img src="assets/Attaquerenforcee.jpg" alt="Attaque renforcée" loading="lazy" onerror="this.style.display='none'">Attaque renforcée<span>INT · STR — Puissance d'attaque ↑</span></div>
+                <div class="cp-skill"><img src="assets/Griffedefoudre.jpg" alt="Griffe de Foudre" loading="lazy" onerror="this.style.display='none'">Griffe de Foudre<span>INT · STR — Réaction en chaîne</span></div>
               </div>
             </div>
             <div class="cp-col">
-              <h4 data-i18n="panel.pvp">PvP — Ordre recommandé</h4>
+              <h4>PvP — Ordre recommandé</h4>
               <div class="cp-skills">
-                <div class="cp-skill"><img src="assets/Soin.jpg" alt="" onerror="this.style.display='none'">Soin <span>INT — Restaure PV + soigne effets négatifs</span></div>
-                <div class="cp-skill"><img src="assets/Promptitude.jpg" alt="" onerror="this.style.display='none'">Promptitude <span>DEX — Vitesse déplacement + sort ↑</span></div>
-                <div class="cp-skill"><img src="assets/Invocationdefoudre.jpg" alt="" onerror="this.style.display='none'">Invocation de Foudre <span>INT · STR — Distance + assomme</span></div>
-                <div class="cp-skill"><img src="assets/Jetdefoudre.jpg" alt="" onerror="this.style.display='none'">Jet de Foudre <span>INT · DEX — Distance multi-cibles</span></div>
-                <div class="cp-skill"><img src="assets/Griffedefoudre.jpg" alt="" onerror="this.style.display='none'">Griffe de Foudre <span>INT · STR — Réaction en chaîne</span></div>
-                <div class="cp-skill"><img src="assets/Attaquerenforcee.jpg" alt="" onerror="this.style.display='none'">Attaque renforcée <span>INT · STR — Puissance d'attaque ↑</span></div>
+                <div class="cp-skill"><img src="assets/Soin.jpg" alt="Soin" loading="lazy" onerror="this.style.display='none'">Soin<span>INT — Restaure PV + soigne effets négatifs</span></div>
+                <div class="cp-skill"><img src="assets/Promptitude.jpg" alt="Promptitude" loading="lazy" onerror="this.style.display='none'">Promptitude<span>DEX — Vitesse déplacement + sort ↑</span></div>
+                <div class="cp-skill"><img src="assets/Invocationdefoudre.jpg" alt="Invocation de Foudre" loading="lazy" onerror="this.style.display='none'">Invocation de Foudre<span>INT · STR — Distance + assomme</span></div>
+                <div class="cp-skill"><img src="assets/Jetdefoudre.jpg" alt="Jet de Foudre" loading="lazy" onerror="this.style.display='none'">Jet de Foudre<span>INT · DEX — Distance multi-cibles</span></div>
+                <div class="cp-skill"><img src="assets/Griffedefoudre.jpg" alt="Griffe de Foudre" loading="lazy" onerror="this.style.display='none'">Griffe de Foudre<span>INT · STR — Réaction en chaîne</span></div>
+                <div class="cp-skill"><img src="assets/Attaquerenforcee.jpg" alt="Attaque renforcée" loading="lazy" onerror="this.style.display='none'">Attaque renforcée<span>INT · STR — Puissance d'attaque ↑</span></div>
               </div>
             </div>
           </div>
-          <div class="ibox" style="margin-top:1.2rem" data-i18n-html="panel.note"><strong>Note :</strong> Ces ordres sont indicatifs — de nombreux choix s'offrent à vous selon la spécificité souhaitée pour votre personnage.</div>
+          <div class="ibox" style="margin-top:1.2rem"><strong>Note :</strong> Ces ordres sont indicatifs — de nombreux choix s'offrent à vous selon la spécificité souhaitée pour votre personnage.</div>
         </div>
 
       </div><!-- /cgrid -->
 
-      <div class="ibox" style="margin-top:1.5rem" data-i18n-html="classes.progression"><strong>Progression :</strong> Niveaux 1–20 → Maître M1–M10 → Grand Maître G1–G10 → <strong>Parfait P</strong>. Montez au niveau 17 pour maximiser les chances de passage en M1.</div>
+      <div class="ibox" style="margin-top:1.5rem"><strong>Progression :</strong> Niveaux 1–20 → Maître M1–M10 → Grand Maître G1–G10 → <strong>Parfait P</strong>. Montez au niveau 17 pour maximiser les chances de passage en M1.</div>
     </div>
   </div>
 </section>
 
 <!-- ══ QUÊTES ══ -->
-<div class="sep"><span class="sep-l"></span><a href="#quetes" class="sep-r" aria-label="Aller à Quêtes"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg><span data-i18n="sep.quetes">Quêtes</span><svg class="sep-arrow" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></a><span class="sep-l"></span></div>
+<div class="sep"><span class="sep-l"></span><a href="#quetes" class="sep-r" aria-label="Aller à Quêtes"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg><span>Quêtes</span><svg class="sep-arrow" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></a><span class="sep-l"></span></div>
 <section class="panel" id="quetes">
   <div class="mmo">
     <div class="mmo-hd">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-      <span class="mmo-ht" data-i18n="quetes.title">Les Quêtes</span>
-      <span class="mmo-hs" data-i18n="quetes.subtitle">Cliquez pour explorer</span>
+      <span class="mmo-ht">Les Quêtes</span>
+      <span class="mmo-hs">Cliquez pour explorer</span>
     </div>
     <div class="mmo-bd">
 
@@ -511,10 +542,10 @@
             <img src="assets/icon-liste.svg" alt="Quête principale">
           </div>
           <div class="qc-label">
-            <div class="qcn" data-i18n="quest.principale.title">Quête principale</div>
-            <div class="qcd" data-i18n="quest.principale.desc">Niv. 1–84 · Processus complet</div>
+            <div class="qcn">Quête principale</div>
+            <div class="qcd">Niv. 1–84 · Processus complet</div>
           </div>
-          <div class="qc-foot" data-i18n="quest.voir">VOIR ›</div>
+          <div class="qc-foot">VOIR ›</div>
         </div>
 
         <!-- VIGNETTE 2 : MISSIONS DE CHASSE -->
@@ -523,10 +554,10 @@
             <img src="assets/icon-chasse.png" alt="Missions de chasse">
           </div>
           <div class="qc-label">
-            <div class="qcn" data-i18n="quest.chasse.title">Missions de chasse</div>
-            <div class="qcd" data-i18n="quest.chasse.desc">Niv. 2–90 · Une par niveau</div>
+            <div class="qcn">Missions de chasse</div>
+            <div class="qcd">Niv. 2–90 · Une par niveau</div>
           </div>
-          <div class="qc-foot" data-i18n="quest.voir">VOIR ›</div>
+          <div class="qc-foot">VOIR ›</div>
         </div>
 
         <!-- VIGNETTE 3 : MISSIONS BIOLOGIQUES -->
@@ -535,10 +566,10 @@
             <img src="assets/icon-bio.svg" alt="Biologiste">
           </div>
           <div class="qc-label">
-            <div class="qcn" data-i18n="quest.bio.title">Biologiste</div>
-            <div class="qcd" data-i18n="quest.bio.desc">Bonus permanents</div>
+            <div class="qcn">Biologiste</div>
+            <div class="qcd">Bonus permanents</div>
           </div>
-          <div class="qc-foot" data-i18n="quest.voir">VOIR ›</div>
+          <div class="qc-foot">VOIR ›</div>
         </div>
         <!-- VIGNETTE 4 : MISSIONS D'ÉQUITATION -->
         <div class="qc qequit" role="button" tabindex="0" data-quest="equit" aria-expanded="false">
@@ -546,10 +577,10 @@
             <img src="assets/icon-equitation.png" alt="Équitation">
           </div>
           <div class="qc-label">
-            <div class="qcn" data-i18n="quest.equit.title">Équitation</div>
-            <div class="qcd" data-i18n="quest.equit.desc">Poney → Militaire</div>
+            <div class="qcn">Équitation</div>
+            <div class="qcd">Poney → Militaire</div>
           </div>
-          <div class="qc-foot" data-i18n="quest.voir">VOIR ›</div>
+          <div class="qc-foot">VOIR ›</div>
         </div>
 
         <!-- VIGNETTE 5 : LIVRES DE QUÊTES -->
@@ -558,18 +589,18 @@
             <img src="assets/icon-livres.svg" alt="Livres de quêtes">
           </div>
           <div class="qc-label">
-            <div class="qcn" data-i18n="quest.livres.title">Livres de quêtes</div>
-            <div class="qcd" data-i18n="quest.livres.desc">Facile → Expert</div>
+            <div class="qcn">Livres de quêtes</div>
+            <div class="qcd">Facile → Expert</div>
           </div>
-          <div class="qc-foot" data-i18n="quest.voir">VOIR ›</div>
+          <div class="qc-foot">VOIR ›</div>
         </div>
 
         <!-- ═══ PANNEAU MISSIONS DE CHASSE ═══ -->
         <div class="qc-panel" id="panel-chasse">
-          <button class="qcp-close" data-close-quest="chasse" data-i18n="panel.close">Fermer ✕</button>
+          <button class="qcp-close" data-close-quest="chasse">Fermer ✕</button>
           <div class="qcp-head">
-            <div class="qcp-title" data-i18n="chasse.title">Missions de chasse</div>
-            <div class="qcp-sub" data-i18n="chasse.subtitle">Une mission par niveau · 15% EXP garanti · Disponible uniquement si la mission précédente est terminée</div>
+            <div class="qcp-title">Missions de chasse</div>
+            <div class="qcp-sub">Une mission par niveau · 15% EXP garanti · Disponible uniquement si la mission précédente est terminée</div>
           </div>
           <div class="tbox"><strong>Règle :</strong> Une mission par niveau — disponible uniquement si la précédente est terminée. Récompense fixe : <strong>15% EXP</strong> du niveau de la quête + récompense indiquée.</div>
       <div class="qtabs">
@@ -759,10 +790,10 @@
       </div>
 
         <div class="qc-panel" id="panel-bio">
-          <button class="qcp-close" data-close-quest="bio" data-i18n="panel.close">Fermer ✕</button>
+          <button class="qcp-close" data-close-quest="bio">Fermer ✕</button>
           <div class="qcp-head">
-            <div class="qcp-title" data-i18n="bio.title">Missions biologiques</div>
-            <div class="qcp-sub" data-i18n="bio.subtitle">Bonus permanents cumulatifs · Commencer dès le niveau 30 · PNJ Chaegirab puis Seon-Pyeong</div>
+            <div class="qcp-title">Missions biologiques</div>
+            <div class="qcp-sub">Bonus permanents cumulatifs · Commencer dès le niveau 30 · PNJ Chaegirab puis Seon-Pyeong</div>
           </div>
       <div class="ptitle"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>Missions biologiques — Bonus permanents</div>
       <div class="pnj-row">
@@ -863,19 +894,19 @@
         <!-- ═══ PANNEAU LIVRES DE QUÊTES ═══ -->
 
         <div class="qc-panel" id="panel-livres">
-          <button class="qcp-close" data-close-quest="livres" data-i18n="panel.close">Fermer ✕</button>
+          <button class="qcp-close" data-close-quest="livres">Fermer ✕</button>
           <div class="qcp-head">
-            <div class="qcp-title" data-i18n="livres.title">Livres de quêtes</div>
-            <div class="qcp-sub" data-i18n="livres.subtitle">7 niveaux de difficulté · Récompenses aléatoires · Obtenables sur les monstres ou en boutique</div>
+            <div class="qcp-title">Livres de quêtes</div>
+            <div class="qcp-sub">7 niveaux de difficulté · Récompenses aléatoires · Obtenables sur les monstres ou en boutique</div>
           </div>
       <div class="ibox">Les livres de quêtes s'obtiennent de diverses façons (quêtes, monstres, boutique). Chaque livre donne une quête aléatoire à réaliser contre une récompense aléatoire parmi la liste indiquée.</div>
 
       <!-- ONGLETS LIVRES -->
       <div class="qtabs" id="livres-tabs">
-        <button class="qtab active" data-panel="lf" data-i18n="livres.tab.facile">Facile</button>
-        <button class="qtab" data-panel="ln" data-i18n="livres.tab.normal">Normal</button>
-        <button class="qtab" data-panel="ld" data-i18n="livres.tab.difficile">Difficile</button>
-        <button class="qtab" data-panel="le" data-i18n="livres.tab.expert">Expert</button>
+        <button class="qtab active" data-panel="lf">Facile</button>
+        <button class="qtab" data-panel="ln">Normal</button>
+        <button class="qtab" data-panel="ld">Difficile</button>
+        <button class="qtab" data-panel="le">Expert</button>
       </div>
 
       <!-- FACILE -->
@@ -982,10 +1013,10 @@
         <!-- ═══ PANNEAU ÉQUITATION ═══ -->
 
         <div class="qc-panel" id="panel-equit">
-          <button class="qcp-close" data-close-quest="equit" data-i18n="panel.close">Fermer ✕</button>
+          <button class="qcp-close" data-close-quest="equit">Fermer ✕</button>
           <div class="qcp-head">
-            <div class="qcp-title" data-i18n="equit.title">Missions d'équitation</div>
-            <div class="qcp-sub" data-i18n="equit.subtitle">21 médailles équestres au total · Poney → Débutant → Combat → Militaire</div>
+            <div class="qcp-title">Missions d'équitation</div>
+            <div class="qcp-sub">21 médailles équestres au total · Poney → Débutant → Combat → Militaire</div>
           </div>
       <div class="ibox"><strong>Prérequis :</strong> 1 Médaille équestre par mission — <strong>21 au total</strong>. Pour les missions 1, 11 et 21 : si vous ratez le temps imparti vous perdez la médaille. Pour les autres missions : si vous descendez du cheval, mourrez ou passez un portail, attente ~24h mais la médaille n'est <em>pas</em> perdue. Il arrive que le Palefrenier annonce un échec même si la mission est réussie — vous pouvez directement recommencer sans perdre la médaille.</div>
 
@@ -993,31 +1024,31 @@
       <div class="horse-track" style="margin-bottom:1.4rem">
         <div class="horse-step">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-          <div class="hs-lvl" data-i18n="equit.poney.lvl">Niv. 10 requis</div>
-          <div class="hs-name" data-i18n="equit.poney.name">Poney</div>
+          <div class="hs-lvl">Niv. 10 requis</div>
+          <div class="hs-name">Poney</div>
           <div class="hs-mission">Ticket d'équitation → monture temporaire 10 min, déplacement uniquement. Interdiction de monter/descendre sous peine de le perdre. Mourir = perte du Poney.</div>
-          <span class="hs-reward" data-i18n="equit.poney.reward">Monture temporaire</span>
+          <span class="hs-reward">Monture temporaire</span>
         </div>
         <div class="horse-step">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.25C17.25 22.15 21 17.25 21 12V7L12 2z"/></svg>
-          <div class="hs-lvl" data-i18n="equit.debutant.lvl">Niv. 25 requis</div>
-          <div class="hs-name" data-i18n="equit.debutant.name">Cheval débutant</div>
+          <div class="hs-lvl">Niv. 25 requis</div>
+          <div class="hs-name">Cheval débutant</div>
           <div class="hs-mission">Niv.1 : tuer 20 Archers Barbares en ≤30 min → Dessin de cheval après 10h (100.000 Yang). La compétence Équitation s'active uniquement à ce moment. Monter/descendre à volonté (Ctrl+H).</div>
-          <span class="hs-reward" data-i18n="equit.debutant.reward">Déplacement rapide · Ctrl+H</span>
+          <span class="hs-reward">Déplacement rapide · Ctrl+H</span>
         </div>
         <div class="horse-step">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          <div class="hs-lvl" data-i18n="equit.combat.lvl">Niv. 35 requis</div>
-          <div class="hs-name" data-i18n="equit.combat.name">Cheval de Combat</div>
+          <div class="hs-lvl">Niv. 35 requis</div>
+          <div class="hs-name">Cheval de Combat</div>
           <div class="hs-mission">Niv.11 : tuer 100 Archers serpent ou Archers scorpion en ≤2h → Livre cheval de combat après 12h (500.000 Yang). Possible en groupe — le chef doit posséder la quête.</div>
-          <span class="hs-reward" data-i18n="equit.combat.reward">Frappe statique à cheval</span>
+          <span class="hs-reward">Frappe statique à cheval</span>
         </div>
         <div class="horse-step">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/><circle cx="12" cy="12" r="3"/></svg>
-          <div class="hs-lvl" data-i18n="equit.militaire.lvl">Niv. 50 requis</div>
-          <div class="hs-name" data-i18n="equit.militaire.name">Cheval Militaire</div>
+          <div class="hs-lvl">Niv. 50 requis</div>
+          <div class="hs-name">Cheval Militaire</div>
           <div class="hs-mission">Niv.21 : tuer 300 Archers démon dans la Tour de Gumsan en ≤30 min → Livre équit. militaire après 12h (1.000.000 Yang). Possible en groupe — le chef doit posséder la quête.</div>
-          <span class="hs-reward" data-i18n="equit.militaire.reward">Frappe statique + dynamique</span>
+          <span class="hs-reward">Frappe statique + dynamique</span>
         </div>
       </div>
 
@@ -1067,10 +1098,10 @@
         <!-- ═══ PANNEAU LISTE DES QUÊTES ═══ -->
 
         <div class="qc-panel" id="panel-liste">
-          <button class="qcp-close" data-close-quest="liste" data-i18n="panel.close">Fermer ✕</button>
+          <button class="qcp-close" data-close-quest="liste">Fermer ✕</button>
           <div class="qcp-head">
-            <div class="qcp-title" data-i18n="liste.title">Quête principale</div>
-            <div class="qcp-sub" data-i18n="liste.subtitle">Niveaux 1 à 84 · Nom · Récompenses · PNJ</div>
+            <div class="qcp-title">Quête principale</div>
+            <div class="qcp-sub">Niveaux 1 à 84 · Nom · Récompenses · PNJ</div>
           </div>
           <!-- ONGLETS -->
       <div class="qtabs">
@@ -1263,13 +1294,13 @@
 </section>
 
 <!-- ══ CARTES ══ -->
-<div class="sep"><span class="sep-l"></span><a href="#cartes" class="sep-r" aria-label="Aller à Cartes &amp; Empires"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/></svg><span data-i18n="sep.cartes">Cartes &amp; Empires</span><svg class="sep-arrow" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></a><span class="sep-l"></span></div>
+<div class="sep"><span class="sep-l"></span><a href="#cartes" class="sep-r" aria-label="Aller à Cartes &amp; Empires"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/></svg><span>Cartes &amp; Empires</span><svg class="sep-arrow" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></a><span class="sep-l"></span></div>
 <section class="panel" id="cartes">
   <div class="mmo">
     <div class="mmo-hd">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
-      <span class="mmo-ht" data-i18n="cartes.title">Cartes &amp; Empires</span>
-      <span class="mmo-hs" data-i18n="cartes.subtitle">Le monde de Metin2</span>
+      <span class="mmo-ht">Cartes &amp; Empires</span>
+      <span class="mmo-hs">Le monde de Metin2</span>
     </div>
     <div class="mmo-bd">
 
@@ -1321,61 +1352,61 @@
         <div class="em-info" id="em-info">
 
           <div class="em-info-panel active" data-info="c">
-            <div class="em-info-title em-c" data-i18n="empire.chunjo.name">Chunjo</div>
-            <div class="em-info-sub" data-i18n="empire.chunjo.sub">Ouest · Théocratique · <em>Les Fidèles</em></div>
+            <div class="em-info-title em-c">Chunjo</div>
+            <div class="em-info-sub">Ouest · Théocratique · <em>Les Fidèles</em></div>
             <div class="em-info-divider em-div--c"></div>
             <div class="em-info-grid">
-              <div class="em-row"><span class="em-lbl" data-i18n="empire.lbl.capital">Capitale</span><span class="em-val">Waryong</span></div>
-              <div class="em-row"><span class="em-lbl" data-i18n="empire.lbl.map1">Map 1</span><span class="em-val">Joan</span></div>
-              <div class="em-row"><span class="em-lbl" data-i18n="empire.lbl.map2">Map 2</span><span class="em-val">Bokjung</span></div>
-              <div class="em-row"><span class="em-lbl" data-i18n="empire.lbl.region">Région</span><span class="em-val">Ouest</span></div>
-              <div class="em-row"><span class="em-lbl" data-i18n="empire.lbl.style">Style</span><span class="em-val">Théocratie</span></div>
+              <div class="em-row"><span class="em-lbl">Capitale</span><span class="em-val">Waryong</span></div>
+              <div class="em-row"><span class="em-lbl">Map 1</span><span class="em-val">Joan</span></div>
+              <div class="em-row"><span class="em-lbl">Map 2</span><span class="em-val">Bokjung</span></div>
+              <div class="em-row"><span class="em-lbl">Région</span><span class="em-val">Ouest</span></div>
+              <div class="em-row"><span class="em-lbl">Style</span><span class="em-val">Théocratie</span></div>
             </div>
-              <div class="em-desc" data-i18n="empire.chunjo.desc">Guidé par les anciens et la foi, Chunjo est l'empire de la sagesse et du mysticisme. Ses terres dorées s'étendent à l'ouest du monde connu.</div>
+              <div class="em-desc">Guidé par les anciens et la foi, Chunjo est l'empire de la sagesse et du mysticisme. Ses terres dorées s'étendent à l'ouest du monde connu.</div>
             </div>
 
           <div class="em-info-panel" data-info="j">
-            <div class="em-info-title em-j" data-i18n="empire.jinno.name">Jinno</div>
-            <div class="em-info-sub" data-i18n="empire.jinno.sub">Est · Militaire · <em>Les Guerriers</em></div>
+            <div class="em-info-title em-j">Jinno</div>
+            <div class="em-info-sub">Est · Militaire · <em>Les Guerriers</em></div>
             <div class="em-info-divider em-div--j"></div>
             <div class="em-info-grid">
-              <div class="em-row"><span class="em-lbl" data-i18n="empire.lbl.capital">Capitale</span><span class="em-val">Imha</span></div>
-              <div class="em-row"><span class="em-lbl" data-i18n="empire.lbl.map1">Map 1</span><span class="em-val">Pyungmoo</span></div>
-              <div class="em-row"><span class="em-lbl" data-i18n="empire.lbl.map2">Map 2</span><span class="em-val">Bakra</span></div>
-              <div class="em-row"><span class="em-lbl" data-i18n="empire.lbl.region">Région</span><span class="em-val">Est</span></div>
-              <div class="em-row"><span class="em-lbl" data-i18n="empire.lbl.style">Style</span><span class="em-val">Militaire</span></div>
+              <div class="em-row"><span class="em-lbl">Capitale</span><span class="em-val">Imha</span></div>
+              <div class="em-row"><span class="em-lbl">Map 1</span><span class="em-val">Pyungmoo</span></div>
+              <div class="em-row"><span class="em-lbl">Map 2</span><span class="em-val">Bakra</span></div>
+              <div class="em-row"><span class="em-lbl">Région</span><span class="em-val">Est</span></div>
+              <div class="em-row"><span class="em-lbl">Style</span><span class="em-val">Militaire</span></div>
             </div>
-            <div class="em-desc" data-i18n="empire.jinno.desc">Discipliné et puissant, Jinno règne par la force de ses armées. Ses terres verdâtres à l'est sont protégées par des légions de guerriers d'élite.</div>
+            <div class="em-desc">Discipliné et puissant, Jinno règne par la force de ses armées. Ses terres verdâtres à l'est sont protégées par des légions de guerriers d'élite.</div>
           </div>
 
           <div class="em-info-panel" data-info="s">
-            <div class="em-info-title em-s" data-i18n="empire.shinsoo.name">Shinsoo</div>
-            <div class="em-info-sub" data-i18n="empire.shinsoo.sub">Sud · Commerce · <em>Les Marchands</em></div>
+            <div class="em-info-title em-s">Shinsoo</div>
+            <div class="em-info-sub">Sud · Commerce · <em>Les Marchands</em></div>
             <div class="em-info-divider em-div--s"></div>
             <div class="em-info-grid">
-              <div class="em-row"><span class="em-lbl" data-i18n="empire.lbl.capital">Capitale</span><span class="em-val">Jungrang</span></div>
-              <div class="em-row"><span class="em-lbl" data-i18n="empire.lbl.map1">Map 1</span><span class="em-val">Yongan</span></div>
-              <div class="em-row"><span class="em-lbl" data-i18n="empire.lbl.map2">Map 2</span><span class="em-val">Jayang</span></div>
-              <div class="em-row"><span class="em-lbl" data-i18n="empire.lbl.region">Région</span><span class="em-val">Sud</span></div>
-              <div class="em-row"><span class="em-lbl" data-i18n="empire.lbl.style">Style</span><span class="em-val">Commerce</span></div>
+              <div class="em-row"><span class="em-lbl">Capitale</span><span class="em-val">Jungrang</span></div>
+              <div class="em-row"><span class="em-lbl">Map 1</span><span class="em-val">Yongan</span></div>
+              <div class="em-row"><span class="em-lbl">Map 2</span><span class="em-val">Jayang</span></div>
+              <div class="em-row"><span class="em-lbl">Région</span><span class="em-val">Sud</span></div>
+              <div class="em-row"><span class="em-lbl">Style</span><span class="em-val">Commerce</span></div>
             </div>
-            <div class="em-desc" data-i18n="empire.shinsoo.desc">Prospère et ambitieux, Shinsoo contrôle les routes marchandes du sud. Sous ses dehors civils, il cache une armée redoutable et des alliances secrètes.</div>
+            <div class="em-desc">Prospère et ambitieux, Shinsoo contrôle les routes marchandes du sud. Sous ses dehors civils, il cache une armée redoutable et des alliances secrètes.</div>
           </div>
 
         </div><!-- /em-info -->
       </div><!-- /em-wrap -->
 
       <!-- ZONES DE JEU -->
-      <div class="ptitle"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 10-16 0c0 3 2.7 6.9 8 11.7z"/></svg><span data-i18n="cartes.zones.title">Zones de jeu</span></div>
+      <div class="ptitle"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 10-16 0c0 3 2.7 6.9 8 11.7z"/></svg><span>Zones de jeu</span></div>
       <div class="sg" id="zone-grid">
-  <div class="sc zone-card" data-zone="joan"><img class="sc-img" src="assets/Joan-Panorama.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'; this.src='assets/Fond2015.jpg'; this.onerror=null"><div class="scn" data-i18n="zone.joan.name">Joan · Pyungmoo · Yongan</div><div class="scd" data-i18n="zone.joan.desc">Cartes de départ des 3 empires</div><span class="badge">1–25</span></div>
-  <div class="sc zone-card" data-zone="yongbi"><img class="sc-img" src="assets/Desertdeyongbi.png" onerror="this.src='assets/DesertdeYongbi-Panorama.jpg'; this.onerror=function(){this.src='assets/Desertyongbi.jpg'; this.onerror=function(){this.style.opacity='0.3';}}" alt="" loading="lazy"><div class="scn" data-i18n="zone.yongbi.name">Désert de Yongbi</div><div class="scd" data-i18n="zone.yongbi.desc">Hors-la-loi · Orcs noirs · Araignées</div><span class="badge">25–45</span></div>
-  <div class="sc zone-card" data-zone="seungryong"><img class="sc-img" src="assets/Valleedeseungryong.png" onerror="this.src='assets/ValleedeSeungryong-Panorama.jpg'; this.onerror=function(){this.src='assets/Seungryong.jpg'; this.onerror=function(){this.style.opacity='0.3';}}" alt="" loading="lazy"><div class="scn" data-i18n="zone.seungryong.name">Vallée Seungryong</div><div class="scd" data-i18n="zone.seungryong.desc">Araignées · Arahan bestial · Singes</div><span class="badge">30–55</span></div>
-  <div class="sc zone-card" data-zone="sohan"><img class="sc-img" src="assets/Montsohan.png" onerror="this.src='assets/MontSohan-Panorama.jpg'; this.onerror=function(){this.src='assets/Sohan.jpg'; this.onerror=function(){this.style.opacity='0.3';}}" alt="" loading="lazy"><div class="scn" data-i18n="zone.sohan.name">Mont Sohan</div><div class="scd" data-i18n="zone.sohan.desc">Golems de glace · Yétis</div><span class="badge">50–70</span></div>
-  <div class="sc zone-card" data-zone="doyyumhwan"><img class="sc-img" src="assets/Doyyumhwan.png" onerror="this.src='assets/Doyyumhwan-Panorama.jpg'; this.onerror=function(){this.src='assets/Doyyumhwan.jpg'; this.onerror=function(){this.style.opacity='0.3';}}" alt="" loading="lazy"><div class="scn" data-i18n="zone.doyyumhwan.name">Doyyumhwan</div><div class="scd" data-i18n="zone.doyyumhwan.desc">Tigres de combat · Ogres · Flammes</div><span class="badge">60–75</span></div>
-  <div class="sc zone-card" data-zone="boisrouge"><img class="sc-img" src="assets/Boisrouge.png" onerror="this.src='assets/BoisRouge-Panorama.jpg'; this.onerror=function(){this.src='assets/BoisRouge.jpg'; this.onerror=function(){this.style.opacity='0.3';}}" alt="" loading="lazy"><div class="scn" data-i18n="zone.boisrouge.name">Bois Rouge</div><div class="scd" data-i18n="zone.boisrouge.desc">Arbres maléfiques · Dryades rouges</div><span class="badge">70–85</span></div>
-  <div class="sc zone-card" data-zone="grotte"><img class="sc-img" src="assets/Grottedelexil.png" onerror="this.src='assets/GrottedelExil-Panorama.jpg'; this.onerror=function(){this.src='assets/GrottedelExil.jpg'; this.onerror=function(){this.style.opacity='0.3';}}" alt="" loading="lazy"><div class="scn" data-i18n="zone.grotte.name">Grotte de l'Exil</div><div class="scd" data-i18n="zone.grotte.desc">Setaou · Monstres de glace d'enfer</div><span class="badge">80–90</span></div>
-  <div class="sc zone-card" data-zone="tourdemons"><img class="sc-img" src="assets/Tourdesdemons.png" onerror="this.style.opacity='0.3'" alt="" loading="lazy"><div class="scn" data-i18n="zone.tourdemons.name">Tour des Démons</div><div class="scd" data-i18n="zone.tourdemons.desc">Mort-vivants · Boss · 8 étages</div><span class="badge">40–75</span></div>
+  <div class="sc zone-card" data-zone="joan"><img class="sc-img" src="assets/Joan-Panorama.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'; this.src='assets/Fond2015.jpg'; this.onerror=null"><div class="scn">Joan · Pyungmoo · Yongan</div><div class="scd">Cartes de départ des 3 empires</div><span class="badge">1–25</span></div>
+  <div class="sc zone-card" data-zone="yongbi"><img class="sc-img" src="assets/Desertdeyongbi.png" onerror="this.src='assets/DesertdeYongbi-Panorama.jpg'; this.onerror=function(){this.src='assets/Desertyongbi.jpg'; this.onerror=function(){this.style.opacity='0.3';}}" alt="" loading="lazy"><div class="scn">Désert de Yongbi</div><div class="scd">Hors-la-loi · Orcs noirs · Araignées</div><span class="badge">25–45</span></div>
+  <div class="sc zone-card" data-zone="seungryong"><img class="sc-img" src="assets/Valleedeseungryong.png" onerror="this.src='assets/ValleedeSeungryong-Panorama.jpg'; this.onerror=function(){this.src='assets/Seungryong.jpg'; this.onerror=function(){this.style.opacity='0.3';}}" alt="" loading="lazy"><div class="scn">Vallée Seungryong</div><div class="scd">Araignées · Arahan bestial · Singes</div><span class="badge">30–55</span></div>
+  <div class="sc zone-card" data-zone="sohan"><img class="sc-img" src="assets/Montsohan.png" onerror="this.src='assets/MontSohan-Panorama.jpg'; this.onerror=function(){this.src='assets/Sohan.jpg'; this.onerror=function(){this.style.opacity='0.3';}}" alt="" loading="lazy"><div class="scn">Mont Sohan</div><div class="scd">Golems de glace · Yétis</div><span class="badge">50–70</span></div>
+  <div class="sc zone-card" data-zone="doyyumhwan"><img class="sc-img" src="assets/Doyyumhwan.png" onerror="this.src='assets/Doyyumhwan-Panorama.jpg'; this.onerror=function(){this.src='assets/Doyyumhwan.jpg'; this.onerror=function(){this.style.opacity='0.3';}}" alt="" loading="lazy"><div class="scn">Doyyumhwan</div><div class="scd">Tigres de combat · Ogres · Flammes</div><span class="badge">60–75</span></div>
+  <div class="sc zone-card" data-zone="boisrouge"><img class="sc-img" src="assets/Boisrouge.png" onerror="this.src='assets/BoisRouge-Panorama.jpg'; this.onerror=function(){this.src='assets/BoisRouge.jpg'; this.onerror=function(){this.style.opacity='0.3';}}" alt="" loading="lazy"><div class="scn">Bois Rouge</div><div class="scd">Arbres maléfiques · Dryades rouges</div><span class="badge">70–85</span></div>
+  <div class="sc zone-card" data-zone="grotte"><img class="sc-img" src="assets/Grottedelexil.png" onerror="this.src='assets/GrottedelExil-Panorama.jpg'; this.onerror=function(){this.src='assets/GrottedelExil.jpg'; this.onerror=function(){this.style.opacity='0.3';}}" alt="" loading="lazy"><div class="scn">Grotte de l'Exil</div><div class="scd">Setaou · Monstres de glace d'enfer</div><span class="badge">80–90</span></div>
+  <div class="sc zone-card" data-zone="tourdemons"><img class="sc-img" src="assets/Tourdesdemons.png" onerror="this.style.opacity='0.3'" alt="" loading="lazy"><div class="scn">Tour des Démons</div><div class="scd">Mort-vivants · Boss · 8 étages</div><span class="badge">40–75</span></div>
 
   <!-- ══ PANNEAU JOAN ══ -->
   <div class="zone-panel" id="zpanel-joan">
@@ -1659,17 +1690,17 @@
 </div>
 </section>
 <!-- ══ SAVIEZ-VOUS ══ -->
-<div class="sep"><span class="sep-l"></span><a href="#saviez-vous" class="sep-r" aria-label="Aller à Saviez-vous"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01"/></svg><span data-i18n="sep.saviez">Saviez-vous</span><svg class="sep-arrow" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></a><span class="sep-l"></span></div>
+<div class="sep"><span class="sep-l"></span><a href="#saviez-vous" class="sep-r" aria-label="Aller à Saviez-vous"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01"/></svg><span>Saviez-vous</span><svg class="sep-arrow" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></a><span class="sep-l"></span></div>
 <section class="panel" id="saviez-vous">
   <div class="svw">
     <div style="font-family:'Alegreya SC',serif;font-size:.56rem;letter-spacing:4px;color:var(--copper-l);text-transform:uppercase;margin-bottom:1.2rem;display:flex;align-items:center;justify-content:center;gap:.5rem" aria-hidden="true">
       <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01"/></svg>
-      <span data-i18n="saviez.label">Le Savoir du Sage</span>
+      <span>Le Savoir du Sage</span>
     </div>
     <div class="svt" id="svtext" aria-live="polite">Chargement...</div>
     <button class="svb" id="svbtn">
       <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
-      <span data-i18n="saviez.btn">Astuce suivante</span>
+      <span>Astuce suivante</span>
     </button>
   </div>
 </section>
@@ -1679,68 +1710,88 @@
 <section class="panel" id="chronologie">
   <div class="tl-fresco">
     <div class="tl-rail" aria-hidden="true"><div class="tl-fill" id="tl-fill"></div></div>
-    <div class="tl-glow-line" aria-hidden="true"></div>
 
-    <div class="tl-node" data-date="2023-11">
-      <div class="tl-stem"></div>
-      <div class="tl-pin-wrap"><div class="tl-pin-ring"></div><div class="tl-pin"></div></div>
-      <div class="tl-label">
-        <span class="tl-yr">Nov. 2023</span><span class="tl-diamond" aria-hidden="true"></span>
-        <span class="tl-ev">Création du projet</span>
-        <span class="tl-desc">Naissance de l'idée M2Return — poser les bases d'un retour aux sources.</span>
+    <div class="tl-node tl-node--past" data-date="2023-11">
+      <div class="tl-mark" aria-hidden="true"></div>
+      <div class="tl-date">Nov. 2023</div>
+      <div class="tl-tooltip" role="tooltip">
+        <div class="tl-tip-title">Création du projet</div>
+        <div class="tl-tip-desc">Naissance de l'idée M2Return — poser les bases d'un retour aux sources.</div>
       </div>
     </div>
 
-    <div class="tl-node" data-date="2024-02">
-      <div class="tl-stem"></div>
-      <div class="tl-pin-wrap"><div class="tl-pin-ring"></div><div class="tl-pin"></div></div>
-      <div class="tl-label">
-        <span class="tl-yr">Fév. 2024</span><span class="tl-diamond" aria-hidden="true"></span>
-        <span class="tl-ev">Développement & Contenu</span>
-        <span class="tl-desc">Mise en développement et récupération du contenu officiel.</span>
+    <div class="tl-node tl-node--past" data-date="2024-02">
+      <div class="tl-mark" aria-hidden="true"></div>
+      <div class="tl-date">Fév. 2024</div>
+      <div class="tl-tooltip" role="tooltip">
+        <div class="tl-tip-title">Développement &amp; Contenu</div>
+        <div class="tl-tip-desc">Mise en développement et récupération du contenu officiel.</div>
       </div>
     </div>
 
-    <div class="tl-node" data-date="2025-11">
-      <div class="tl-stem"></div>
-      <div class="tl-pin-wrap"><div class="tl-pin-ring"></div><div class="tl-pin"></div></div>
-      <div class="tl-label">
-        <span class="tl-yr">Nov. 2025</span><span class="tl-diamond" aria-hidden="true"></span>
-        <span class="tl-ev">Annonce & Réseaux</span>
-        <span class="tl-desc">Lancement sur les réseaux — à la recherche de la nostalgie.</span>
+    <div class="tl-node tl-node--past" data-date="2025-11">
+      <div class="tl-mark" aria-hidden="true"></div>
+      <div class="tl-date">Nov. 2025</div>
+      <div class="tl-tooltip" role="tooltip">
+        <div class="tl-tip-title">Annonce &amp; Réseaux</div>
+        <div class="tl-tip-desc">Lancement sur les réseaux — à la recherche de la nostalgie.</div>
       </div>
     </div>
 
-    <div class="tl-node" data-date="2026-01">
-      <div class="tl-stem"></div>
-      <div class="tl-pin-wrap"><div class="tl-pin-ring"></div><div class="tl-pin"></div></div>
-      <div class="tl-label">
-        <span class="tl-yr">Jan. 2026</span><span class="tl-diamond" aria-hidden="true"></span>
-        <span class="tl-ev">Phase de Test</span>
-        <span class="tl-desc">Test du gameplay en conditions réelles.</span>
+    <div class="tl-node tl-node--past" data-date="2026-01">
+      <div class="tl-mark" aria-hidden="true"></div>
+      <div class="tl-date">Jan. 2026</div>
+      <div class="tl-tooltip" role="tooltip">
+        <div class="tl-tip-title">Phase de Test</div>
+        <div class="tl-tip-desc">Test du gameplay en conditions réelles.</div>
       </div>
     </div>
 
     <div class="tl-node tl-node--now" data-date="2026-06">
-      <div class="tl-stem"></div>
-      <div class="tl-pin-wrap"><div class="tl-pin-ring"></div><div class="tl-pin"></div></div>
-      <div class="tl-label">
-        <span class="tl-yr">Juin 2026</span><span class="tl-diamond" aria-hidden="true"></span>
-        <span class="tl-ev">Lancement — Thaloria</span>
-        <span class="tl-desc">Ouverture du 1er serveur M2Return : <strong style="color:var(--gold)">Thaloria</strong>.</span>
+      <div class="tl-mark" aria-hidden="true"></div>
+      <div class="tl-date">Juin 2026</div>
+      <div class="tl-tooltip" role="tooltip">
+        <div class="tl-tip-title">Lancement — <strong>Thaloria</strong></div>
+        <div class="tl-tip-desc">Ouverture du 1er serveur M2Return.</div>
+      </div>
+    </div>
+
+    <div class="tl-node tl-node--future" data-date="2027-06">
+      <div class="tl-mark" aria-hidden="true"></div>
+      <div class="tl-date">2027</div>
+      <div class="tl-tooltip" role="tooltip">
+        <div class="tl-tip-title">Mise à jour majeure</div>
+        <div class="tl-tip-desc">Contenu exclusif et nouvelles zones.</div>
+      </div>
+    </div>
+
+    <div class="tl-node tl-node--future" data-date="2028-06">
+      <div class="tl-mark" aria-hidden="true"></div>
+      <div class="tl-date">2028</div>
+      <div class="tl-tooltip" role="tooltip">
+        <div class="tl-tip-title">Nouveau serveur</div>
+        <div class="tl-tip-desc">Second royaume, progression indépendante.</div>
+      </div>
+    </div>
+
+    <div class="tl-node tl-node--future" data-date="2030-06">
+      <div class="tl-mark" aria-hidden="true"></div>
+      <div class="tl-date">2030</div>
+      <div class="tl-tooltip" role="tooltip">
+        <div class="tl-tip-title">Expansion</div>
+        <div class="tl-tip-desc">Nouvelles cartes et mécaniques de guilde.</div>
       </div>
     </div>
 
   </div>
 </section>
-<!-- ══ TRAILER ══ -->
-<div class="sep"><span class="sep-l"></span><a href="#trailer" class="sep-r" aria-label="Aller à Trailer"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg><span data-i18n="sep.trailer">Trailer</span><svg class="sep-arrow" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></a><span class="sep-l"></span></div>
+<div class="sep"><span class="sep-l"></span><a href="#trailer" class="sep-r" aria-label="Aller à Trailer"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg><span>Trailer</span><svg class="sep-arrow" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></a><span class="sep-l"></span></div>
 <section class="panel" id="trailer">
   <div class="mmo">
     <div class="mmo-hd">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-      <span class="mmo-ht" data-i18n="trailer.title">Bande Annonce</span>
-      <span class="mmo-hs" data-i18n="trailer.subtitle">M2Return</span>
+      <span class="mmo-ht">Bande Annonce</span>
+      <span class="mmo-hs">M2Return</span>
     </div>
     <div class="mmo-bd">
       <div class="yt-wrap">
@@ -1752,7 +1803,7 @@
         </div>
         <iframe
           class="yt-frame"
-          src="https://www.youtube.com/embed/OT-D7w66E5Y?rel=0&modestbranding=1&color=white"
+          src="https://www.youtube-nocookie.com/embed/OT-D7w66E5Y?rel=0&modestbranding=1&color=white"
           title="Bande annonce Metin2 Return"
           frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -1763,7 +1814,7 @@
       <div class="yt-desc">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.25C17.25 22.15 21 17.25 21 12V7L12 2z"/></svg>
         <div>
-          <div class="yt-desc-title" data-i18n="trailer.desc.title">Découvrez M2Return</div>
+          <div class="yt-desc-title">Découvrez M2Return</div>
           <div class="yt-desc-body"> Replongez-vous au cœur du prime.
 Le temps s’est arrêté. Le monde d’autrefois renaît, plus vivant que jamais.
 
@@ -1776,12 +1827,20 @@ Pas de nouveautés inutiles, pas d’artifices — juste l’expérience pure, p
 </section>
 
 <footer>
+  <div class="footer-social">
+    <a href="https://discord.gg/m2return" target="_blank" rel="noopener" class="footer-social-link" aria-label="Rejoindre le Discord M2Return">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03z"/></svg> Discord
+    </a>
+    <a href="https://x.com/m2return" target="_blank" rel="noopener" class="footer-social-link" aria-label="Suivre M2Return sur X">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> X / Twitter
+    </a>
+  </div>
   <div class="footer-logos">
     <img src="assets/gameforge-logo.png" alt="Gameforge" onerror="this.style.display='none'">
     <img src="assets/webzen-logo.png" alt="Webzen" onerror="this.style.display='none'">
     <img src="assets/Mr2_logo.png" alt="Metin2" onerror="this.style.display='none'">
   </div>
-<div class="footer-txt"><span data-i18n="footer.copyright">— © M2Return. Projet communautaire. Tous droits réservés. —</span>
+<div class="footer-txt"><span>— © M2Return. Projet communautaire. Tous droits réservés. —</span>
     <a href="#hero" id="btt" aria-label="Retour en haut">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="18 15 12 9 6 15"/></svg>
     </a>
