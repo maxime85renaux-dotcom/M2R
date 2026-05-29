@@ -683,23 +683,23 @@ function initSaviez() {
   const isEN = document.documentElement.lang === 'en';
 
   const factsFR = [
-    "Le mari de Ah-Yu est mort à la guerre.",
-    "Le PNJ Esprit d'un Sura s'appelle Akuma.",
-    "L'Amiral Angmur est le chef militaire de l'empire Chunjo.",
+    "Le biologiste a besoin de 2 heures pour étudier un objet.",
+    "Il n’y a pas de restriction de niveau pour changer de sexe ou de royaume.",
+    "Le mariage homosexuel est autorisé.",
     "Les missions biologiques donnent des bonus permanents cumulatifs.",
     "Un cheval au niveau 21 peut attaquer en se déplaçant.",
     "Il faut 55 réussites pour passer du stade Maître au Grand Maître.",
-    "L'Embuscade d'un Ninja inflige des dégâts massifs dans le dos.",
+    "Les objets de l’Item-Shop sont échangeables et vendables en jeu.",
     "Corps puissant au niveau G1 empêche le Guerrier Mental de tomber.",
     "La compétence Soin peut retirer des effets négatifs.",
-    "Berserk augmente la vitesse d'attaque mais aussi les dégâts reçus.",
-    "Un Accélérateur réduit le temps d'étude de Chaegirab.",
-    "La Tour de Gumsan est nécessaire pour le Cheval Militaire.",
-    "Les quêtes Yohara donnent des Gemmes ou des Reliques d'âme.",
-    "Pour la 8ème compétence, la 7ème doit être au niveau Parfait.",
-    "Il faut 21 médailles équestres pour toutes les missions d'équitation.",
-    "Le taux biologique est ~50% — comptez ~20 jours pour la première.",
-    "Waryong, Imha et Jungrang sont les trois zones de guilde.",
+    "Les compétences de buff sont actives sur tous les membres de votre groupe.",
+    "Il n’y a pas de restriction de niveau pour parler dans le chat général.",
+    "Vous pouvez enchaîner les quêtes d’équitation sans que votre cheval ait besoin de repos.",
+    "Une boutique hors ligne dure 30 jours.",
+    "Sur M2Return, tous les royaumes parlent la même langue.",
+    "Le forgeron a plus d’expérience sur les armes et armures de niveau 20 et moins.",
+    "Le taux biologique est ~50%",
+    "Thaloria est le premier serveur de M2Return.",
   ];
 
   const factsEN = [
