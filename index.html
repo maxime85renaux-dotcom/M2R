@@ -1393,6 +1393,7 @@
       <div class="ptitle"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="10" r="3"/><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 10-16 0c0 3 2.7 6.9 8 11.7z"/></svg><span>Zones de jeu</span></div>
       <div class="sg" id="zone-grid">
   <div class="sc zone-card" data-zone="joan"><img class="sc-img" src="assets/Joan-Panorama.jpg" alt="" loading="lazy" onerror="this.style.opacity='0.2'; this.src='assets/Fond2015.jpg'; this.onerror=null"><div class="scn">Joan · Pyungmoo · Yongan</div><div class="scd">Cartes de départ des 3 empires</div><span class="badge">1–25</span></div>
+  <div class="sc zone-card" data-zone="bokjung"><img class="sc-img" src="assets/Bokjung-Panorama.jpg" onerror="this.style.opacity='0.3'" alt="" loading="lazy"><div class="scn">Bokjung · Bakra · Jayan</div><div class="scd">Deuxièmes villages · 3 empires</div><span class="badge">25–45</span></div>
   <div class="sc zone-card" data-zone="yongbi"><img class="sc-img" src="assets/Desertdeyongbi.png" onerror="this.src='assets/DesertdeYongbi-Panorama.jpg'; this.onerror=function(){this.src='assets/Desertyongbi.jpg'; this.onerror=function(){this.style.opacity='0.3';}}" alt="" loading="lazy"><div class="scn">Désert de Yongbi</div><div class="scd">Araignées · Scorpions · Désert</div><span class="badge">37–67</span></div>
   <div class="sc zone-card" data-zone="seungryong"><img class="sc-img" src="assets/Valleedeseungryong.png" onerror="this.src='assets/ValleedeSeungryong-Panorama.jpg'; this.onerror=function(){this.src='assets/Seungryong.jpg'; this.onerror=function(){this.style.opacity='0.3';}}" alt="" loading="lazy"><div class="scn">Vallée Seungryong</div><div class="scd">Orcs · Mystiques funestes · Haut arahan</div><span class="badge">26–51</span></div>
   <div class="sc zone-card" data-zone="sohan"><img class="sc-img" src="assets/Montsohan.png" onerror="this.src='assets/MontSohan-Panorama.jpg'; this.onerror=function(){this.src='assets/Sohan.jpg'; this.onerror=function(){this.style.opacity='0.3';}}" alt="" loading="lazy"><div class="scn">Mont Sohan</div><div class="scd">Pestiférés · Morts-vivants · Glace</div><span class="badge">49–72</span></div>
@@ -1400,6 +1401,45 @@
   <div class="sc zone-card" data-zone="boisrouge"><img class="sc-img" src="assets/Boisrouge.png" onerror="this.src='assets/BoisRouge-Panorama.jpg'; this.onerror=function(){this.src='assets/BoisRouge.jpg'; this.onerror=function(){this.style.opacity='0.3';}}" alt="" loading="lazy"><div class="scn">Bois Rouge</div><div class="scd">Arbres maléfiques · Dryades rouges</div><span class="badge">74–82</span></div>
   <div class="sc zone-card" data-zone="grotte"><img class="sc-img" src="assets/Grottedelexil.png" onerror="this.src='assets/GrottedelExil-Panorama.jpg'; this.onerror=function(){this.src='assets/GrottedelExil.jpg'; this.onerror=function(){this.style.opacity='0.3';}}" alt="" loading="lazy"><div class="scn">Grotte de l'Exil</div><div class="scd">Setaou · Monstres de glace d'enfer</div><span class="badge">80–90</span></div>
   <div class="sc zone-card" data-zone="tourdemons"><img class="sc-img" src="assets/Tourdesdemons.png" onerror="this.style.opacity='0.3'" alt="" loading="lazy"><div class="scn">Tour des Démons</div><div class="scd">Mort-vivants · Boss · 8 étages</div><span class="badge">40–75</span></div>
+
+  <!-- ══ PANNEAU BOKJUNG / BAKRA / JAYAN ══ -->
+  <div class="zone-panel" id="zpanel-bokjung">
+    <button class="zp-close" data-close-zone="bokjung">Fermer ✕</button>
+    <div class="zp-head"><span class="zp-name">Bokjung · Bakra · Jayan</span><span class="zp-sub">Deuxièmes villages · Niv. 25–45</span></div>
+    <div class="zp-cols">
+      <div class="zp-col">
+        <div class="ptitle" style="margin-top:0">Présentation</div>
+        <p class="cp-desc">Les trois deuxièmes villages correspondent chacun à un empire : <strong>Bokjung</strong> pour Chunjo, <strong>Bakra</strong> pour Jinno, <strong>Jayan</strong> pour Shinsoo. Comme les premiers villages, on y trouve toutes les boutiques essentielles. C'est ici que se trouve le <strong>Vieil homme</strong> donnant accès au Désert de Yongbi et aux zones de niveau moyen.</p>
+        <div class="ptitle">Accès</div>
+        <div class="ibox">Accessible dès le niveau 1. Téléportation via l'Anneau, l'Alliance, le Parchemin du lieu et la Carte de monstre autorisés.</div>
+        <div class="ptitle">Zones limitrophes</div>
+        <p class="cp-desc">Premier village ➔ Deuxième village ➔ Désert de Yongbi · Doyyumhwan (portails directs)</p>
+      </div>
+      <div class="zp-col">
+        <div class="ptitle" style="margin-top:0">Monstres principaux</div>
+        <div class="cp-skills">
+          <div class="cp-skill">Soldat / Archer du Serment Blanc <span>Niv. 15–20</span></div>
+          <div class="cp-skill">Cdt du Serment Blanc / Général du Serment Blanc <span>Niv. 20–22</span></div>
+          <div class="cp-skill">Soldat / Maniac / Archer du Vent Noir <span>Niv. 21–24</span></div>
+          <div class="cp-skill">Jak-To / To-Su / Gu-Ryung du Vent Noir <span>Niv. 24–26</span></div>
+          <div class="cp-skill">Soldat / Maniac / Archer Tempête Noire <span>Niv. 25–28</span></div>
+          <div class="cp-skill">Joh-Hwan / Kyuk-Jang / Pho-Hwan Tempête Noire <span>Niv. 28–30</span></div>
+          <div class="cp-skill">Soldat / Archer / Joh-Hwan T.Noire du Mal <span>Niv. 30–33</span></div>
+          <div class="cp-skill">Soldat / Minion / Archer Barbare <span>Niv. 20–25</span></div>
+          <div class="cp-skill">Fort Soldat / Minion / Archer / Général Barbare <span>Niv. 25–30</span></div>
+          <div class="cp-skill">Bo · Goo-Pae · Chuong · Mahon <span>Mini-boss</span></div>
+        </div>
+        <div class="ptitle">Pierres Metin</div>
+        <div class="cp-skills">
+          <div class="cp-skill">Metin Noire <span>Niv. 25</span></div>
+          <div class="cp-skill">Metin des Ténèbres <span>Niv. 30</span></div>
+          <div class="cp-skill">Metin de Jalousie <span>Niv. 35</span></div>
+        </div>
+        <div class="ptitle">Boss</div>
+        <div class="ibox">Chuong — Mini-boss · Bo — Mini-boss · Drops : Yang, objets rares</div>
+      </div>
+    </div>
+  </div>
 
   <!-- ══ PANNEAU JOAN ══ -->
   <div class="zone-panel" id="zpanel-joan">
