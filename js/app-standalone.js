@@ -1208,7 +1208,7 @@ function injectSearch(panel, id, placeholder, filterFn) {
   if (!qt) return;
   const wrap = document.createElement('div');
   wrap.className = 'qs-wrap qs-wrap-'+id;
-  wrap.innerHTML = `<svg class="qs-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="search" class="qs-input" placeholder="${placeholder}" aria-label="${placeholder}"><span class="qs-count" aria-live="polite"></span>`;
+  wrap.innerHTML = `<svg class="qs-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="search" class="qs-input" id="qs-${id}" name="qs-${id}" placeholder="${placeholder}" aria-label="${placeholder}"><span class="qs-count" aria-live="polite"></span>`;
   qt.before(wrap);
   const input = wrap.querySelector('input');
   const count = wrap.querySelector('.qs-count');
